@@ -4,10 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Team 5 | Results</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/style.css">
+
   <style>
     .table-wrap {
       max-width: 100%;
@@ -59,14 +61,15 @@
     }
   </style>
 </head>
+
 <body>
   <header class="site-header">
     <div class="wrap bar">
       <div class="brand-group">
         <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
         <span class="brand">Team 5</span>
       </div>
+
       <nav class="tabs" aria-label="Team pages">
         <a href="index.html">Project</a>
         <a href="results.html" aria-current="page">Results</a>
@@ -75,122 +78,365 @@
     </div>
   </header>
 
-
   <section class="page-hero">
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
       <h1 data-scramble>Results</h1>
-      <p class="lede">Model performance, room-level predictions, and WiFi signal patterns for indoor localization.</p>
+      <p class="lede">
+        Model performance, room-level predictions, and WiFi signal
+        patterns for indoor localization.
+      </p>
     </div>
   </section>
 
   <main class="wrap">
 
-    <!--
-      HOW TO ADD A GRAPH
-      1. Save your image inside this team's "images" folder (for example images/graph1.png).
-      2. Copy everything from "BEGIN RESULT" to "END RESULT" and paste it below the last result.
-      3. Change the image name, the alt text, the title and the explanation.
-    -->
-
-    <!-- BEGIN RESULT -->
+    <!-- 1. MODEL PERFORMANCE -->
     <section class="result">
       <figure>
-        <img src="images/figure1.png" alt="Model performance dashboard showing Decision Tree and Random Forest test accuracy of 98.00% and KNN accuracy of 98.50%, with a bar chart">
-        <figcaption>Model performance overview: test accuracy for Decision Tree, Random Forest, and KNN.</figcaption>
+        <img
+          src="images/figure1.png"
+          alt="Model performance dashboard comparing Decision Tree, Random Forest, and KNN test accuracy">
+        <figcaption>
+          Figure 1. Test accuracy comparison for the three classifiers.
+        </figcaption>
       </figure>
+
       <div class="result-text">
         <h2>Model Performance Overview</h2>
-        <p>The three machine learning classifiers achieved test accuracies of 98% or higher. K-Nearest Neighbors (KNN) achieved the highest test accuracy of 98.50%, slightly outperforming Decision Tree and Random Forest.</p>
-        <p>The dashboard compares the test accuracy of all three models. Decision Tree and Random Forest each achieved 98.00% accuracy, while KNN achieved 98.50%.</p>
+        <p>
+          The three classifiers achieved reported test accuracies of
+          98% or higher. K-Nearest Neighbors (KNN) achieved the highest
+          reported test accuracy at 98.50%, while Decision Tree and
+          Random Forest each achieved 98.00%.
+        </p>
+        <p>
+          The difference between KNN and the other two models is
+          0.50 percentage points. All three models performed strongly
+          on the reported test set.
+        </p>
       </div>
     </section>
-    <!-- END RESULT -->
 
-    <!-- BEGIN RESULT -->
+    <!-- 2. CLASSIFICATION METRICS -->
     <section class="result">
-      <figure>
-        <img src="images/figure2.png" alt="Confusion matrices for Decision Tree, Random Forest, and KNN showing predictions for the four rooms">
-        <figcaption>Figure 2. Confusion matrices for Decision Tree, Random Forest, and KNN.</figcaption>
-      </figure>
       <div class="result-text">
-        <h2>Prediction Performance by Room</h2>
-        <p>The confusion matrices show the agreement between actual and predicted room locations. They help identify which rooms are classified correctly and where misclassifications occur.</p>
-        <p><strong>Purpose:</strong> Show how well each model performs for the individual rooms, rather than relying only on overall accuracy.</p>
-      </div>
-    </section>
-    <!-- END RESULT -->
+        <h2>Classification Metrics</h2>
+        <p>
+          Accuracy measures the proportion of correct predictions.
+          Precision measures how often predictions for a class are
+          correct, while recall measures how many actual instances
+          of that class are identified. The F1-score balances
+          precision and recall.
+        </p>
 
-    <!-- BEGIN RESULT -->
-    <section class="result">
-      <figure>
-        <img src="images/figure3.png" alt="Grouped bar chart comparing five-fold cross-validation accuracy and test accuracy for the three models">
-        <figcaption>Cross-validation versus test accuracy for Decision Tree, Random Forest, and KNN.</figcaption>
-      </figure>
-      <div class="result-text">
-        <h2>Model Generalization</h2>
-        <p><strong>Cross-validation versus test accuracy</strong></p>
         <div class="table-wrap">
           <table>
             <thead>
-              <tr><th scope="col">Model</th><th scope="col">Cross-validation</th><th scope="col">Test</th></tr>
+              <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Accuracy</th>
+                <th scope="col">Precision</th>
+                <th scope="col">Recall</th>
+                <th scope="col">F1-score</th>
+              </tr>
             </thead>
             <tbody>
-              <tr><th scope="row">Decision Tree</th><td>97.50%</td><td>98.00%</td></tr>
-              <tr><th scope="row">Random Forest</th><td>98.50%</td><td>98.00%</td></tr>
-              <tr><th scope="row">KNN</th><td>98.38%</td><td>98.50%</td></tr>
+              <tr>
+                <th scope="row">Decision Tree</th>
+                <td>98.00%</td>
+                <td>98.06%</td>
+                <td>98.00%</td>
+                <td>98.01%</td>
+              </tr>
+              <tr>
+                <th scope="row">Random Forest</th>
+                <td>98.00%</td>
+                <td>98.06%</td>
+                <td>98.00%</td>
+                <td>98.01%</td>
+              </tr>
+              <tr>
+                <th scope="row">KNN</th>
+                <td>98.50%</td>
+                <td>98.54%</td>
+                <td>98.50%</td>
+                <td>98.51%</td>
+              </tr>
             </tbody>
           </table>
         </div>
-        <p>Five-fold cross-validation was used to select suitable hyperparameters. Comparing cross-validation scores with test performance provides additional context for assessing how consistently the models perform.</p>
+
+        <p>
+          In the reported metrics, KNN has the highest accuracy,
+          precision, recall, and F1-score. The values for Decision
+          Tree and Random Forest are equal in this summary.
+        </p>
       </div>
     </section>
-    <!-- END RESULT -->
 
-    <!-- BEGIN RESULT -->
+    <!-- 3. CROSS-VALIDATION VS TEST ACCURACY -->
     <section class="result">
       <figure>
-        <img src="images/figure4.png" alt="Correlation heatmap of WiFi signal features WS1 through WS7 and the room location label">
-        <figcaption>Figure 1. Correlation between WiFi signal measurements and room location.</figcaption>
+        <img
+          src="images/figure3.png"
+          alt="Grouped bar chart comparing five-fold cross-validation accuracy and test accuracy for three classifiers">
+        <figcaption>
+          Figure 2. Cross-validation and test accuracy comparison.
+        </figcaption>
       </figure>
+
+      <div class="result-text">
+        <h2>Model Generalization</h2>
+        <p>
+          The reported cross-validation and test accuracies are close
+          for all three models. Random Forest has a cross-validation
+          score 0.50 percentage points higher than its test accuracy,
+          while KNN's test accuracy is 0.12 percentage points higher
+          than its reported cross-validation score.
+        </p>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th scope="col">Model</th>
+                <th scope="col">Cross-validation</th>
+                <th scope="col">Test accuracy</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Decision Tree</th>
+                <td>97.50%</td>
+                <td>98.00%</td>
+              </tr>
+              <tr>
+                <th scope="row">Random Forest</th>
+                <td>98.50%</td>
+                <td>98.00%</td>
+              </tr>
+              <tr>
+                <th scope="row">KNN</th>
+                <td>98.38%</td>
+                <td>98.50%</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 4. CONFUSION MATRICES -->
+    <section class="result">
+      <figure>
+        <img
+          src="images/figure2.png"
+          alt="Confusion matrices for Decision Tree, Random Forest, and KNN predicting four room locations">
+        <figcaption>
+          Figure 3. Confusion matrices for Decision Tree,
+          Random Forest, and KNN.
+        </figcaption>
+      </figure>
+
+      <div class="result-text">
+        <h2>Prediction Performance by Room</h2>
+        <p>
+          The confusion matrices compare actual room labels with
+          predicted room labels. Values on the main diagonal represent
+          correct predictions, while off-diagonal values show
+          misclassifications.
+        </p>
+        <p>
+          Read together, the three matrices show whether errors are
+          concentrated in particular rooms. Use the displayed counts
+          to identify the exact room pairs that are confused most
+          frequently; overall accuracy alone does not reveal this.
+        </p>
+      </div>
+    </section>
+
+    <!-- 5. PER-ROOM F1 SCORE -->
+    <section class="result">
+      <figure>
+        <img
+          src="images/figure6.png"
+          alt="Grouped bar chart comparing Decision Tree, Random Forest, and KNN F1-scores across four rooms">
+        <figcaption>
+          Figure 4. Per-room F1-score comparison for Decision Tree,
+          Random Forest, and KNN.
+        </figcaption>
+      </figure>
+
+      <div class="result-text">
+        <h2>Room-Level Classification Performance</h2>
+        <p>
+          The per-room F1-score comparison evaluates the balance
+          between precision and recall for each room. It complements
+          overall accuracy by showing whether performance differs
+          across individual room classes.
+        </p>
+        <p>
+          KNN has the highest F1-score for all four rooms. Room 3
+          has the lowest F1-scores across the three models, while
+          Rooms 1 and 4 are classified most strongly.
+        </p>
+      </div>
+    </section>
+
+    <!-- 6. CORRELATION HEATMAP -->
+    <section class="result">
+      <figure>
+        <img
+          src="images/figure4.png"
+          alt="Correlation heatmap showing relationships between seven WiFi signal features and room location">
+        <figcaption>
+          Figure 5. Correlation between WiFi signal measurements
+          and room location.
+        </figcaption>
+      </figure>
+
       <div class="result-text">
         <h2>Understanding WiFi Fingerprints</h2>
-        <p>WS5 and WS3 show the strongest reported correlations with the location label.</p>
-        <p><strong>Figure 3. Distribution of WiFi signal strengths across the four rooms.</strong></p>
-        <p>Differences in signal distributions help illustrate why WiFi fingerprints can be useful for room classification.</p>
-        <p class="image-note">Add the Figure 3 signal-distribution image in the open space when it is ready.</p>
+        <p>
+          The reported correlation analysis identifies WS5 and WS3
+          as the WiFi features with the strongest correlations with
+          the encoded location label. The heatmap gives an overview
+          of how each signal feature relates to the others and to
+          the target label.
+        </p>
+        <p>
+          Correlation describes association, not causation, and it
+          is not the same as a trained model's feature importance.
+        </p>
       </div>
     </section>
-    <!-- END RESULT -->
 
-    <!-- BEGIN RESULT -->
+    <!-- 7. PCA VISUALIZATION -->
     <section class="result">
       <figure>
-        <img src="images/figure5.png" alt="Classification metrics table showing accuracy, precision, recall, and F1-score for Decision Tree, Random Forest, and KNN">
-        <figcaption>Figure 5. Accuracy, precision, recall, and F1-score for each classifier.</figcaption>
+        <img
+          src="images/pca_wifi_fingerprints.png"
+          alt="PCA scatter plot projecting seven WiFi features into two principal components, with points colored by room">
+        <figcaption>
+          Figure 6. Two-dimensional PCA projection of WiFi fingerprints.
+        </figcaption>
       </figure>
+
       <div class="result-text">
-        <h2>Classification Metrics</h2>
-        <p>Precision, recall and F1-score provide complementary measures of classification performance. Together with accuracy and the confusion matrices, they give a more complete picture of how the three models classify indoor locations.</p>
+        <h2>Visualizing WiFi Fingerprints with PCA</h2>
+        <p>
+          Principal Component Analysis (PCA) projects the seven WiFi
+          signal features into two dimensions for visualization.
+          Each point represents an observation, colored according
+          to its room label.
+        </p>
+        <p>
+          In this projection, the first two principal components
+          explain approximately 73.0% of the variance in the
+          standardized WiFi features. The plot provides a compact
+          view of patterns and overlap among room classes.
+        </p>
+        <p>
+          The axes represent combinations of WiFi measurements,
+          not physical room coordinates. Because PCA retains only
+          two components here, some information is not displayed.
+        </p>
       </div>
     </section>
-    <!-- END RESULT -->
 
+    <!-- 8. PAIRWISE WIFI SCATTER PLOT -->
+    <section class="result">
+      <figure>
+        <img
+          src="images/wifi_pair_scatter_ws1_ws5.png"
+          alt="Scatter plot showing WiFi signal feature WS1 on the horizontal axis and WS5 on the vertical axis, colored by room">
+        <figcaption>
+          Figure 7. Relationship between WS1 and WS5 signal strengths
+          across room classes.
+        </figcaption>
+      </figure>
+
+      <div class="result-text">
+        <h2>Relationship Between WiFi Signals</h2>
+        <p>
+          This scatter plot compares two original WiFi signal
+          features, WS1 and WS5. Each point represents an observation,
+          and its color identifies the room label.
+        </p>
+        <p>
+          The point clouds show how these two measurements vary
+          across the room classes. Any overlap indicates that this
+          pair of features alone may not completely distinguish
+          all rooms, which motivates using multiple WiFi features
+          together.
+        </p>
+      </div>
+    </section>
+
+    <!-- 9. RANDOM FOREST FEATURE IMPORTANCE -->
+    <section class="result">
+      <figure>
+        <img
+          src="images/figure7.png"
+          alt="Horizontal bar chart ranking the seven WiFi signal features by Random Forest feature importance">
+        <figcaption>
+          Figure 8. Feature importance values from the fitted
+          Random Forest classifier.
+        </figcaption>
+      </figure>
+
+      <div class="result-text">
+        <h2>Understanding Model Decisions</h2>
+        <p>
+          In the fitted Random Forest model, WS1 and WS5 have the
+          highest feature-importance values, while WS2 has the
+          lowest. This ranking describes how the model uses the
+          WiFi features when making predictions.
+        </p>
+        <p>
+          Feature importance is model-specific and does not establish
+          a causal relationship between signal strength and room
+          location. Its ranking may differ from the correlation
+          ranking because the two measures describe different things.
+        </p>
+      </div>
+    </section>
+
+    <!-- 10. SUMMARY -->
     <div class="prose summary">
       <h2>Summary</h2>
       <ul>
-        <li>KNN achieved the best test accuracy at 98.50%.</li>
-        <li>Decision Tree and Random Forest each achieved 98.00% test accuracy.</li>
-        <li>WiFi signal patterns can distinguish indoor rooms and support accurate room classification.</li>
+        <li>
+          KNN achieved the highest reported test accuracy at 98.50%.
+        </li>
+        <li>
+          Decision Tree and Random Forest each achieved 98.00%
+          reported test accuracy.
+        </li>
+        <li>
+          Confusion matrices and per-room F1-scores provide
+          additional insight into room-level classification.
+        </li>
+        <li>
+          PCA and pairwise scatter plots visualize the structure
+          of the WiFi fingerprints, while feature importance helps
+          interpret the fitted Random Forest model.
+        </li>
       </ul>
     </div>
 
-    <p class="next"><a class="button" href="team.html">Meet the team</a> <a class="button alt" href="index.html">Back to the project</a></p>
+    <p class="next">
+      <a class="button" href="team.html">Meet the team</a>
+      <a class="button alt" href="index.html">Back to the project</a>
+    </p>
   </main>
 
   <footer class="site-footer">
     <div class="wrap">MDS Project, IIT Dharwad</div>
   </footer>
+
   <script src="../../assets/site.js" defer></script>
 </body>
 </html>
