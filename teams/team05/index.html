@@ -29,32 +29,33 @@
   <section class="page-hero">
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
-      <!-- EDIT: your project title and a one or two line summary -->
-      <h1 data-scramble>Your project title goes here</h1>
-      <p class="lede">One or two sentences that tell a visitor what this project is about and why it matters.</p>
+      <h1 data-scramble>WiFi-Based Indoor Localization</h1>
+      <p class="lede">We use WiFi signal strength and machine learning to predict which of four indoor rooms a device is in, without specialized positioning hardware.</p>
     </div>
   </section>
 
   <main class="wrap prose">
 
-    <!-- EDIT: describe the problem statement (PS) your team was given -->
     <h2>Problem statement</h2>
-    <p>Describe the problem your team is solving. Say what question you are trying to answer and what the final outcome should look like.</p>
-    <p>Add more paragraphs by copying a &lt;p&gt; line like this one.</p>
+    <p>Indoor localization is challenging because GPS signals are often weak or unavailable inside buildings. This project investigates whether machine learning can use WiFi Received Signal Strength Indicator (RSSI) measurements to identify a device's room.</p>
+    <p>Our goal is to classify a device's location as one of four rooms based on signal readings from seven WiFi access points. We compare Decision Tree, Random Forest, and K-Nearest Neighbors (KNN) models using accuracy, precision, recall, and F1-score. KNN achieved the highest test accuracy at 98.50%.</p>
 
     <h2>Dataset</h2>
-    <p>Where the data comes from, how many rows and columns it has, and what each important column means.</p>
+    <p>The WiFi fingerprinting dataset contains 2,000 observations and eight columns: seven RSSI features, measured in dBm from different access points, and a <code>Location</code> target with four room classes (1–4). Each room has 500 observations, so the classes are balanced.</p>
+    <p>We checked the data for missing values and verified data types. The WiFi features were standardized, and the data was split using stratified sampling into 1,600 training observations (80%) and 400 test observations (20%).</p>
 
     <h2>Approach</h2>
-    <p>Briefly explain the steps you followed, from cleaning the data to producing the final results.</p>
     <ul>
-      <li>Step or method one</li>
-      <li>Step or method two</li>
-      <li>Step or method three</li>
+      <li>Loaded and inspected the dataset, checked missing values and data types, and reviewed descriptive statistics.</li>
+      <li>Separated the seven WiFi signal features from the target and standardized the features with <code>StandardScaler</code>.</li>
+      <li>Explored room-label distributions and feature correlations to identify signals useful for distinguishing rooms.</li>
+      <li>Created an 80/20 stratified train-test split to preserve the room distribution.</li>
+      <li>Trained Decision Tree, Random Forest, and KNN classifiers; used <code>GridSearchCV</code> with five-fold cross-validation to tune hyperparameters.</li>
+      <li>Compared test-set accuracy, precision, recall, F1-score, and confusion matrices. KNN reached 98.50% accuracy; Decision Tree and Random Forest each reached 98.00%.</li>
     </ul>
 
     <h2>Tools used</h2>
-    <p>Python, pandas, matplotlib (replace with your own list).</p>
+    <p>Python, Pandas, NumPy, Matplotlib, Seaborn, Scikit-learn, and Jupyter Notebook.</p>
 
     <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="team.html">Meet the team</a></p>
   </main>

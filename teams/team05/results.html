@@ -8,6 +8,56 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    .table-wrap {
+      max-width: 100%;
+      margin: 1rem 0 1.25rem;
+      overflow-x: auto;
+    }
+
+    .result-text table {
+      width: 100%;
+      border-collapse: collapse;
+      color: var(--ink);
+      font: inherit;
+      font-size: .95rem;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    .result-text th,
+    .result-text td {
+      padding: .55rem .45rem;
+      border: 0;
+      background: transparent;
+    }
+
+    .result-text thead th {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .result-text tbody th {
+      font-weight: 500;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .result-text tbody tr + tr {
+      border-top: 1px solid rgba(10, 14, 63, .12);
+    }
+
+    @media (max-width: 560px) {
+      .result-text table {
+        font-size: .88rem;
+      }
+
+      .result-text th,
+      .result-text td {
+        padding: .5rem .35rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
@@ -30,7 +80,7 @@
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
       <h1 data-scramble>Results</h1>
-      <p class="lede">Graphs from the project, with an explanation of what each one shows.</p>
+      <p class="lede">Model performance, room-level predictions, and WiFi signal patterns for indoor localization.</p>
     </div>
   </section>
 
@@ -46,14 +96,13 @@
     <!-- BEGIN RESULT -->
     <section class="result">
       <figure>
-        <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 1. Short caption for the graph.</figcaption>
+        <img src="images/figure1.png" alt="Model performance dashboard showing Decision Tree and Random Forest test accuracy of 98.00% and KNN accuracy of 98.50%, with a bar chart">
+        <figcaption>Model performance overview: test accuracy for Decision Tree, Random Forest, and KNN.</figcaption>
       </figure>
       <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
+        <h2>Model Performance Overview</h2>
+        <p>The three machine learning classifiers achieved test accuracies of 98% or higher. K-Nearest Neighbors (KNN) achieved the highest test accuracy of 98.50%, slightly outperforming Decision Tree and Random Forest.</p>
+        <p>The dashboard compares the test accuracy of all three models. Decision Tree and Random Forest each achieved 98.00% accuracy, while KNN achieved 98.50%.</p>
       </div>
     </section>
     <!-- END RESULT -->
@@ -61,24 +110,78 @@
     <!-- BEGIN RESULT -->
     <section class="result">
       <figure>
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 2. Short caption for the graph.</figcaption>
+        <img src="images/figure2.png" alt="Confusion matrices for Decision Tree, Random Forest, and KNN showing predictions for the four rooms">
+        <figcaption>Figure 2. Confusion matrices for Decision Tree, Random Forest, and KNN.</figcaption>
       </figure>
       <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
+        <h2>Prediction Performance by Room</h2>
+        <p>The confusion matrices show the agreement between actual and predicted room locations. They help identify which rooms are classified correctly and where misclassifications occur.</p>
+        <p><strong>Purpose:</strong> Show how well each model performs for the individual rooms, rather than relying only on overall accuracy.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/figure3.png" alt="Grouped bar chart comparing five-fold cross-validation accuracy and test accuracy for the three models">
+        <figcaption>Cross-validation versus test accuracy for Decision Tree, Random Forest, and KNN.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Model Generalization</h2>
+        <p><strong>Cross-validation versus test accuracy</strong></p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th scope="col">Model</th><th scope="col">Cross-validation</th><th scope="col">Test</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">Decision Tree</th><td>97.50%</td><td>98.00%</td></tr>
+              <tr><th scope="row">Random Forest</th><td>98.50%</td><td>98.00%</td></tr>
+              <tr><th scope="row">KNN</th><td>98.38%</td><td>98.50%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Five-fold cross-validation was used to select suitable hyperparameters. Comparing cross-validation scores with test performance provides additional context for assessing how consistently the models perform.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/figure4.png" alt="Correlation heatmap of WiFi signal features WS1 through WS7 and the room location label">
+        <figcaption>Figure 1. Correlation between WiFi signal measurements and room location.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Understanding WiFi Fingerprints</h2>
+        <p>WS5 and WS3 show the strongest reported correlations with the location label.</p>
+        <p><strong>Figure 3. Distribution of WiFi signal strengths across the four rooms.</strong></p>
+        <p>Differences in signal distributions help illustrate why WiFi fingerprints can be useful for room classification.</p>
+        <p class="image-note">Add the Figure 3 signal-distribution image in the open space when it is ready.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/figure5.png" alt="Classification metrics table showing accuracy, precision, recall, and F1-score for Decision Tree, Random Forest, and KNN">
+        <figcaption>Figure 5. Accuracy, precision, recall, and F1-score for each classifier.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Classification Metrics</h2>
+        <p>Precision, recall and F1-score provide complementary measures of classification performance. Together with accuracy and the confusion matrices, they give a more complete picture of how the three models classify indoor locations.</p>
       </div>
     </section>
     <!-- END RESULT -->
 
     <div class="prose summary">
-      <!-- EDIT: sum up the main findings -->
-      <h2>Anomalies, observations and patterns</h2>
+      <h2>Summary</h2>
       <ul>
-        <li><strong>Anomaly:</strong> something unusual in the data and a likely reason for it.</li>
-        <li><strong>Observation:</strong> something you measured or noticed.</li>
-        <li><strong>Pattern:</strong> a trend that repeats across the dataset.</li>
+        <li>KNN achieved the best test accuracy at 98.50%.</li>
+        <li>Decision Tree and Random Forest each achieved 98.00% test accuracy.</li>
+        <li>WiFi signal patterns can distinguish indoor rooms and support accurate room classification.</li>
       </ul>
     </div>
 
