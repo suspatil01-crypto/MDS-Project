@@ -3,5 +3,5 @@
 window.TEAM_INFO = window.TEAM_INFO || {};
 window.TEAM_INFO["team16"] = {
   name: "Team 16",
-  topic: "Project title to be added"
+  topic: "Predicting NYC Taxi Trip Duration via Spatial Network & Regression"
 };
