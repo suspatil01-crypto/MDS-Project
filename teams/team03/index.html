@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Team 3 | Project</title>
+  <title>Team 3 | Amazon Product Recommendation System</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -14,7 +14,6 @@
     <div class="wrap bar">
       <div class="brand-group">
         <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
         <span class="brand">Team 3</span>
       </div>
       <nav class="tabs" aria-label="Team pages">
@@ -25,38 +24,165 @@
     </div>
   </header>
 
-
   <section class="page-hero">
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
-      <!-- EDIT: your project title and a one or two line summary -->
-      <h1 data-scramble>Your project title goes here</h1>
-      <p class="lede">One or two sentences that tell a visitor what this project is about and why it matters.</p>
+      <h1 data-scramble>Amazon Product Recommendation System</h1>
+      <p class="lede">
+        Discover related products through user interaction patterns.
+        Our project explores collaborative recommendation techniques using
+        product co-occurrence, similarity measures, and ensemble ranking
+        to identify products that users may also find relevant.
+      </p>
     </div>
   </section>
 
   <main class="wrap prose">
 
-    <!-- EDIT: describe the problem statement (PS) your team was given -->
-    <h2>Problem statement</h2>
-    <p>Describe the problem your team is solving. Say what question you are trying to answer and what the final outcome should look like.</p>
-    <p>Add more paragraphs by copying a &lt;p&gt; line like this one.</p>
+    <h2>Problem Statement</h2>
+    <p>
+      E-commerce platforms offer a large number of products, making it
+      difficult for customers to discover relevant items among the available
+      choices. Recommendation systems address this challenge by identifying
+      relationships between products and helping users explore items that
+      may match their interests.
+    </p>
+    <p>
+      The objective of this project is to develop a product-to-product
+      recommendation approach using Amazon product reviews. By analyzing
+      user–product interactions, we identify products that share common users,
+      calculate similarity scores, and rank related products to generate
+      recommendations.
+    </p>
+    <p>
+      The central question is: <strong>Can patterns in user–product
+      interactions help us identify and rank related products?</strong>
+    </p>
 
     <h2>Dataset</h2>
-    <p>Where the data comes from, how many rows and columns it has, and what each important column means.</p>
+    <p>
+      We use the Amazon Baby product review dataset from the
+      <a href="https://snap.stanford.edu/data/" target="_blank"
+         rel="noopener noreferrer">Stanford Network Analysis Project (SNAP)</a>.
+      The dataset contains customer reviews and product identifiers that
+      allow us to study relationships between products based on shared users.
+    </p>
+    <p>
+      The important attributes include:
+    </p>
+    <ul>
+      <li><strong>User ID:</strong> Identifies the customer who submitted a review.</li>
+      <li><strong>Product ID:</strong> Identifies the reviewed product.</li>
+      <li><strong>Rating:</strong> Records the customer's product rating.</li>
+      <li><strong>Review text and summary:</strong> Provide textual feedback when available.</li>
+      <li><strong>Review time:</strong> Records when the review was submitted, when available.</li>
+    </ul>
+    <p>
+      We focus primarily on user IDs and product IDs for interaction-based
+      recommendation. Ratings and other review attributes are used for
+      understanding the dataset and conducting exploratory analysis.
+    </p>
 
     <h2>Approach</h2>
-    <p>Briefly explain the steps you followed, from cleaning the data to producing the final results.</p>
+    <p>
+      Our recommendation pipeline converts customer activity into
+      product-to-product relationships. It uses multiple similarity measures
+      and combines them into an ensemble score to rank candidate products.
+    </p>
     <ul>
-      <li>Step or method one</li>
-      <li>Step or method two</li>
-      <li>Step or method three</li>
+      <li>
+        <strong>Data preprocessing:</strong>
+        Load the Amazon review data, standardize column names, validate
+        required fields, and remove records with missing essential values.
+      </li>
+      <li>
+        <strong>Exploratory data analysis:</strong>
+        Examine rating distributions, user activity, product popularity,
+        and the overall structure of customer interactions.
+      </li>
+      <li>
+        <strong>User–product interaction matrix:</strong>
+        Represent each unique user–product interaction in a sparse matrix
+        to efficiently process the dataset.
+      </li>
+      <li>
+        <strong>Product co-occurrence:</strong>
+        Calculate how many users interacted with each pair of products
+        using the product co-occurrence matrix.
+      </li>
+      <li>
+        <strong>Similarity calculation:</strong>
+        Calculate cosine similarity and Jaccard similarity for eligible
+        product pairs, while also incorporating a normalized support score.
+      </li>
+      <li>
+        <strong>Ensemble ranking:</strong>
+        Combine the similarity components into a weighted score and rank
+        product pairs to identify the strongest relationships.
+      </li>
+      <li>
+        <strong>Recommendation and visualization:</strong>
+        Retrieve the highest-ranked related products for a selected product
+        and visualize product relationships using a network graph.
+      </li>
     </ul>
 
-    <h2>Tools used</h2>
-    <p>Python, pandas, matplotlib (replace with your own list).</p>
+    <h2>Recommendation Methodology</h2>
+    <p>
+      The system combines three complementary signals: cosine similarity,
+      Jaccard similarity, and normalized shared-user support. The ensemble
+      score is calculated as:
+    </p>
+    <p>
+      <strong>
+        Ensemble Score = 0.45 × Cosine Similarity
+        + 0.30 × Jaccard Similarity
+        + 0.25 × Support Score
+      </strong>
+    </p>
+    <p>
+      Cosine similarity measures shared-user overlap relative to the
+      interaction counts of the two products. Jaccard similarity measures
+      the proportion of shared users among all users associated with either
+      product. The support component incorporates the number of shared
+      users, using logarithmic normalization.
+    </p>
+    <p>
+      By combining these signals, the system considers both the strength
+      of the relationship and the amount of interaction evidence supporting
+      it. Product pairs with insufficient shared-user support are excluded
+      before ranking.
+    </p>
 
-    <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="team.html">Meet the team</a></p>
+    <h2>Tools and Technologies</h2>
+    <ul>
+      <li><strong>Python:</strong> Core implementation and data processing.</li>
+      <li><strong>Pandas and NumPy:</strong> Data cleaning, tabular analysis, and numerical computation.</li>
+      <li><strong>SciPy:</strong> Sparse matrices and efficient co-occurrence calculations.</li>
+      <li><strong>Matplotlib and Seaborn:</strong> Exploratory data analysis and result visualization.</li>
+      <li><strong>NetworkX:</strong> Construction and visualization of product relationship networks.</li>
+      <li><strong>Jupyter Notebook:</strong> Experimentation, analysis, and execution of the recommendation pipeline.</li>
+    </ul>
+
+    <h2>Expected Outcome</h2>
+    <p>
+      The project aims to identify meaningful relationships among
+      products using customer interaction patterns. Its outputs include
+      product-pair similarity scores, ranked related products, descriptive
+      statistics, and network visualizations that help explain how products
+      are connected.
+    </p>
+    <p>
+      The approach provides an interpretable foundation for product
+      recommendations. Its effectiveness depends on the available interaction
+      data, the reliability of shared-user evidence, and subsequent
+      evaluation of recommendation quality.
+    </p>
+
+    <p class="next">
+      <a class="button" href="results.html">Explore the results</a>
+      <a class="button alt" href="team.html">Meet the team</a>
+    </p>
   </main>
 
   <footer class="site-footer">
