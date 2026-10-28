@@ -1,91 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Team 11 | Team</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../../assets/style.css">
-</head>
-<body>
-  <header class="site-header">
-    <div class="wrap bar">
-      <div class="brand-group">
-        <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
-        <span class="brand">Team 11</span>
-      </div>
-      <nav class="tabs" aria-label="Team pages">
-        <a href="index.html">Project</a>
-        <a href="results.html">Results</a>
-        <a href="team.html" aria-current="page">Team</a>
-      </nav>
-    </div>
-  </header>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="AirScope MDS project: air quality patterns and AQI prediction across Indian cities."><title>AirScope | Team Profiles</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><script src="app.js" defer></script></head><body><div class="app-shell"><aside class="sidebar"><a class="brand" href="index.html"><span class="brand-mark">A</span><span>AirScope<small>MDS PROJECT</small></span></a><div class="side-label">WORKSPACE</div><nav class="side-nav" aria-label="Main navigation"><a class="nav-link " href="project.html"><span class="nav-icon">⌂</span>Project</a><a class="nav-link " href="results.html"><span class="nav-icon">▥</span>Results <span class="nav-dot"></span></a><a class="nav-link active" href="team.html"><span class="nav-icon">♙</span>Team</a></nav><div class="sidebar-bottom"><div class="status-dot"></div><div><strong>Notebook-based analysis</strong><small>Source: MDS_Project_AQI</small></div></div></aside><main class="main-content"><header class="topbar"><div class="breadcrumb">MDS PROJECT <span>/</span> <strong>TEAM PROFILES</strong></div><div class="top-actions"><span class="live-chip"><i></i> Analysis summary</span><button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">◐</button></div></header><section class="page active" id="page-team">
+<div class="page-title-row"><div><div class="eyebrow"><span class="eyebrow-line"></span> THE PEOPLE BEHIND THE PROJECT</div><h1>Meet the team<span class="title-period">.</span></h1><p class="page-subtitle">Meet the people behind our air-quality analysis, modelling, and interpretation.</p></div><span class="team-count">TEAM PROFILES · PLACEHOLDERS</span></div>
+<div class="team-banner"><div class="team-banner-icon">✳</div><div><h2>Curiosity, collaboration, and cleaner air.</h2><p>This project brings data exploration and machine learning together to study air quality patterns and prediction.</p></div></div>
+<div class="team-grid">
+<article class="member-card">
+<div class="avatar avatar-a"><img alt="Team member 1 photo" class="member-photo" onerror="this.style.display='none'" src="images/member1.jpg"/>
+<span>AM</span>
 
+</div>
+<div class="member-content">
+<span class="member-role">TEAM MEMBER 01</span>
+<h3>Aiswarya M S</h3>
+<p class="member-bio">
+      EE23BT055 | 4th-Year Electrical Engineering student
+      at IIT Dharwad. Interested in data analysis and
+      machine learning, contributing to the project's
+      analysis and exploratory data analysis (EDA).
+    </p>
+<div class="member-tags">
+<span>Data Analysis</span>
+<span>EDA</span>
+</div>
 
-  <section class="page-hero">
-    <canvas class="field" aria-hidden="true"></canvas>
-    <div class="wrap">
-      <h1 data-scramble>Meet the team</h1>
-      <p class="lede">The people behind this project.</p>
-    </div>
-  </section>
+</div>
+</article>
+<article class="member-card">
+<div class="avatar avatar-b"><img alt="Team member 2 photo" class="member-photo" onerror="this.style.display='none'" src="images/member2.jpg"/>
+<span>SH</span>
 
-  <main class="wrap">
+</div>
+<div class="member-content">
+<span class="member-role">TEAM MEMBER 02</span>
+<h3>S. Sri. Hansitha</h3>
+<p class="member-bio">
+      EE23BT055 | 4th-Year Electrical Engineering student
+      at IIT Dharwad. Contributing to the project's
+      visualisation, interpretation of results, and
+      identification of meaningful insights.
+    </p>
+<div class="member-tags">
+<span>Visualisation</span>
+<span>Insights</span>
+</div>
 
-    <!-- EDIT: team photo or logo. Save it as images/team.jpg (png or webp also work) inside this team's folder.
-         It replaces the placeholder here and also appears on your tile on the main page. -->
-    <img class="team-dp" data-team-photo src="../../assets/team-placeholder.svg" alt="Team photo or logo">
-
-    <!-- Teams have 1 to 4 members. Delete the member blocks you do not need (everything from "BEGIN MEMBER" to "END MEMBER"). To add one, copy a block and paste it below. -->
-    <div class="members">
-      <!-- BEGIN MEMBER -->
-      <article class="member">
-        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
-        <img src="../../assets/avatar.svg" alt="Photo of Member Name">
-        <h2>Member name</h2>
-        <p class="meta">Roll number, branch</p>
-        <p>Two or three lines about yourself: your interests, skills, and what you worked on in this project.</p>
-      </article>
-      <!-- END MEMBER -->
-      <!-- BEGIN MEMBER -->
-      <article class="member">
-        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
-        <img src="../../assets/avatar.svg" alt="Photo of Member Name">
-        <h2>Member name</h2>
-        <p class="meta">Roll number, branch</p>
-        <p>Two or three lines about yourself: your interests, skills, and what you worked on in this project.</p>
-      </article>
-      <!-- END MEMBER -->
-      <!-- BEGIN MEMBER -->
-      <article class="member">
-        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
-        <img src="../../assets/avatar.svg" alt="Photo of Member Name">
-        <h2>Member name</h2>
-        <p class="meta">Roll number, branch</p>
-        <p>Two or three lines about yourself: your interests, skills, and what you worked on in this project.</p>
-      </article>
-      <!-- END MEMBER -->
-      <!-- BEGIN MEMBER -->
-      <article class="member">
-        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
-        <img src="../../assets/avatar.svg" alt="Photo of Member Name">
-        <h2>Member name</h2>
-        <p class="meta">Roll number, branch</p>
-        <p>Two or three lines about yourself: your interests, skills, and what you worked on in this project.</p>
-      </article>
-      <!-- END MEMBER -->
-    </div>
-
-    <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="index.html">Back to the project</a></p>
-  </main>
-
-  <footer class="site-footer">
-    <div class="wrap">MDS Project, IIT Dharwad</div>
-  </footer>
-  <script src="../../assets/site.js" defer></script>
-</body>
-</html>
+</div>
+</article>
+</div><p class="team-disclaimer">Add approved member photographs to the images folder and update each image path. Keep names, IDs, and contributions verified.</p>
+</section><footer class="footer"><span>AirScope · MDS Project</span><span>Built from the uploaded AQI analysis notebook <b>·</b> <span id="footerYear"></span></span></footer></main></div><div class="toast" id="toast" role="status" aria-live="polite"></div></body></html>
