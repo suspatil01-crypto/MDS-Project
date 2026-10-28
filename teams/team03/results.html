@@ -14,7 +14,6 @@
     <div class="wrap bar">
       <div class="brand-group">
         <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
         <span class="brand">Team 3</span>
       </div>
       <nav class="tabs" aria-label="Team pages">
@@ -25,35 +24,39 @@
     </div>
   </header>
 
-
   <section class="page-hero">
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
       <h1 data-scramble>Results</h1>
-      <p class="lede">Graphs from the project, with an explanation of what each one shows.</p>
+      <p class="lede">Dataset analysis, product similarity, and recommendation network visualizations.</p>
     </div>
   </section>
 
   <main class="wrap">
 
     <!--
-      HOW TO ADD A GRAPH
-      1. Save your image inside this team's "images" folder (for example images/graph1.png).
-      2. Copy everything from "BEGIN RESULT" to "END RESULT" and paste it below the last result.
-      3. Change the image name, the alt text, the title and the explanation.
+      IMAGE INSTRUCTIONS:
+      Save the generated graph images in this team's "images" folder.
+      The filenames used below are:
+        images/rating_distribution_and_reviews_per_product.png
+        images/user_activity_and_top_products.png
+        images/cooccurrence_distribution.png
+        images/similarity_score_distributions.png
+        images/recommendation_network.png
+      If your actual output filenames differ, update the relevant src path below.
     -->
 
     <!-- BEGIN RESULT -->
     <section class="result">
       <figure>
-        <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 1. Short caption for the graph.</figcaption>
+        <img src="images/rating_distribution_and_reviews_per_product.png"
+             alt="Bar chart of rating distribution and histogram of number of reviews per product">
+        <figcaption>Figure 1. Rating distribution and reviews per product.</figcaption>
       </figure>
       <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
+        <h2>Rating Distribution and Reviews per Product</h2>
+        <p>The first plot shows how many reviews fall under each rating, while the second shows the distribution of review counts across products. The product-review histogram uses a logarithmic vertical axis to make less frequent and highly reviewed products easier to compare.</p>
+        <p>Together, these plots help assess rating patterns and whether review activity is concentrated among a small number of products. The exact shape and dominant rating should be described after checking the generated image.</p>
       </div>
     </section>
     <!-- END RESULT -->
@@ -61,24 +64,71 @@
     <!-- BEGIN RESULT -->
     <section class="result">
       <figure>
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 2. Short caption for the graph.</figcaption>
+        <img src="images/user_activity_and_top_products.png"
+             alt="Histogram of reviews per user and bar chart of the fifteen most-reviewed products">
+        <figcaption>Figure 2. User activity and the 15 most-reviewed products.</figcaption>
       </figure>
       <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
+        <h2>User Activity and Product Popularity</h2>
+        <p>The left plot shows the number of reviews written by each user. The right plot ranks the 15 products with the highest number of reviews. A logarithmic scale is used for user activity to make differences between low- and high-activity users visible.</p>
+        <p>These plots reveal how engagement is distributed across users and products. They can help identify whether the dataset contains a long tail of users with few reviews alongside a smaller group of highly active users, and whether a few products receive substantially more reviews than others.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/cooccurrence_distribution.png"
+             alt="Histogram of non-zero product-product co-occurrence counts">
+        <figcaption>Figure 3. Distribution of product co-occurrence counts.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Product–Product Co-occurrence</h2>
+        <p>The co-occurrence matrix counts how many distinct users interacted with each pair of products. The histogram displays the non-zero co-occurrence counts, with a logarithmic vertical axis.</p>
+        <p>Most product pairs may share relatively few users, while a smaller number have stronger overlap. This matrix forms the basis for finding related products; it measures shared-user behaviour, not semantic similarity between product descriptions.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/similarity_score_distributions.png"
+             alt="Histograms of cosine similarity, Jaccard similarity, and final ensemble similarity scores">
+        <figcaption>Figure 4. Distributions of the similarity and ensemble scores.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Hybrid Product Similarity Scores</h2>
+        <p>Three score distributions are compared: Cosine Similarity, Jaccard Similarity, and the final ensemble score. Cosine Similarity captures overlap relative to the interaction counts of each product, while Jaccard Similarity measures shared users relative to the union of users for the pair.</p>
+        <p>The final score combines Cosine Similarity (weight 0.45), Jaccard Similarity (weight 0.30), and a log-scaled support score based on the number of shared users (weight 0.25). Only pairs with at least three shared users are considered by the configured pair-scoring step.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/recommendation_network_B000KOEAKM.png"
+             alt="Network graph showing products as nodes and edges labelled with ensemble similarity scores">
+        <figcaption>Figure 5. Product recommendation network based on ensemble similarity.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Product Recommendation Network</h2>
+        <p>The network visualizes a selection of products as nodes. Edges connect product pairs whose ensemble similarity meets the threshold used to build the graph, and edge labels display the similarity score. The input product is highlighted when one is supplied.</p>
+        <p>The code starts with a threshold of 0.80 and gradually lowers it in steps of 0.05 if needed, down to 0.50, to find related products. This visualization makes it easier to inspect groups of strongly related products and compare the strength of their relationships.</p>
       </div>
     </section>
     <!-- END RESULT -->
 
     <div class="prose summary">
-      <!-- EDIT: sum up the main findings -->
       <h2>Anomalies, observations and patterns</h2>
       <ul>
-        <li><strong>Anomaly:</strong> something unusual in the data and a likely reason for it.</li>
-        <li><strong>Observation:</strong> something you measured or noticed.</li>
-        <li><strong>Pattern:</strong> a trend that repeats across the dataset.</li>
+        <li><strong>Interaction sparsity:</strong> The user–product matrix is built from observed user–product interactions, so most possible user–product combinations are unobserved. The code reports the matrix sparsity when it runs.</li>
+        <li><strong>Uneven activity:</strong> The user-activity and product-popularity plots help assess whether reviews are concentrated among a smaller number of users or products. Confirm the specific pattern from the generated graphs.</li>
+        <li><strong>Shared-user signal:</strong> Product co-occurrence identifies products reviewed by overlapping groups of users. A higher count means more shared users, but does not by itself prove that the products are substitutes or semantically similar.</li>
+        <li><strong>Hybrid ranking:</strong> Combining cosine, Jaccard, and support scores balances normalized overlap with evidence from the number of shared users.</li>
+        <li><strong>Threshold effect:</strong> The recommendation network may become less connected at higher similarity thresholds. The plotting function relaxes the threshold in steps if the selected product has too few related products.</li>
       </ul>
     </div>
 
