@@ -2,6 +2,6 @@
 // Change the two texts between the quotes. Do not change anything else.
 window.TEAM_INFO = window.TEAM_INFO || {};
 window.TEAM_INFO["team06"] = {
-  name: "Team 6",
-  topic: "Project title to be added"
+  name: "Team 6: NeuroPulse",
+  topic: "A Comparative and Reproducible Framework for EEG Seizure Detection"
 };
