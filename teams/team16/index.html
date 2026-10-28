@@ -14,7 +14,6 @@
     <div class="wrap bar">
       <div class="brand-group">
         <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
         <span class="brand">Team 16</span>
       </div>
       <nav class="tabs" aria-label="Team pages">
@@ -29,32 +28,32 @@
   <section class="page-hero">
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
-      <!-- EDIT: your project title and a one or two line summary -->
-      <h1 data-scramble>Your project title goes here</h1>
-      <p class="lede">One or two sentences that tell a visitor what this project is about and why it matters.</p>
+      <h1 data-scramble>Predicting NYC Taxi Trip Duration through Spatial Network and Regression Analysis</h1>
+      <p class="lede">Given a taxi trip's pickup location, dropoff location and pickup time, we predict how long the ride will take &mdash; by turning the city itself into a graph and feeding its structure into regression models built from scratch.</p>
     </div>
   </section>
 
   <main class="wrap prose">
 
-    <!-- EDIT: describe the problem statement (PS) your team was given -->
     <h2>Problem statement</h2>
-    <p>Describe the problem your team is solving. Say what question you are trying to answer and what the final outcome should look like.</p>
-    <p>Add more paragraphs by copying a &lt;p&gt; line like this one.</p>
+    <p>Our goal is to predict the duration (in seconds) of a yellow-taxi trip in New York City, given only four coordinates (pickup/dropoff latitude and longitude) and a pickup timestamp. This is the task behind Kaggle's well-known "NYC Taxi Trip Duration" competition, re-framed here as a course project in applied linear algebra, graph theory and regression: can we substantially improve a plain linear model just by (a) engineering better geometric/temporal features, and (b) representing the city's road network as a graph and feeding its spectral structure into the regression?</p>
 
     <h2>Dataset</h2>
-    <p>Where the data comes from, how many rows and columns it has, and what each important column means.</p>
+    <p>We use the public Kaggle <em>NYC Taxi Trip Duration</em> dataset &mdash; about 1.46 million real yellow-taxi rides recorded between January and June 2016, with pickup/dropoff coordinates, pickup timestamp, passenger count, vendor ID, and the trip duration label.</p>
+    <p>During cleaning we drop trips that are physically impossible (shorter than 60 seconds, longer than 24 hours, outside New York City, or with zero passengers) &mdash; only 0.89% of rows are removed. Because trip duration is heavily right-skewed, we transform the target with <em>y&prime; = log(1 + y)</em>, which turns it into a roughly bell-shaped distribution that a linear model can fit well.</p>
 
     <h2>Approach</h2>
-    <p>Briefly explain the steps you followed, from cleaning the data to producing the final results.</p>
+    <p>The project is organised into five stages:</p>
     <ul>
-      <li>Step or method one</li>
-      <li>Step or method two</li>
-      <li>Step or method three</li>
+      <li><strong>Clean the data</strong> &mdash; remove impossible trips and log-transform the skewed target.</li>
+      <li><strong>Engineer 16 features</strong> &mdash; 5 geometric (Haversine distance, bearing, Manhattan distance, north&ndash;south / east&ndash;west components), 6 temporal (hour, day of week, month, weekend/rush-hour flags, with hour and day cyclically encoded on the unit circle), and 2 interaction terms (distance &times; rush hour, distance &times; weekend).</li>
+      <li><strong>Build a spatial network</strong> &mdash; cluster NYC into 50 zones with K-means, build a 50&times;50 pickup&ndash;dropoff adjacency matrix, derive the symmetric graph Laplacian <em>L<sub>sym</sub> = I &minus; D<sup>&minus;1/2</sup>AD<sup>&minus;1/2</sup></em> (proved positive semi-definite), and use its eigenvectors for spectral clustering (5 natural neighbourhoods) and four centrality scores (degree, betweenness, PageRank, eigenvector) per zone &mdash; 13 new graph-based features in total.</li>
+      <li><strong>Fit three models from scratch</strong> &mdash; Ordinary Least Squares via the normal equation, Gradient Descent with a provably safe step size <em>&eta; &lt; 2/&lambda;<sub>max</sub>(H)</em>, and Ridge Regression with &alpha; chosen by 5-fold cross-validation.</li>
+      <li><strong>Validate statistically</strong> &mdash; Welch's t-test to compare models, a 200-iteration bootstrap for coefficient confidence intervals, condition-number analysis of X<sup>T</sup>X for numerical stability, and an ablation study across four nested feature sets.</li>
     </ul>
 
     <h2>Tools used</h2>
-    <p>Python, pandas, matplotlib (replace with your own list).</p>
+    <p>Python, pandas, NumPy, SciPy, scikit-learn, NetworkX, Matplotlib, Seaborn, JupyterLab.</p>
 
     <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="team.html">Meet the team</a></p>
   </main>
