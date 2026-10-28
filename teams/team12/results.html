@@ -8,13 +8,76 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    .clean-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0 2rem;
+      font-size: 0.95rem;
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .clean-table th, .clean-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e0e2ec;
+      text-align: left;
+    }
+    .clean-table th {
+      background: #EAEBFA;
+      color: var(--ink);
+      font-weight: 700;
+      font-family: var(--display);
+    }
+    .clean-table tr:last-child td {
+      border-bottom: none;
+    }
+    .clean-table tr.highlight-row {
+      background: #FFFBEB;
+      font-weight: 600;
+    }
+    .model-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0 2.5rem;
+    }
+    .model-card {
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 10px;
+      padding: 1.25rem;
+      box-shadow: 4px 4px 0 var(--blue);
+    }
+    .model-card h3 {
+      font-size: 1.2rem;
+      margin-top: 0;
+      margin-bottom: 0.25rem;
+    }
+    .model-tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--blue);
+      margin-bottom: 0.5rem;
+    }
+    .model-card p {
+      font-size: 0.92rem;
+      line-height: 1.55;
+      color: var(--ink);
+      margin: 0;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="wrap bar">
       <div class="brand-group">
         <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
         <span class="brand">Team 12</span>
       </div>
       <nav class="tabs" aria-label="Team pages">
@@ -25,60 +88,382 @@
     </div>
   </header>
 
-
   <section class="page-hero">
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
-      <h1 data-scramble>Results</h1>
-      <p class="lede">Graphs from the project, with an explanation of what each one shows.</p>
+      <h1 data-scramble>Results &amp; Key Observations</h1>
+      <p class="lede">Empirical performance of ten machine learning models across classification, continuous rating prediction, and clustering on 100,000 IMDB reviews.</p>
     </div>
   </section>
 
   <main class="wrap">
 
-    <!--
-      HOW TO ADD A GRAPH
-      1. Save your image inside this team's "images" folder (for example images/graph1.png).
-      2. Copy everything from "BEGIN RESULT" to "END RESULT" and paste it below the last result.
-      3. Change the image name, the alt text, the title and the explanation.
-    -->
+    <!-- PART 1: BINARY CLASSIFICATION -->
+    <div class="prose">
+      <h2>1. Binary Sentiment Classification</h2>
+      <p>We evaluated four classification models on 50,000 balanced reviews (25,000 train, 25,000 test). Moving from simple word counts to BERT&rsquo;s bidirectional self-attention improved classification accuracy from 84.20% to 94.16%.</p>
+    </div>
 
-    <!-- BEGIN RESULT -->
+    <!-- Table 1 from Report -->
+    <table class="clean-table">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>Accuracy (%)</th>
+          <th>Precision</th>
+          <th>Recall</th>
+          <th>F1-Score</th>
+          <th>Notes &amp; Representation</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Multinomial Naive Bayes</strong></td>
+          <td>84.20</td>
+          <td>&mdash;</td>
+          <td>&mdash;</td>
+          <td>&mdash;</td>
+          <td>Bag-of-Words baseline; evaluates words in isolation without syntax.</td>
+        </tr>
+        <tr>
+          <td><strong>Logistic Regression</strong></td>
+          <td>88.22</td>
+          <td>0.88</td>
+          <td>0.88</td>
+          <td>0.88</td>
+          <td>TF-IDF with unigrams and bigrams, L2 regularization (C = 1.0).</td>
+        </tr>
+        <tr>
+          <td><strong>Bidirectional LSTM</strong></td>
+          <td>87.78</td>
+          <td>0.88</td>
+          <td>0.88</td>
+          <td>0.88</td>
+          <td>2-layer BiLSTM with 128-dim dense embeddings in PyTorch.</td>
+        </tr>
+        <tr class="highlight-row">
+          <td><strong>BERT (Fine-Tuned)</strong></td>
+          <td><strong>94.16</strong></td>
+          <td><strong>0.94</strong></td>
+          <td><strong>0.94</strong></td>
+          <td><strong>0.94</strong></td>
+          <td>Pre-trained <code>bert-base-uncased</code> with bidirectional self-attention.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Classification Model Descriptions -->
+    <div class="model-card-grid">
+      <div class="model-card">
+        <span class="model-tag">Baseline &bull; 84.20% Acc</span>
+        <h3>Multinomial Naive Bayes</h3>
+        <p>A fast probabilistic baseline based on Bayes' theorem. It assumes words appear independently, so it cannot understand word order, sarcasm, or negation phrases like &ldquo;not good&rdquo;.</p>
+      </div>
+
+      <div class="model-card">
+        <span class="model-tag">Linear Model &bull; 88.22% Acc</span>
+        <h3>Logistic Regression</h3>
+        <p>Uses TF-IDF features with both unigrams and bigrams plus L2 regularization. Incorporating bigrams like &ldquo;worst movie&rdquo; lets this linear model capture local context, beating our BiLSTM.</p>
+      </div>
+
+      <div class="model-card">
+        <span class="model-tag">Recurrent NN &bull; 87.78% Acc</span>
+        <h3>Bidirectional LSTM</h3>
+        <p>A 2-layer BiLSTM trained in PyTorch using 128-dimensional word embeddings. It reads reviews forwards and backwards, but struggles on long reviews (200+ words) where earlier words get forgotten.</p>
+      </div>
+
+      <div class="model-card">
+        <span class="model-tag">Transformer &bull; 94.16% Acc</span>
+        <h3>BERT Classification</h3>
+        <p>Fine-tuned <code>bert-base-uncased</code> (110M params) for 3 epochs. Self-attention looks at every word relative to the entire sentence simultaneously, effortlessly resolving sarcasm and complex negation.</p>
+      </div>
+    </div>
+
+    <!-- Figure 1: BERT Confusion Matrix -->
     <section class="result">
       <figure>
-        <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 1. Short caption for the graph.</figcaption>
+        <img src="images/bert_confusion_matrix.png" alt="Confusion matrix for the fine-tuned BERT model on IMDB test set">
+        <figcaption>Figure 1. Confusion Matrix for fine-tuned BERT Classification on the 25,000-review test set (94.16% Accuracy).</figcaption>
       </figure>
       <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
+        <h2>BERT Confusion Matrix</h2>
+        <p>The fine-tuned BERT model achieved outstanding separation on the 25,000 test reviews: <strong>11,540 true negatives</strong> and <strong>11,810 true positives</strong>, with only 820 false positives and 629 false negatives.</p>
+        <p>BERT rarely confuses polarized reviews, demonstrating the clear advantage of pre-trained bidirectional contextual attention over traditional n-gram models.</p>
       </div>
     </section>
-    <!-- END RESULT -->
 
-    <!-- BEGIN RESULT -->
+    <!-- Figure 2: BiLSTM Confusion Matrix -->
     <section class="result">
       <figure>
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 2. Short caption for the graph.</figcaption>
+        <img src="images/lstm_confusion_matrix.png" alt="Confusion matrix for the Bidirectional LSTM model">
+        <figcaption>Figure 2. Confusion Matrix for the 2-layer Bidirectional LSTM (87.78% Accuracy).</figcaption>
       </figure>
       <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
+        <h2>Bidirectional LSTM Confusion Matrix</h2>
+        <p>The 2-layer BiLSTM correctly classified the majority of reviews, but suffered more false positives and false negatives than BERT on reviews containing mixed or subtle sentiments.</p>
+        <p>Because movie reviews average over 200 words, recurrent memory bottlenecks prevent the LSTM from retaining earlier context as effectively as Transformer self-attention.</p>
       </div>
     </section>
-    <!-- END RESULT -->
 
+    <!-- Figure 3: Loss Curves -->
+    <section class="result">
+      <figure>
+        <img src="images/lstm_loss_curve.png" alt="Training and validation loss curves for Bidirectional LSTM">
+        <figcaption>Figure 3. Training and validation loss curves for the Bidirectional LSTM across epochs.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>LSTM Training &amp; Validation Loss</h2>
+        <p>The cross-entropy loss decreased smoothly over training epochs, showing stable learning. Early stopping was used to freeze training before validation loss began diverging, preventing overfitting on the training set.</p>
+      </div>
+    </section>
+
+    <!-- PART 2: CONTINUOUS REGRESSION -->
+    <div class="prose" style="margin-top: 4rem;">
+      <h2>2. Continuous Rating Prediction (1&ndash;10 Stars)</h2>
+      <p>Predicting an exact star rating (1&ndash;10) is much harder than binary classification. Models must understand subtle qualifiers (e.g., &ldquo;pretty good&rdquo; vs. &ldquo;a timeless masterpiece&rdquo;). We adapted deep learning architectures with Mean Squared Error (MSE) loss to predict a continuous score.</p>
+    </div>
+
+    <!-- Table 2 from Report -->
+    <table class="clean-table">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>MSE</th>
+          <th>MAE (Stars)</th>
+          <th>R&sup2; Score</th>
+          <th>Performance Summary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>XGBoost (TF-IDF)</strong></td>
+          <td>6.5666</td>
+          <td>2.1612</td>
+          <td>0.4604</td>
+          <td>Off by over 2.1 rating points on average; lacks word-order awareness.</td>
+        </tr>
+        <tr>
+          <td><strong>LSTM Regression</strong></td>
+          <td>4.8040</td>
+          <td>1.5477</td>
+          <td>0.6058</td>
+          <td>Reduces MAE by 28.4% over XGBoost by maintaining sequential hidden states.</td>
+        </tr>
+        <tr class="highlight-row">
+          <td><strong>BERT Regression</strong></td>
+          <td><strong>2.2462</strong></td>
+          <td><strong>0.9897</strong></td>
+          <td><strong>0.8154</strong></td>
+          <td>Predicts within less than one star of true user rating on average.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Regression Model Descriptions -->
+    <div class="model-card-grid">
+      <div class="model-card">
+        <span class="model-tag">Tree Ensemble &bull; MAE 2.16</span>
+        <h3>XGBoost Regressor</h3>
+        <p>Trained on 2,000 TF-IDF unigram and bigram features using squared error loss. While robust against overfitting, it cannot track sentence syntax, resulting in an average error of over 2 full star points.</p>
+      </div>
+
+      <div class="model-card">
+        <span class="model-tag">Sequential NN &bull; MAE 1.55</span>
+        <h3>LSTM Regressor</h3>
+        <p>Adapted with a single linear output neuron and MSE loss. By learning word order, it cut prediction error down to 1.55 stars, significantly outperforming the statistical tree baseline.</p>
+      </div>
+
+      <div class="model-card">
+        <span class="model-tag">Transformer &bull; MAE 0.99</span>
+        <h3>BERT Regressor</h3>
+        <p>Replaced the classification head with a continuous linear node (<code>num_labels=1</code>) and fine-tuned with MSE loss. Achieved a state-of-the-art MAE of 0.9897, predicting user ratings within &plusmn;0.99 stars.</p>
+      </div>
+    </div>
+
+    <!-- Figure 4: LSTM Reg True vs Pred & Residuals -->
+    <section class="result">
+      <figure>
+        <img src="images/lstm_reg_true_vs_pred.png" alt="True vs Predicted ratings for LSTM Regressor">
+        <figcaption>Figure 4. True vs. Predicted ratings for the LSTM Regressor on the test set.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>LSTM True vs. Predicted Ratings</h2>
+        <p>This scatter plot demonstrates that predictions cluster tightly along the diagonal identity line across both 1-star and 10-star extremes.</p>
+        <p>The model occasionally struggles on mid-range ratings (4 to 7 stars) due to the severe shortage of neutral reviews in the benchmark dataset.</p>
+      </div>
+    </section>
+
+    <!-- Figure 5: LSTM Residuals -->
+    <section class="result">
+      <figure>
+        <img src="images/lstm_reg_residuals.png" alt="Histogram of prediction residuals for LSTM regressor">
+        <figcaption>Figure 5. Distribution of prediction residuals (predicted rating minus true rating) for LSTM.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Regression Residual Analysis</h2>
+        <p>Residual errors are symmetrically distributed around zero with near-zero mean, confirming that our model does not have systematic over-prediction or under-prediction bias.</p>
+      </div>
+    </section>
+
+    <!-- PART 3: UNSUPERVISED CLUSTERING & SVD -->
+    <div class="prose" style="margin-top: 4rem;">
+      <h2>3. Dimensionality Reduction &amp; Unsupervised Clustering</h2>
+      <p>We tested whether natural sentiment groupings emerge automatically when all labels and ratings are removed. We used Truncated SVD to reduce 5,000+ TF-IDF features to 2 dimensions for plotting, and evaluated K-Means and Gaussian Mixture Models on 50,000 unlabelled reviews.</p>
+    </div>
+
+    <!-- Table 3 from Report -->
+    <table class="clean-table">
+      <thead>
+        <tr>
+          <th>Model / Method</th>
+          <th>Learning Paradigm</th>
+          <th>Input &rarr; Output</th>
+          <th>Target / Criterion</th>
+          <th>Supervised Metric</th>
+          <th>Key Finding from Report</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Truncated SVD</strong></td>
+          <td>Dimensionality Reduction</td>
+          <td>5,000+ TF-IDF &rarr; 2 Components</td>
+          <td>Variance Maximization</td>
+          <td>&mdash;</td>
+          <td>2D scatter plot confirms latent semantic structures align cleanly with sentiment polarity.</td>
+        </tr>
+        <tr>
+          <td><strong>K-Means Clustering</strong></td>
+          <td>Unsupervised (Hard Partitioning)</td>
+          <td>50,000 reviews (K = 2)</td>
+          <td>WCSS Inertia Minimization</td>
+          <td>&mdash;</td>
+          <td>Elbow curve clearly bends at K = 2, confirming a natural two-group sentiment structure.</td>
+        </tr>
+        <tr>
+          <td><strong>Gaussian Mixture Model (GMM)</strong></td>
+          <td>Unsupervised (Soft Probabilistic)</td>
+          <td>50,000 reviews (2 Gaussians)</td>
+          <td>Expectation-Maximization (EM)</td>
+          <td>&mdash;</td>
+          <td>Assigns continuous probabilities to mixed reviews (e.g., 60% positive, 40% negative).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Figure 6: SVD 2D Scatter -->
+    <section class="result">
+      <figure>
+        <img src="images/svd_2d_scatter.png" alt="Truncated SVD 2D projection of TF-IDF features">
+        <figcaption>Figure 6. Truncated SVD 2D projection of high-dimensional TF-IDF vectors.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Truncated SVD 2D Semantic Space</h2>
+        <p>Compressing over 5,000 TF-IDF dimensions down to just two Principal Components reveals distinct geometric separation between positive and negative reviews.</p>
+        <p>This validates that sentiment polarity is the dominant source of mathematical variance in the review vocabulary.</p>
+      </div>
+    </section>
+
+    <!-- Figure 7: K-Means Elbow Curve -->
+    <section class="result">
+      <figure>
+        <img src="images/kmeans_elbow.png" alt="Elbow curve for K-Means clustering showing inertia vs K">
+        <figcaption>Figure 7. K-Means Elbow Curve: Inertia vs. Number of Clusters (K = 1 to 10).</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>K-Means Elbow Method</h2>
+        <p>Plotting within-cluster sum of squares (WCSS) across K = 1 to 10 shows a clear inflection point at <strong>K = 2</strong>, proving that the vocabulary naturally splits into positive and negative clusters without any supervision.</p>
+      </div>
+    </section>
+
+    <!-- Figure 8: GMM Soft Clusters -->
+    <section class="result">
+      <figure>
+        <img src="images/gmm_clusters.png" alt="Gaussian Mixture Model posterior probability distribution">
+        <figcaption>Figure 8. Gaussian Mixture Model (GMM) posterior probability distribution.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>GMM Soft Clustering Probabilities</h2>
+        <p>Unlike rigid K-Means, GMM assigns each review a probability of belonging to each cluster. Reviews with mixed feedback (e.g., <em>&ldquo;great acting, terrible plot&rdquo;</em>) sit smoothly in the boundary region with split probabilities.</p>
+      </div>
+    </section>
+
+    <!-- PART 4: EXPLORATORY DATA ANALYSIS -->
+    <div class="prose" style="margin-top: 4rem;">
+      <h2>4. Exploratory Data Analysis (EDA) Plots</h2>
+      <p>Before training our models, we audited the 100,000 reviews to examine review lengths, vocabulary patterns, rating distributions, and punctuation habits:</p>
+    </div>
+
+    <!-- Figure 9: Target Distributions -->
+    <section class="result">
+      <figure>
+        <img src="images/eda_plot_1.png" alt="Target distributions: 50/50 binary classification vs U-shaped rating histogram">
+        <figcaption>Figure 9. Target Distributions: Balanced binary set vs. U-shaped 1&ndash;10 continuous rating histogram.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>The Missing Middle in Ratings</h2>
+        <p>Comparing the balanced 50/50 classification set against the 1&ndash;10 star ratings shows that scores 5 and 6 are almost completely missing. People review films they loved (10/10) or hated (1/10).</p>
+      </div>
+    </section>
+
+    <!-- Figure 10: Review Length Distribution -->
+    <section class="result">
+      <figure>
+        <img src="images/eda_plot_2.png" alt="Review character and word count distributions">
+        <figcaption>Figure 10. Document length distributions across characters and words.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Review Length &amp; Positive Skew</h2>
+        <p>Most reviews are concise (under 150 words), but a long tail extends beyond 1,000 words. Strong opinions (1 and 10 stars) average over 1,420 characters, while mild opinions average under 950 characters.</p>
+      </div>
+    </section>
+
+    <!-- Figure 11: Word Clouds -->
+    <section class="result">
+      <figure>
+        <img src="images/eda_plot_3.png" alt="Word clouds comparing positive and negative reviews">
+        <figcaption>Figure 11. Word Clouds: Positive reviews (&ldquo;masterpiece&rdquo;, &ldquo;brilliant&rdquo;) vs. negative reviews (&ldquo;waste&rdquo;, &ldquo;awful&rdquo;).</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Lexical Divergence in Sentiment</h2>
+        <p>Word clouds reveal clear vocabulary contrasts. Positive reviews feature praise adjectives like &ldquo;brilliant&rdquo; and &ldquo;wonderful&rdquo;, while negative reviews heavily feature dismissive terms like &ldquo;waste&rdquo;, &ldquo;boring&rdquo;, and &ldquo;awful&rdquo;.</p>
+      </div>
+    </section>
+
+    <!-- Figure 12: Bigram Discriminative Power -->
+    <section class="result">
+      <figure>
+        <img src="images/eda_plot_6.png" alt="Top predictive bigrams in positive and negative reviews">
+        <figcaption>Figure 12. Top predictive bigrams: &ldquo;worst movie ever&rdquo; vs. &ldquo;highly recommend&rdquo;.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Bigrams (Word Pairs) vs. Single Words</h2>
+        <p>Individual words like &ldquo;movie&rdquo; or &ldquo;film&rdquo; appear in almost every review and give zero sentiment signal. Bigram phrases like <em>&ldquo;worst movie ever&rdquo;</em>, <em>&ldquo;complete waste&rdquo;</em>, and <em>&ldquo;must see&rdquo;</em> strongly dictate polarity.</p>
+      </div>
+    </section>
+
+    <!-- Figure 13: Anger Index in Punctuation -->
+    <section class="result">
+      <figure>
+        <img src="images/eda_plot_7.png" alt="Exclamation mark frequency across 1-10 star ratings">
+        <figcaption>Figure 13. Punctuation Density: Exclamation marks (<code>!</code>) mapped against 1&ndash;10 star ratings.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>The &ldquo;Anger Index&rdquo; in Punctuation</h2>
+        <p>1-star negative reviews contain nearly <strong>4 times more exclamation marks (<code>!!!</code>) and ALL-CAPS words</strong> than 10-star reviews. Unhappy reviewers use punctuation to shout their displeasure, providing a valuable secondary predictive signal.</p>
+      </div>
+    </section>
+
+    <!-- SUMMARY SECTION: ANOMALIES, OBSERVATIONS, PATTERNS -->
     <div class="prose summary">
-      <!-- EDIT: sum up the main findings -->
-      <h2>Anomalies, observations and patterns</h2>
+      <h2>Anomalies, Observations and Patterns</h2>
       <ul>
-        <li><strong>Anomaly:</strong> something unusual in the data and a likely reason for it.</li>
-        <li><strong>Observation:</strong> something you measured or noticed.</li>
-        <li><strong>Pattern:</strong> a trend that repeats across the dataset.</li>
+        <li><strong>Anomaly &bull; The Missing Middle:</strong> Ratings 5 and 6 are almost absent from the dataset. Both human bias (people only review what they love or hate) and benchmark curation created a U-shaped distribution that makes middle-range rating regression challenging.</li>
+        <li><strong>Observation &bull; The Anger Index:</strong> While positive reviewers rely on polite adjectives, furious reviewers shout through typography&mdash;using 4x more exclamation marks (<code>!!!</code>) and ALL-CAPS words in 1-star reviews.</li>
+        <li><strong>Observation &bull; Review Length vs. Emotion:</strong> Strongly polarized reviews (1 and 10 stars) are significantly longer on average (>1,420 chars) than moderate reviews (<950 chars).</li>
+        <li><strong>Pattern &bull; Bigrams Dominate Unigrams:</strong> Single words carry high stopword noise, whereas 2-word pairs (like &ldquo;not bad&rdquo; or &ldquo;must see&rdquo;) preserve critical local context.</li>
+        <li><strong>Pattern &bull; Memory Bottlenecks in LSTMs:</strong> In reviews over 200 words, recurrent LSTMs lose early context, which allowed TF-IDF Logistic Regression to match them (88.22% vs. 87.78%). BERT solved this with bidirectional self-attention (94.16%).</li>
+        <li><strong>Pattern &bull; Soft Clustering for Mixed Reviews:</strong> Gaussian Mixture Models outshine hard K-Means by expressing nuanced mixed sentiments as continuous probabilities.</li>
       </ul>
     </div>
 
@@ -86,7 +471,7 @@
   </main>
 
   <footer class="site-footer">
-    <div class="wrap">MDS Project, IIT Dharwad</div>
+    <div class="wrap">MDS Project, IIT Dharwad &bull; Team 12</div>
   </footer>
   <script src="../../assets/site.js" defer></script>
 </body>

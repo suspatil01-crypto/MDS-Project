@@ -8,13 +8,60 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    .clean-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0 1.75rem;
+      font-size: 0.95rem;
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .clean-table th, .clean-table td {
+      padding: 0.75rem 1rem;
+      border-bottom: 1px solid #e0e2ec;
+      text-align: left;
+    }
+    .clean-table th {
+      background: #EAEBFA;
+      color: var(--ink);
+      font-weight: 700;
+      font-family: var(--display);
+    }
+    .clean-table tr:last-child td {
+      border-bottom: none;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      background: #EAEBFA;
+      border: 1px solid var(--ink);
+      border-radius: 4px;
+    }
+    .highlight-card {
+      background: #fff;
+      border: 2px solid var(--ink);
+      border-left: 6px solid var(--blue);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      margin: 1.5rem 0;
+      box-shadow: 4px 4px 0 var(--ink);
+    }
+    .highlight-card h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
     <div class="wrap bar">
       <div class="brand-group">
         <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
         <span class="brand">Team 12</span>
       </div>
       <nav class="tabs" aria-label="Team pages">
@@ -25,42 +72,106 @@
     </div>
   </header>
 
-
   <section class="page-hero">
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
-      <!-- EDIT: your project title and a one or two line summary -->
-      <h1 data-scramble>Your project title goes here</h1>
-      <p class="lede">One or two sentences that tell a visitor what this project is about and why it matters.</p>
+      <h1 data-scramble>Can a Machine Truly Understand Movie Reviews?</h1>
+      <p class="lede">We trained and compared ten machine learning models on 100,000 real IMDB reviews to classify sentiment, predict 1&ndash;10 star ratings, and discover natural review clusters.</p>
     </div>
   </section>
 
   <main class="wrap prose">
 
-    <!-- EDIT: describe the problem statement (PS) your team was given -->
-    <h2>Problem statement</h2>
-    <p>Describe the problem your team is solving. Say what question you are trying to answer and what the final outcome should look like.</p>
-    <p>Add more paragraphs by copying a &lt;p&gt; line like this one.</p>
+    <h2>Problem Statement</h2>
+    <p>When people write movie reviews online, they don't just say <em>&ldquo;this is good&rdquo;</em> or <em>&ldquo;this is bad&rdquo;</em>. They use sarcasm, tell stories, praise the cinematography while criticizing the plot, and express strong emotions through punctuation and formatting.</p>
+    
+    <div class="highlight-card">
+      <h3>Our Core Question</h3>
+      <p style="margin: 0;"><strong>Can a computer automatically read a review written in everyday English and accurately understand how much the viewer liked or disliked the film?</strong></p>
+    </div>
 
-    <h2>Dataset</h2>
-    <p>Where the data comes from, how many rows and columns it has, and what each important column means.</p>
-
-    <h2>Approach</h2>
-    <p>Briefly explain the steps you followed, from cleaning the data to producing the final results.</p>
+    <p>To answer this question thoroughly, we formulated three learning tasks:</p>
     <ul>
-      <li>Step or method one</li>
-      <li>Step or method two</li>
-      <li>Step or method three</li>
+      <li><strong>Task 1 &bull; Binary Classification:</strong> Predict whether a review is categorically Positive or Negative. We tested models ranging from simple word counts up to fine-tuned BERT transformers.</li>
+      <li><strong>Task 2 &bull; Continuous Regression:</strong> Go beyond binary labels to predict the reviewer's exact numerical score on a continuous scale of <strong>1 to 10 stars</strong> based purely on their text.</li>
+      <li><strong>Task 3 &bull; Unsupervised Clustering:</strong> Remove all ratings and sentiment labels completely, testing whether clustering algorithms can discover natural groupings on raw text on their own.</li>
     </ul>
 
-    <h2>Tools used</h2>
-    <p>Python, pandas, matplotlib (replace with your own list).</p>
+    <h3>Why is this hard for a machine?</h3>
+    <ul>
+      <li><strong>Negation:</strong> <em>&ldquo;This movie was <strong>not bad at all</strong>.&rdquo;</em> A simple model sees the word &ldquo;bad&rdquo; and predicts negative, even though the viewer liked it.</li>
+      <li><strong>Sarcasm:</strong> <em>&ldquo;A <strong>masterpiece</strong> of terrible acting.&rdquo;</em> The praise word &ldquo;masterpiece&rdquo; confuses models that don't understand context.</li>
+      <li><strong>Mixed Opinions:</strong> <em>&ldquo;Great visuals, but a boring and slow story.&rdquo;</em> Models must weigh contrasting sentiments across long paragraphs.</li>
+    </ul>
+
+    <h2>Dataset</h2>
+    <p>We used the benchmark <strong>IMDB Large Movie Review Dataset</strong>, containing 100,000 real reviews written by real moviegoers. We systematically structured the data into three subsets of 50,000 reviews each:</p>
+
+    <table class="clean-table">
+      <thead>
+        <tr>
+          <th>Subset Name</th>
+          <th>Size</th>
+          <th>Description &amp; Use Case</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>1. Classification Set</strong></td>
+          <td><span class="tag">50,000 reviews</span></td>
+          <td>25,000 training and 25,000 testing reviews, perfectly balanced 50/50 (positive vs. negative) to prevent class imbalance biases.</td>
+        </tr>
+        <tr>
+          <td><strong>2. Rating Prediction Set</strong></td>
+          <td><span class="tag">50,000 reviews</span></td>
+          <td>50,000 reviews where each file has the reviewer's exact 1&ndash;10 star rating extracted directly from the raw filename metadata (e.g., <code>1234_7.txt</code> = 7/10).</td>
+        </tr>
+        <tr>
+          <td><strong>3. Unsupervised Set</strong></td>
+          <td><span class="tag">50,000 reviews</span></td>
+          <td>50,000 completely unlabelled reviews with all scores and folder tags stripped away, serving as a pure sandbox for K-Means and GMM clustering.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Data Preprocessing</h2>
+    <p>Raw text scraped from the web is messy. Before feeding any text into our models, we put all 100,000 reviews through a 4-step cleaning pipeline:</p>
+    <ul>
+      <li><strong>HTML Tag Removal:</strong> Over 58% of the raw reviews contained <code>&lt;br /&gt;</code> break tags from website markup. We stripped all HTML tags using regular expressions so models learn language instead of web code.</li>
+      <li><strong>Symbol Decoding:</strong> Web entities like <code>&amp;amp;</code> and <code>&amp;quot;</code> were unescaped back into clean characters.</li>
+      <li><strong>Whitespace Normalization:</strong> Multiple consecutive spaces, rogue tabs, and random line breaks were collapsed into clean paragraphs.</li>
+      <li><strong>Deduplication:</strong> We identified and removed 96 duplicate reviews in the training set and 199 in the test set, preventing data leakage between splits.</li>
+    </ul>
+
+    <h3>Turning Words into Numbers</h3>
+    <p>Computers do math on numbers, not words. We tested two main feature extraction approaches:</p>
+    <ul>
+      <li><strong>TF-IDF with N-Grams:</strong> For traditional models (Naive Bayes, Logistic Regression, XGBoost), we used Term Frequency-Inverse Document Frequency. By including 2-word bigrams like <em>&ldquo;worst movie&rdquo;</em> or <em>&ldquo;highly recommend&rdquo;</em>, we preserved local word-order information.</li>
+      <li><strong>Token Embeddings &amp; Self-Attention:</strong> For deep learning (BiLSTM and BERT), text was split into subword tokens and mapped to dense vector embeddings. BERT uses bidirectional self-attention to read every word relative to the whole sentence simultaneously.</li>
+    </ul>
+
+    <h2>Key Dataset Discoveries (6 Documented Anomalies)</h2>
+    <p>While exploring the dataset, we identified six fascinating behavioral and linguistic patterns in how people write movie reviews:</p>
+    <ul>
+      <li><strong>1. The Missing Middle:</strong> Ratings 5 and 6 are almost completely absent from the dataset. First, people rarely write online reviews unless they loved a film (10/10) or hated it (1/10). Second, the dataset creators removed neutral ratings to ensure clean binary polarity.</li>
+      <li><strong>2. The &ldquo;Anger Index&rdquo; in Punctuation:</strong> 1-star negative reviews contain nearly <strong>4 times more exclamation marks (<code>!!!</code>) and ALL-CAPS words</strong> than 10-star reviews. Unhappy viewers express anger through punctuation, while positive reviews rely on descriptive adjectives.</li>
+      <li><strong>3. Strong Opinions Make People Write More:</strong> Reviews with 1 star or 10 stars average over 1,420 characters, compared to under 950 characters for moderate reviews. Polarized opinions motivate users to write miniature essays.</li>
+      <li><strong>4. Single Words Give Zero Signal; Word Pairs Matter:</strong> Single words like &ldquo;movie&rdquo; or &ldquo;film&rdquo; appear everywhere and give zero clue about sentiment. But 2-word pairs (bigrams) like <em>&ldquo;waste time&rdquo;</em> or <em>&ldquo;must see&rdquo;</em> immediately dictate the rating.</li>
+      <li><strong>5. Long Reviews Challenge Standard LSTMs:</strong> Standard recurrent neural networks read word-by-word. When reviews are 200+ words long, LSTMs struggle to remember the beginning of the text, giving Logistic Regression a slight edge. BERT overcomes this by processing the entire sequence at once.</li>
+      <li><strong>6. Mixed Reviews Need Soft Probabilities:</strong> Reviews praising acting while slamming the plot cannot fit neatly into a single hard cluster. Gaussian Mixture Models (GMM) handle this much better by assigning continuous percentages (e.g., 60% positive, 40% negative).</li>
+    </ul>
+
+    <h2>Tools Used</h2>
+    <p><strong>Programming Language:</strong> Python 3.11</p>
+    <p><strong>Deep Learning Frameworks:</strong> PyTorch, Hugging Face Transformers (<code>bert-base-uncased</code>)</p>
+    <p><strong>Machine Learning:</strong> Scikit-Learn (Naive Bayes, Logistic Regression, K-Means, GMM, Truncated SVD), XGBoost</p>
+    <p><strong>Data Processing &amp; Visualization:</strong> Pandas, NumPy, Matplotlib, Seaborn, VADER Sentiment</p>
 
     <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="team.html">Meet the team</a></p>
   </main>
 
   <footer class="site-footer">
-    <div class="wrap">MDS Project, IIT Dharwad</div>
+    <div class="wrap">MDS Project, IIT Dharwad &bull; Team 12</div>
   </footer>
   <script src="../../assets/site.js" defer></script>
 </body>

@@ -14,7 +14,6 @@
     <div class="wrap bar">
       <div class="brand-group">
         <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
         <span class="brand">Team 12</span>
       </div>
       <nav class="tabs" aria-label="Team pages">
@@ -25,66 +24,66 @@
     </div>
   </header>
 
-
   <section class="page-hero">
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
-      <h1 data-scramble>Meet the team</h1>
-      <p class="lede">The people behind this project.</p>
+      <h1 data-scramble>Meet the Team</h1>
+      <p class="lede">We are 3rd year B.Tech students at IIT Dharwad working on sentiment analysis and rating prediction for the Multidisciplinary Data Science (MDS) course.</p>
     </div>
   </section>
 
   <main class="wrap">
 
-    <!-- EDIT: team photo or logo. Save it as images/team.jpg (png or webp also work) inside this team's folder.
-         It replaces the placeholder here and also appears on your tile on the main page. -->
-    <img class="team-dp" data-team-photo src="../../assets/team-placeholder.svg" alt="Team photo or logo">
+    <!-- Team photo / logo -->
+    <img class="team-dp" data-team-photo src="images/team.jpg" alt="Team 12 Photo">
 
-    <!-- Teams have 1 to 4 members. Delete the member blocks you do not need (everything from "BEGIN MEMBER" to "END MEMBER"). To add one, copy a block and paste it below. -->
     <div class="members">
-      <!-- BEGIN MEMBER -->
+      <!-- Member 01: Anjali Kumari -->
       <article class="member">
-        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
-        <img src="../../assets/avatar.svg" alt="Photo of Member Name">
-        <h2>Member name</h2>
-        <p class="meta">Roll number, branch</p>
-        <p>Two or three lines about yourself: your interests, skills, and what you worked on in this project.</p>
+        <img src="images/team_anjali.jpg" alt="Photo of Anjali Kumari">
+        <h2>Anjali Kumari</h2>
+        <p class="meta">Project Lead &bull; 3rd Year B.Tech, IIT Dharwad</p>
+        <p>Led the overall project and fine-tuned the BERT Transformer for binary classification (94.16% accuracy) and continuous rating regression (0.9897 MAE). Handled task coordination, repository management, and report compilation.</p>
       </article>
-      <!-- END MEMBER -->
-      <!-- BEGIN MEMBER -->
+
+      <!-- Member 02: Tangirala Dhanunjaya Rao -->
       <article class="member">
-        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
-        <img src="../../assets/avatar.svg" alt="Photo of Member Name">
-        <h2>Member name</h2>
-        <p class="meta">Roll number, branch</p>
-        <p>Two or three lines about yourself: your interests, skills, and what you worked on in this project.</p>
+        <img src="images/team_dhanunjaya.jpg" alt="Photo of Tangirala Dhanunjaya Rao">
+        <h2>Tangirala Dhanunjaya Rao</h2>
+        <p class="meta">Team Member &bull; 3rd Year B.Tech, IIT Dharwad</p>
+        <p>Built and trained the 2-layer Bidirectional LSTM in PyTorch for classification (87.78% accuracy) and the continuous LSTM regressor (1.5477 MAE). Analyzed prediction residuals and built the project website.</p>
       </article>
-      <!-- END MEMBER -->
-      <!-- BEGIN MEMBER -->
+
+      <!-- Member 03: Paripelly Pritika -->
       <article class="member">
-        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
-        <img src="../../assets/avatar.svg" alt="Photo of Member Name">
-        <h2>Member name</h2>
-        <p class="meta">Roll number, branch</p>
-        <p>Two or three lines about yourself: your interests, skills, and what you worked on in this project.</p>
+        <img src="images/team_pritika.jpg" alt="Photo of Paripelly Pritika">
+        <h2>Paripelly Pritika</h2>
+        <p class="meta">Team Member &bull; 3rd Year B.Tech, IIT Dharwad</p>
+        <p>Wrote Python extraction scripts to parse all 100,000 reviews from the raw IMDB directories. Cleaned the text by removing HTML <code>&lt;br /&gt;</code> tags, unescaping characters, normalizing whitespace, and removing duplicate reviews. Generated the EDA distribution plots.</p>
       </article>
-      <!-- END MEMBER -->
-      <!-- BEGIN MEMBER -->
+
+      <!-- Member 04: Sucharitha Kamera -->
       <article class="member">
-        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
-        <img src="../../assets/avatar.svg" alt="Photo of Member Name">
-        <h2>Member name</h2>
-        <p class="meta">Roll number, branch</p>
-        <p>Two or three lines about yourself: your interests, skills, and what you worked on in this project.</p>
+        <img src="images/team_sucharitha.jpg" alt="Photo of Sucharitha Kamera">
+        <h2>Sucharitha Kamera</h2>
+        <p class="meta">Team Member &bull; 3rd Year B.Tech, IIT Dharwad</p>
+        <p>Implemented and benchmarked baseline ML models: Multinomial Naive Bayes (84.20% accuracy) and Logistic Regression with TF-IDF unigrams and bigrams (88.22% accuracy). Evaluated how bigrams capture localized negation like &ldquo;not good&rdquo;.</p>
       </article>
-      <!-- END MEMBER -->
+
+      <!-- Member 05: Harshith Konda -->
+      <article class="member">
+        <img src="images/team_harshith.jpg" alt="Photo of Harshith Konda">
+        <h2>Harshith Konda</h2>
+        <p class="meta">Team Member &bull; 3rd Year B.Tech, IIT Dharwad</p>
+        <p>Handled the unsupervised learning and dimensionality reduction tasks. Reduced TF-IDF features to 2 components using Truncated SVD for 2D plotting. Implemented K-Means clustering (confirming K=2 with the elbow curve) and tested Gaussian Mixture Models (GMM) for soft clustering on mixed reviews.</p>
+      </article>
     </div>
 
     <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="index.html">Back to the project</a></p>
   </main>
 
   <footer class="site-footer">
-    <div class="wrap">MDS Project, IIT Dharwad</div>
+    <div class="wrap">MDS Project, IIT Dharwad &bull; Team 12</div>
   </footer>
   <script src="../../assets/site.js" defer></script>
 </body>
