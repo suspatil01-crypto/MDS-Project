@@ -30,8 +30,8 @@
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
       <!-- EDIT: your project title and a one or two line summary -->
-      <h1 data-scramble>Your project title goes here</h1>
-      <p class="lede">One or two sentences that tell a visitor what this project is about and why it matters.</p>
+      <h1 data-scramble>Student Placement Predictor</h1>
+      <p class="lede">A machine learning model that estimates a student's chance of campus placement from study habits, DSA practice, projects, internships and interview preparation, so students and institutions can see which skills to strengthen.</p>
     </div>
   </section>
 
@@ -39,22 +39,24 @@
 
     <!-- EDIT: describe the problem statement (PS) your team was given -->
     <h2>Problem statement</h2>
-    <p>Describe the problem your team is solving. Say what question you are trying to answer and what the final outcome should look like.</p>
-    <p>Add more paragraphs by copying a &lt;p&gt; line like this one.</p>
+    <p>Placement outcomes are usually judged on a single number such as CGPA, but a student's preparedness has many sides: academics, coding practice, projects, internships, communication and interview readiness. The question we are answering is which of these factors actually separate placed students from not-placed students, and whether a student's profile can be used to predict the outcome.</p>
+    <p>The final outcome is a classification model that takes a student's profile and returns the probability of being placed, together with the strongest drivers behind that estimate. The trained model is exported to ONNX and runs entirely in the browser, so anyone can try a profile without a server.</p>
 
     <h2>Dataset</h2>
-    <p>Where the data comes from, how many rows and columns it has, and what each important column means.</p>
+    <p>We used the Student Placement Preparation dataset from Kaggle. It has 1,000 student records and 11 columns, with no missing values. Of these students, 714 were placed and 286 were not placed, so the classes are imbalanced.</p>
+    <p>The columns are: <strong>study_hours_per_day</strong> (average daily study time), <strong>dsa_hours_per_week</strong> and <strong>dsa_problems_solved</strong> (data structures and algorithms practice), <strong>projects_count</strong>, <strong>internships</strong> (0 or 1), <strong>cgpa</strong>, <strong>mock_interviews</strong> attended, <strong>communication_score</strong>, <strong>resume_score</strong>, <strong>hackathons_participated</strong>, and the target <strong>placement_status</strong> (Placed or Not Placed).</p>
 
     <h2>Approach</h2>
-    <p>Briefly explain the steps you followed, from cleaning the data to producing the final results.</p>
+    <p>We followed a standard supervised learning workflow, from exploring the data to deploying the final model in a web page.</p>
     <ul>
-      <li>Step or method one</li>
-      <li>Step or method two</li>
-      <li>Step or method three</li>
+      <li><strong>Exploratory analysis:</strong> checked class balance, compared CGPA and study hours across the two outcomes, and built a correlation matrix.</li>
+      <li><strong>Feature engineering:</strong> created academic_efficiency (CGPA &times; study hours), practical_experience (projects + 2 &times; internships) and dsa_overall_score (DSA hours &times; problems solved &divide; 100), which replaces two highly correlated DSA columns.</li>
+      <li><strong>Model building:</strong> split the data 80/20 with stratification, standardised the features, and compared Random Forest with XGBoost. The final model is an XGBoost classifier trained on data balanced with SMOTE (applied to the training split only).</li>
+      <li><strong>Deployment:</strong> exported the trained model to ONNX and ran it in the browser with onnxruntime-web, using the same scaler and feature order as in training.</li>
     </ul>
 
     <h2>Tools used</h2>
-    <p>Python, pandas, matplotlib (replace with your own list).</p>
+    <p>Python, pandas, NumPy, matplotlib, seaborn, scikit-learn, imbalanced-learn (SMOTE), XGBoost, ONNX and onnxruntime-web, with HTML, CSS and JavaScript for the web app.</p>
 
     <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="team.html">Meet the team</a></p>
   </main>
