@@ -46,14 +46,13 @@
     <!-- BEGIN RESULT -->
     <section class="result">
       <figure>
-        <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 1. Short caption for the graph.</figcaption>
+        <img src="images/class_balance.png" alt="Bar chart of placement outcome counts: 714 placed and 286 not placed.">
+        <figcaption>Figure 1. Number of students in each placement outcome.</figcaption>
       </figure>
       <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
+        <h2>The classes are imbalanced</h2>
+        <p>Of the 1,000 students, 714 were placed and 286 were not placed, so about 71% of the data belongs to one class.</p>
+        <p>A model trained on this directly can score well by mostly predicting "Placed", so we balanced the training split with SMOTE to make it take the "Not Placed" class seriously.</p>
       </div>
     </section>
     <!-- END RESULT -->
@@ -61,13 +60,55 @@
     <!-- BEGIN RESULT -->
     <section class="result">
       <figure>
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 2. Short caption for the graph.</figcaption>
+        <img src="images/cgpa_studyhours_box.png" alt="Box plots of CGPA and daily study hours split by placement outcome.">
+        <figcaption>Figure 2. CGPA and daily study hours for placed and not-placed students.</figcaption>
       </figure>
       <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
+        <h2>CGPA and study hours overlap heavily</h2>
+        <p>Placed students have a slightly higher average CGPA (7.37 against 7.08) and study slightly more per day (4.64 hours against 4.26).</p>
+        <p>The boxes overlap a lot, so neither CGPA nor study time alone is a strong signal of placement.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/correlation_heatmap.png" alt="Correlation heatmap of the raw and engineered features and the placement outcome.">
+        <figcaption>Figure 3. Correlation matrix of the features and the placement outcome.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Resume score and experience relate most to placement</h2>
+        <p>Resume score has the strongest correlation with placement (0.25), followed by practical_experience (0.22) and projects_count (0.20). Even the best single feature is only weakly correlated with the outcome.</p>
+        <p>The engineered academic_efficiency is almost the same as study hours (0.97) and strongly tied to CGPA (0.84). Study hours and CGPA are themselves correlated at 0.70.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/feature_importance.png" alt="Horizontal bar chart of feature importances from the final XGBoost model.">
+        <figcaption>Figure 4. Feature importance in the final XGBoost model.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>What the final model relies on</h2>
+        <p>practical_experience is the most important feature at about 0.15, followed by hackathons_participated and projects_count at about 0.11 each.</p>
+        <p>CGPA and academic_efficiency are among the least important features, so hands-on experience matters more to the model than raw academic scores.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/confusion_matrix.png" alt="Confusion matrix of the final model on the 200-student test set.">
+        <figcaption>Figure 5. Confusion matrix of the final model on the test set.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>How well the final model performs</h2>
+        <p>On the 200 test students the model classified 139 correctly, an accuracy of 69.5%. It found 113 of the 143 placed students and 26 of the 57 not-placed students.</p>
+        <p>Detection of the "Not Placed" class is balanced against the "Placed" class (recall of about 0.46 and 0.79), which is the effect of SMOTE. The plain Random Forest we tried first reached 67.5% accuracy.</p>
       </div>
     </section>
     <!-- END RESULT -->
@@ -76,9 +117,9 @@
       <!-- EDIT: sum up the main findings -->
       <h2>Anomalies, observations and patterns</h2>
       <ul>
-        <li><strong>Anomaly:</strong> something unusual in the data and a likely reason for it.</li>
-        <li><strong>Observation:</strong> something you measured or noticed.</li>
-        <li><strong>Pattern:</strong> a trend that repeats across the dataset.</li>
+        <li><strong>Anomaly:</strong> CGPA and study hours barely separate placed from not-placed students, even though they are the usual first measures of preparation. The groups overlap heavily, so these alone are poor predictors.</li>
+        <li><strong>Observation:</strong> the final XGBoost model with SMOTE reaches 69.5% accuracy on the test set, and it finds 26 of 57 not-placed students compared with 15 of 57 for the Random Forest baseline.</li>
+        <li><strong>Pattern:</strong> hands-on experience (projects, internships, hackathons) and resume quality carry more signal than academic scores, and the strongest single correlation with placement is only 0.25, so placement depends on many factors together.</li>
       </ul>
     </div>
 
