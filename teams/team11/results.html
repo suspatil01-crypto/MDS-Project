@@ -1,15 +1,180 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="AirScope MDS project: air quality patterns and AQI prediction across Indian cities."><title>AirScope | Results Dashboard</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script><script src="app.js" defer></script></head><body><div class="app-shell"><aside class="sidebar"><a class="brand" href="index.html"><span class="brand-mark">A</span><span>AirScope<small>MDS PROJECT</small></span></a><div class="side-label">WORKSPACE</div><nav class="side-nav" aria-label="Main navigation"><a class="nav-link " href="project.html"><span class="nav-icon">⌂</span>Project</a><a class="nav-link active" href="results.html"><span class="nav-icon">▥</span>Results <span class="nav-dot"></span></a><a class="nav-link " href="team.html"><span class="nav-icon">♙</span>Team</a></nav><div class="sidebar-bottom"><div class="status-dot"></div><div><strong>Notebook-based analysis</strong><small>Source: MDS_Project_AQI</small></div></div></aside><main class="main-content"><header class="topbar"><div class="breadcrumb">MDS PROJECT <span>/</span> <strong>RESULTS DASHBOARD</strong></div><div class="top-actions"><span class="live-chip"><i></i> Analysis summary</span><button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">◐</button></div></header><section class="page active" id="page-results">
-<div class="page-title-row"><div><div class="eyebrow"><span class="eyebrow-line"></span> FINDINGS &amp; EVALUATION</div><h1>Results dashboard<span class="title-period">.</span></h1><p class="page-subtitle">Explore dataset patterns and model performance reported by the notebook.</p></div><div class="select-wrap"><label for="resultView">VIEW</label><select id="resultView"><option value="all">All results</option><option value="data">Dataset insights</option><option value="models">Model performance</option></select></div></div>
-<div class="results-kpis"><div class="kpi"><span>HIGHEST CITY MEAN AQI</span><strong>452.12</strong><small>Ahmedabad · notebook output</small></div><div class="kpi"><span>TOP REGRESSION R²</span><strong>0.8808</strong><small>Gradient Boosting · test set</small></div><div class="kpi"><span>CLASSIFIER ACCURACY</span><strong>78.11%</strong><small>Random Forest · test set</small></div><div class="kpi"><span>HIGHEST MISSINGNESS</span><strong>61.32%</strong><small>Xylene feature</small></div></div>
-<div class="chart-grid" id="datasetCharts">
-<article class="chart-card chart-wide"><div class="chart-title"><div><span class="eyebrow">CITY COMPARISON</span><h3>10 cities with highest average AQI</h3><p>Mean AQI calculated by city in the notebook.</p></div><span class="chart-badge">AQI</span></div><div class="chart-area tall"><canvas id="cityChart"></canvas></div><div class="chart-insight"><span>↗</span><p><b>Observation:</b> Ahmedabad's mean AQI (452.12) is notably higher than the next city, Delhi (259.49), in this dataset. This is a descriptive comparison, not a causal explanation.</p></div></article>
-<article class="chart-card"><div class="chart-title"><div><span class="eyebrow">DATA COMPLETENESS</span><h3>Missing values by feature</h3><p>Percentage of records missing.</p></div></div><div class="chart-area"><canvas id="missingChart"></canvas></div><div class="chart-footnote">Xylene is the most incomplete pollutant field; interpret comparisons involving it with care.</div></article>
-<article class="chart-card"><div class="chart-title"><div><span class="eyebrow">REGRESSION</span><h3>Test-set performance</h3><p>Lower MAE / RMSE is better; higher R² is better.</p></div></div><div class="chart-area"><canvas id="regressionChart"></canvas></div><div class="chart-footnote">Final test results for Gradient Boosting: MAE 16.47, RMSE 26.22, R² 0.8808.</div></article>
-<article class="chart-card chart-wide"><div class="chart-title"><div><span class="eyebrow">CLASSIFICATION</span><h3>Model comparison</h3><p>Validation comparison from the notebook's multi-model experiment.</p></div><div class="chart-legend"><span><i class="legend-blue"></i>Accuracy</span><span><i class="legend-violet"></i>F1 score</span></div></div><div class="chart-area tall"><canvas id="classificationChart"></canvas></div><div class="chart-insight"><span>◎</span><p><b>Observation:</b> Gradient Boosting had the highest validation accuracy (80.12%) and F1 score (79.65%) among the compared classifiers. The final Random Forest test accuracy was 78.11%; these are different evaluation stages and should not be compared as if they were the same split.</p></div></article>
-<article class="chart-card"><div class="chart-title"><div><span class="eyebrow">FEATURE IMPORTANCE</span><h3>Top regression drivers</h3><p>Gradient Boosting feature importance.</p></div></div><div class="chart-area"><canvas id="featureChart"></canvas></div><div class="chart-footnote">Importance indicates model reliance, not proof that a feature causes AQI changes.</div></article>
-<article class="chart-card"><div class="chart-title"><div><span class="eyebrow">CLASS DISTRIBUTION</span><h3>Test-set category recall</h3><p>Per-class results for the final Random Forest.</p></div></div><div class="chart-area"><canvas id="recallChart"></canvas></div><div class="chart-footnote">Good has low recall (0.35), while Satisfactory recall is 0.90. The class supports differ substantially.</div></article>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team 11 | Results</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap bar">
+      <div class="brand-group">
+        <a class="back" href="../../index.html">All teams</a>
+        <!-- EDIT: team name (also change it in the other two pages) -->
+        <span class="brand">Team 11</span>
+      </div>
+      <nav class="tabs" aria-label="Team pages">
+        <a href="index.html">Project</a>
+        <a href="results.html" aria-current="page">Results</a>
+        <a href="team.html">Team</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <section class="page-hero">
+    <canvas class="field" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <h1 data-scramble>Results</h1>
+      <p class="lede">Charts and metrics from Team 11's AQI analysis, with validation and test results identified separately.</p>
+    </div>
+  </section>
+
+  <main class="wrap">
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/01_mean_aqi_by_city.png" alt="Mean AQI in the ten cities with the highest reported averages.">
+        <figcaption>Figure 1. Mean AQI in the ten cities with the highest reported averages.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>AQI varies sharply across cities</h2>
+        <p>Ahmedabad has the highest mean AQI in the reported city comparison at <b>452.12</b>, followed by Delhi at <b>259.49</b> and Patna at <b>240.78</b>.</p>
+        <p>The gap between Ahmedabad and the next-highest city is substantial. This shows why city-level comparisons provide more insight than relying on a single overall AQI average.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/02_regression_model_comparison.png" alt="MAE and RMSE for four regression models on the validation set.">
+        <figcaption>Figure 2. MAE and RMSE for four regression models on the validation set.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Tree-based models reduce AQI prediction error</h2>
+        <p>Random Forest records the lowest validation MAE (<b>19.32</b>), while Gradient Boosting records the lowest validation RMSE (<b>35.11</b>). Linear Regression has the largest errors among these four models.</p>
+        <p>This indicates that the tree-based models capture patterns in the dataset more effectively than the linear baseline on this validation split.</p>
+        <p class="note">Lower MAE and RMSE indicate smaller prediction errors.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/03_regression_r2.png" alt="Validation R-squared scores for the regression models.">
+        <figcaption>Figure 3. Validation R² scores for the regression models.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Gradient Boosting achieves the strongest validation R²</h2>
+        <p>Gradient Boosting reaches a validation R² of <b>0.9188</b>, followed by Random Forest at <b>0.9135</b>. XGBoost reaches <b>0.8930</b>, while Linear Regression reaches <b>0.8747</b>.</p>
+        <p>The final Gradient Boosting model has a separate held-out test R² of <b>0.8808</b>, MAE of <b>16.47</b>, and RMSE of <b>26.22</b>. These test metrics should not be confused with validation scores.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/04_classification_comparison.png" alt="Accuracy and weighted F1-score across seven classification models on the validation set.">
+        <figcaption>Figure 4. Accuracy and weighted F1-score across seven classification models on the validation set.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Gradient Boosting leads the validation classification comparison</h2>
+        <p>Gradient Boosting achieves the highest validation accuracy (<b>80.12%</b>) and weighted F1-score (<b>0.7965</b>) among the seven models compared.</p>
+        <p>Random Forest is close behind, with validation accuracy of <b>79.42%</b>. The final Random Forest classifier records <b>78.11%</b> accuracy and a weighted F1-score of <b>0.7674</b> on the test set.</p>
+        <p class="note">The validation comparison and final test evaluation are separate results.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/05_category_metrics.png" alt="Precision, recall, and F1-score for each AQI category on the Random Forest test set.">
+        <figcaption>Figure 5. Precision, recall, and F1-score for each AQI category on the Random Forest test set.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Classification performance differs by AQI category</h2>
+        <p>The Good category has high precision (<b>0.96</b>) but low recall (<b>0.35</b>), meaning the model's Good predictions are usually correct, but it misses many actual Good observations.</p>
+        <p>Satisfactory has a recall of <b>0.90</b>. Severe has an F1-score of <b>0.85</b>, but this result is based on only <b>25</b> test observations, so it should be interpreted cautiously.</p>
+        <p>This category-level analysis reveals limitations that overall accuracy alone would hide.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/06_feature_importance.png" alt="Top ten features for Random Forest AQI category prediction.">
+        <figcaption>Figure 6. Top ten features for Random Forest AQI category prediction.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Particulate matter is the most influential input</h2>
+        <p>In the final Random Forest classifier, <b>PM2.5</b> has the highest reported feature importance (approximately <b>0.233</b>), followed by <b>PM10</b> (approximately <b>0.124</b>) and <b>CO</b> (approximately <b>0.088</b>).</p>
+        <p>These values describe how the fitted model uses features to make predictions. They do not establish that a feature causes AQI to change.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+
+<div class="prose summary">
+  <h2>Results and Discussion</h2>
+
+  <ul>
+    <li>
+      <b>City-wise analysis:</b>
+      Mean AQI values vary considerably across the cities in the
+      dataset, highlighting geographical differences in the observed
+      air-quality conditions.
+    </li>
+
+    <li>
+      <b>Regression performance:</b>
+      Tree-based models outperform the Linear Regression baseline
+      in the reported validation comparisons. Gradient Boosting
+      achieves the highest validation R² of 0.9188, while Random
+      Forest records the lowest validation MAE of 19.32.
+    </li>
+
+    <li>
+      <b>Classification performance:</b>
+      The classification models show different levels of performance
+      across AQI categories. The final Random Forest classifier
+      achieves a recall of 0.90 for Satisfactory but only 0.35 for
+      Good, demonstrating why category-specific metrics are important.
+    </li>
+
+    <li>
+      <b>Feature importance:</b>
+      PM2.5, PM10, and CO are the leading features in the reported
+      Random Forest classification analysis. Feature importance
+      describes the model's reliance on inputs and does not establish
+      causation.
+    </li>
+
+    <li>
+      <b>Overall findings:</b>
+      The experiments demonstrate the usefulness of machine-learning
+      models for analysing air-quality data and estimating AQI.
+      However, differences in category-level performance and
+      prediction errors must be considered when interpreting the results.
+    </li>
+  </ul>
 </div>
-<div class="insights-section"><div class="section-heading"><div><div class="eyebrow">INTERPRETATION</div><h2>What stands out?</h2></div><span class="section-index">02 / FINDINGS</span></div><div class="insight-grid"><article class="insight-card"><span class="insight-number">01</span><h3>Uneven data completeness</h3><p>Xylene is missing in 61.32% of rows, PM10 in 37.72%, and NH₃ in 34.97%. Imputation supports modelling but may reduce information quality, especially for sparse features.</p></article><article class="insight-card"><span class="insight-number">02</span><h3>City-level variation</h3><p>The notebook's highest city-average AQI values are Ahmedabad (452.12), Delhi (259.49), Patna (240.78), Gurugram (225.12) and Lucknow (217.97). These rankings reflect available records and the dataset period.</p></article><article class="insight-card"><span class="insight-number">03</span><h3>Particulate matter matters</h3><p>Gradient Boosting regression assigns the largest feature importance to PM2.5 (0.4898), followed by CO (0.3606) and PM10 (0.0372). Feature importance is model-specific, not causal evidence.</p></article><article class="insight-card"><span class="insight-number">04</span><h3>Category errors are uneven</h3><p>In the final Random Forest classification report, recall ranges from 0.35 for Good to 0.90 for Satisfactory. Small supports for Severe (25) and Very Poor (47) make those estimates less stable.</p></article></div></div>
-<div class="table-card"><div class="chart-title"><div><span class="eyebrow">MODEL SCORECARD</span><h3>Classification model comparison</h3><p>Metrics as printed in the notebook's comparison table (validation-stage experiment).</p></div></div><div class="table-scroll"><table><thead><tr><th>Model</th><th>Accuracy</th><th>Precision</th><th>Recall</th><th>F1 score</th></tr></thead><tbody id="modelTable"></tbody></table></div></div>
-<div class="method-note"><b>How to read these results</b><p>The notebook uses time-ordered splits (70% train, 15% validation, 15% test) for regression and classification. The regression model comparison table is based on validation predictions, while the final Gradient Boosting metrics are reported on the test set. Classification model-comparison scores are validation-stage results; the final Random Forest report is test-set performance. The notebook does not print numerical values for every exploratory graph, so the website only plots figures where values are available in notebook outputs.</p></div>
-</section><footer class="footer"><span>AirScope · MDS Project</span><span>Built from the uploaded AQI analysis notebook <b>·</b> <span id="footerYear"></span></span></footer></main></div><div class="toast" id="toast" role="status" aria-live="polite"></div></body></html>
+
+    <p class="next"><a class="button" href="team.html">Meet the team</a> <a class="button alt" href="index.html">Back to the project</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">MDS Project, IIT Dharwad</div>
+  </footer>
+  <script src="../../assets/site.js" defer></script>
+</body>
+</html>

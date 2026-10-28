@@ -1,11 +1,249 @@
-!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="AirScope MDS project: air quality patterns and AQI prediction across Indian cities."><title>AirScope | Project Overview</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="styles.css"><script src="app.js" defer></script></head><body><div class="app-shell"><aside class="sidebar"><a class="brand" href="index.html"><span class="brand-mark">A</span><span>AirScope<small>MDS PROJECT</small></span></a><div class="side-label">WORKSPACE</div><nav class="side-nav" aria-label="Main navigation"><a class="nav-link active" href="project.html"><span class="nav-icon">⌂</span>Project</a><a class="nav-link " href="results.html"><span class="nav-icon">▥</span>Results <span class="nav-dot"></span></a><a class="nav-link " href="team.html"><span class="nav-icon">♙</span>Team</a></nav><div class="sidebar-bottom"><div class="status-dot"></div><div><strong>Notebook-based analysis</strong><small>Source: MDS_Project_AQI</small></div></div></aside><main class="main-content"><header class="topbar"><div class="breadcrumb">MDS PROJECT <span>/</span> <strong>PROJECT OVERVIEW</strong></div><div class="top-actions"><span class="live-chip"><i></i> Analysis summary</span><button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme">◐</button></div></header><section class="page active" id="page-project">
-<div class="hero-grid">
-<div class="hero-copy"><div class="eyebrow"><span class="eyebrow-line"></span> DATA SCIENCE · AIR QUALITY</div><h1>Understanding the<br/><span>air we breathe.</span></h1><p class="hero-lede">A data-driven study of air quality across Indian cities—exploring pollutant patterns, temporal variation, and machine-learning approaches for AQI prediction.</p><div class="hero-buttons"><a class="primary-btn" href="results.html">Explore results ↗</a><a class="text-btn" href="team.html">Meet the team →</a></div><div class="hero-note"><span class="note-icon">ⓘ</span> Results shown here are taken from the uploaded project notebook; no missing values or metrics have been fabricated.</div></div>
-<div aria-label="Abstract air quality illustration" class="hero-art"><div class="orb orb-one"></div><div class="orb orb-two"></div><div class="art-grid"></div><div class="air-card"><div class="air-card-top"><span>DATA SNAPSHOT</span><span class="mini-pulse"></span></div><div class="air-big">26 <small>cities</small></div><div class="air-rule"></div><div class="air-stat"><span>Dataset records</span><b>29,531</b></div><div class="air-stat"><span>Time coverage</span><b>2015–2020*</b></div><div class="air-stat"><span>Prediction tasks</span><b>2</b></div><div class="art-bars"><i style="height:25%"></i><i style="height:43%"></i><i style="height:34%"></i><i style="height:66%"></i><i style="height:51%"></i><i style="height:82%"></i><i style="height:60%"></i><i style="height:95%"></i><i style="height:72%"></i><i style="height:86%"></i><i style="height:54%"></i><i style="height:68%"></i></div><small class="art-caption">*Coverage inferred from the notebook's dataset records.</small></div></div>
-</div>
-<div class="section-heading"><div><div class="eyebrow">THE PROJECT</div><h2>Problem statement</h2></div><span class="section-index">01 / OVERVIEW</span></div>
-<div class="problem-card"><div class="problem-icon">⌁</div><div><h3>Can historical pollution data help us understand and predict air quality?</h3><p>Air quality is influenced by multiple pollutants and varies across locations and time. This project analyses city-wise pollutant measurements and AQI records to identify distributions, relationships, temporal patterns, and differences between cities. It then evaluates machine-learning models for two related tasks: predicting the numerical AQI value (regression) and predicting its AQI category (classification).</p></div></div>
-<div class="stats-grid"><article class="stat-card"><div class="stat-top"><span>DATASET SIZE</span><span class="stat-symbol">▦</span></div><div class="stat-value">29,531</div><p>daily city records before preprocessing</p><div class="stat-foot"><span class="green-text">16 columns</span><span>pollutants + labels</span></div></article><article class="stat-card"><div class="stat-top"><span>CITIES COVERED</span><span class="stat-symbol">◎</span></div><div class="stat-value">26</div><p>cities represented in the dataset</p><div class="stat-foot"><span>India</span><span>multi-city comparison</span></div></article><article class="stat-card"><div class="stat-top"><span>REGRESSION MODEL</span><span class="stat-symbol">↗</span></div><div class="stat-value">0.8808</div><p>Gradient Boosting test-set R²</p><div class="stat-foot"><span class="green-text">88.1% variance</span><span>explained on test set</span></div></article><article class="stat-card"><div class="stat-top"><span>CLASSIFICATION</span><span class="stat-symbol">◈</span></div><div class="stat-value">78.11%</div><p>Random Forest test accuracy</p><div class="stat-foot"><span>6 AQI categories</span><span>held-out test set</span></div></article></div>
-<div class="two-column"><article class="content-card"><div class="card-heading"><div><span class="eyebrow">01 · DATA</span><h3>What the dataset contains</h3></div><span class="card-icon">▤</span></div><p>The notebook loads <code>city_day.csv</code>. Each record represents a city on a date, with pollutant measurements and AQI labels.</p><div class="tag-cloud"><span>PM2.5</span><span>PM10</span><span>NO</span><span>NO₂</span><span>NOx</span><span>NH₃</span><span>CO</span><span>SO₂</span><span>O₃</span><span>Benzene</span><span>Toluene</span><span>Xylene</span><span>AQI</span><span>AQI Bucket</span></div></article><article class="content-card"><div class="card-heading"><div><span class="eyebrow">02 · METHOD</span><h3>Analysis workflow</h3></div><span class="card-icon">⌘</span></div><ol class="workflow"><li><b>Explore</b><span>Summary statistics, missingness, duplicates and city coverage</span></li><li><b>Engineer features</b><span>Year, month, day, weekday and season from date</span></li><li><b>Analyse patterns</b><span>City, month, year, pollutant distributions and correlations</span></li><li><b>Train &amp; evaluate</b><span>Time-ordered train/validation/test splits and model comparison</span></li></ol></article></div>
-<div class="callout"><span class="callout-mark">!</span><div><b>Data-quality note</b><p>Missing data is substantial for some pollutants: Xylene has 61.32% missing values and PM10 has 37.72%. The notebook uses median imputation for numeric features and most-frequent imputation for categorical features in model pipelines. AQI and AQI_Bucket are each missing in 15.85% of records.</p></div></div>
-</section><footer class="footer"><span>AirScope · MDS Project</span><span>Built from the uploaded AQI analysis notebook <b>·</b> <span id="footerYear"></span></span></footer></main></div><div class="toast" id="toast" role="status" aria-live="polite"></div></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Team 11 | Project</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header class="site-header">
+    <div class="wrap bar">
+
+      <div class="brand-group">
+        <a class="back" href="../../index.html">All teams</a>
+        <span class="brand">Team 11</span>
+      </div>
+
+      <nav class="tabs" aria-label="Team pages">
+        <a href="index.html" aria-current="page">Project</a>
+        <a href="results.html">Results</a>
+        <a href="team.html">Team</a>
+      </nav>
+
+    </div>
+  </header>
+
+
+  <!-- Project Introduction -->
+  <section class="page-hero">
+    <canvas class="field" aria-hidden="true"></canvas>
+
+    <div class="wrap">
+      <h1 data-scramble>
+        Air Quality Analysis and AQI Prediction
+      </h1>
+
+      <p class="lede">
+        Exploring air pollution patterns across Indian cities and evaluating
+        machine-learning models for numerical AQI prediction and air-quality
+        category classification.
+      </p>
+    </div>
+  </section>
+
+
+  <main class="wrap prose">
+
+    <!-- Problem Statement -->
+    <section>
+      <h2>Problem statement</h2>
+
+      <p>
+        Air pollution is a significant environmental concern, and its
+        intensity varies across geographical locations and over time.
+        Understanding these variations requires analysing pollutant
+        measurements and their relationship with the Air Quality Index (AQI).
+      </p>
+
+      <p>
+        This project investigates historical air-quality observations
+        across Indian cities to identify pollution patterns and evaluate
+        the effectiveness of machine-learning models in predicting AQI
+        values and classifying air quality into predefined categories.
+      </p>
+    </section>
+
+
+    <!-- Research Objectives -->
+    <section>
+      <h2>Research objectives</h2>
+
+      <ul>
+        <li>
+          Analyse the distribution of AQI values and pollutant
+          measurements across cities.
+        </li>
+
+        <li>
+          Investigate temporal variations in air quality and
+          relationships between pollutant measurements.
+        </li>
+
+        <li>
+          Compare regression algorithms for predicting numerical AQI values.
+        </li>
+
+        <li>
+          Evaluate classification algorithms for predicting AQI categories.
+        </li>
+
+        <li>
+          Examine model performance using appropriate evaluation
+          metrics and identify influential input features.
+        </li>
+      </ul>
+    </section>
+
+
+    <!-- Dataset -->
+    <section>
+      <h2>Dataset</h2>
+
+      <p>
+        The project uses the <b>city_day.csv</b> dataset, containing
+        29,531 daily records across 26 Indian cities and 16 columns.
+        The dataset includes city and date information, pollutant
+        measurements, AQI values, and AQI categories.
+      </p>
+
+      <p>
+        The pollutant variables include PM2.5, PM10, NO₂, CO, SO₂,
+        O₃, and other recorded air-quality indicators. These variables
+        provide the basis for exploring pollution patterns and
+        developing predictive models.
+      </p>
+
+      <p>
+        AQI values and categories are missing for approximately
+        15.85% of the records. Missing data must be considered when
+        preparing observations for regression and classification.
+      </p>
+    </section>
+
+
+    <!-- Methodology -->
+    <section>
+      <h2>Methodology</h2>
+
+      <p>
+        The analysis follows a structured workflow, beginning with
+        data exploration and preprocessing, followed by exploratory
+        analysis, model development, and performance evaluation.
+      </p>
+
+      <ul>
+        <li>
+          <b>Data preparation:</b>
+          Inspect missing values, duplicate records, data distributions,
+          and city-level coverage.
+        </li>
+
+        <li>
+          <b>Exploratory data analysis:</b>
+          Examine AQI distributions, compare cities, investigate
+          temporal patterns, and analyse relationships between
+          pollutant measurements.
+        </li>
+
+        <li>
+          <b>Feature preparation:</b>
+          Prepare relevant input variables and derive calendar
+          features from the date where appropriate.
+        </li>
+
+        <li>
+          <b>Regression:</b>
+          Train and compare models that predict numerical AQI values.
+        </li>
+
+        <li>
+          <b>Classification:</b>
+          Train and compare models that predict discrete AQI categories.
+        </li>
+
+        <li>
+          <b>Evaluation:</b>
+          Use time-ordered data splits and appropriate evaluation
+          metrics to compare model performance.
+        </li>
+      </ul>
+    </section>
+
+
+    <!-- Prediction Tasks -->
+    <section>
+      <h2>Prediction tasks</h2>
+
+      <h3>1. AQI regression</h3>
+
+      <p>
+        The regression task estimates a numerical AQI value from
+        available pollutant measurements and other input features.
+        Models are compared using Mean Absolute Error (MAE),
+        Root Mean Squared Error (RMSE), and the coefficient of
+        determination (R²).
+      </p>
+
+      <h3>2. AQI category classification</h3>
+
+      <p>
+        The classification task predicts the AQI category associated
+        with an observation. Model performance is evaluated using
+        accuracy, precision, recall, and F1-score, providing insight
+        into both overall performance and category-specific errors.
+      </p>
+    </section>
+
+
+    <!-- Tools -->
+    <section>
+      <h2>Tools and technologies</h2>
+
+      <ul>
+        <li><b>Python:</b> Data processing and model development.</li>
+        <li><b>pandas and NumPy:</b> Data manipulation and numerical analysis.</li>
+        <li><b>Data visualisation:</b> Exploring distributions, trends, and relationships.</li>
+        <li><b>scikit-learn:</b> Machine-learning pipelines, model training, and evaluation.</li>
+      </ul>
+    </section>
+
+
+    <!-- Navigation to Other Pages -->
+    <p class="next">
+      <a class="button" href="results.html">
+        Explore the results
+      </a>
+
+      <a class="button alt" href="team.html">
+        Meet the team
+      </a>
+    </p>
+
+  </main>
+
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="wrap">
+      MDS Project, IIT Dharwad
+    </div>
+  </footer>
+
+  <script src="../../assets/site.js" defer></script>
+
+</body>
+</html>

@@ -1,9 +1,7 @@
-// Main-page team tile configuration
-window.teamInfo = {
-  teamName: 'AirScope Team',
-  projectTitle: 'Air Quality Analysis and AQI Prediction',
-  projectDescription: 'Exploring air pollution patterns across Indian cities using data analysis and machine learning.',
-  projectPage: 'index.html',
-  resultsPage: 'results.html',
-  teamPage: 'team.html'
+// EDIT: this is what shows on your team's tile on the main page.
+// Change the two texts between the quotes. Do not change anything else.
+window.TEAM_INFO = window.TEAM_INFO || {};
+window.TEAM_INFO["team11"] = {
+  name: "Team 11",
+  topic: "Air Quality Analysis and AQI Prediction"
 };
