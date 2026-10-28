@@ -3,5 +3,5 @@
 window.TEAM_INFO = window.TEAM_INFO || {};
 window.TEAM_INFO["team03"] = {
   name: "Team 3",
-  topic: "Project title to be added"
+  topic: "Amazon Product Recommendation System"
 };
