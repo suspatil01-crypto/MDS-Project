@@ -47,26 +47,54 @@
     <section class="result">
       <figure>
         <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="../images/PCA_spectral_lines.jpeg" alt="PCA spectral lines">
-        <figcaption>Figure 1. PCA Spectral Lines.</figcaption>
+        <img src="/images/Overall_model_comparision.jpeg" alt="Overall Model Comparision">
+        <figcaption>Figure 1. Overall Model Comparision across processed patients.</figcaption>
       </figure>
       <div class="result-text">
-        <h2>PCA of Spectral Features</h2>
-        <p>Visualizes how the EEG windows from seizure and non-seizure periods are distributed in our Data-Speaks project after applying Principal Component Analysis (PCA) to the extracted spectral features.</p>
+        <h2>Overall Model Comparision across Patients</h2>
+        <p>This graph compares the overall performance of four machine learning models across the processed patients in our Data-Speaks EEG seizure detection project. It evaluates them using three important metrics: seizure sensitivity, false detections per 24 hours, and detection latency. There is no universally best model across all three metrics. Logistic Regression prioritizes detecting seizures quickly, while KNN offers a better balance in terms of false alarms. The appropriate choice depends on the intended application and the relative cost of missed seizures versus false alerts.</p>
         <!-- <p>Add anomalies, patterns or observations you found in the data here.</p> -->
       </div>
     </section>
     <!-- END RESULT -->
-
+    
     <!-- BEGIN RESULT -->
     <section class="result">
       <figure>
-        <img src="../images/Best_sensitivity_by_patient.jpeg" alt="Best sensitivity by patient">
+        <img src="/images/Best_sensitivity_by_patient.jpeg" alt="Best sensitivity by patient">
         <figcaption>Figure 2. Best sensitivity by Patient</figcaption>
       </figure>
       <div class="result-text">
         <h2>Best Sensitivity By Patient</h2>
         <p>This graph shows the highest seizure-detection sensitivity achieved for each patient in the Data-Speaks project using the CHB-MIT EEG dataset. The datapoints with no readings denote patients with no actively detected Seizures The graph demonstrates why patient-wise evaluation is important. A model may achieve perfect sensitivity for some patients but perform less effectively for others. Furthermore, perfect sensitivity does not guarantee an effective detector if it generates many false alarms or detects seizures too slowly.</p>
+        <!-- <p>Add anomalies, patterns or observations you found in the data here.</p> -->
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <section class="result">
+      <figure>
+        <!-- EDIT: replace the src with images/your-graph.png -->
+        <img src="/images/Per_band_energy_shift.jpeg" alt="Per band enegy shift">
+        <figcaption>Figure 3. PCA Spectral Lines.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Per Band Energy Shift</h2>
+        <p>Difference in average EEG spectral energy between interictal (outside seizure periods) and ictal (during seizure periods) recordings for one of the Sample Patients (CHB01)</p>
+        <!-- <p>Add anomalies, patterns or observations you found in the data here.</p> -->
+      </div>
+    </section>
+
+        <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <!-- EDIT: replace the src with images/your-graph.png -->
+        <img src="/images/PCA_spectral_lines.jpeg" alt="PCA spectral lines">
+        <figcaption>Figure 4. PCA Spectral Lines.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>PCA of Spectral Features</h2>
+        <p>Visualizes how the EEG windows from seizure and non-seizure periods are distributed in our Data-Speaks project after applying Principal Component Analysis (PCA) to the extracted spectral features.</p>
         <!-- <p>Add anomalies, patterns or observations you found in the data here.</p> -->
       </div>
     </section>
