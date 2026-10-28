@@ -14,7 +14,6 @@
     <div class="wrap bar">
       <div class="brand-group">
         <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
         <span class="brand">Team 16</span>
       </div>
       <nav class="tabs" aria-label="Team pages">
@@ -30,30 +29,21 @@
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
       <h1 data-scramble>Results</h1>
-      <p class="lede">Graphs from the project, with an explanation of what each one shows.</p>
+      <p class="lede">On a held-out test set of 216,846 trips, Ridge regression reaches R&sup2; = 0.583 and RMSLE = 0.484. Here is how we got there.</p>
     </div>
   </section>
 
   <main class="wrap">
 
-    <!--
-      HOW TO ADD A GRAPH
-      1. Save your image inside this team's "images" folder (for example images/graph1.png).
-      2. Copy everything from "BEGIN RESULT" to "END RESULT" and paste it below the last result.
-      3. Change the image name, the alt text, the title and the explanation.
-    -->
-
     <!-- BEGIN RESULT -->
     <section class="result">
       <figure>
-        <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 1. Short caption for the graph.</figcaption>
+        <img src="images/01_trip_duration_distribution.png" alt="Histogram of raw trip duration versus log-transformed trip duration">
+        <figcaption>Figure 1. Raw trip duration is heavily right-skewed; the log transform y&prime; = log(1 + y) makes it roughly bell-shaped.</figcaption>
       </figure>
       <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
+        <h2>Why we log-transform the target</h2>
+        <p>Trip duration spans seconds to hours with a long right tail (a handful of trips take almost 24 hours). Fitting a linear model directly to this scale would let a few extreme trips dominate the loss. Transforming with y&prime; = log(1 + y) compresses the tail and gives a distribution close to normal, which is exactly what a linear-Gaussian model assumes.</p>
       </div>
     </section>
     <!-- END RESULT -->
@@ -61,24 +51,126 @@
     <!-- BEGIN RESULT -->
     <section class="result">
       <figure>
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 2. Short caption for the graph.</figcaption>
+        <img src="images/14_feature_correlation_matrix.png" alt="Correlation heatmap of all engineered features">
+        <figcaption>Figure 2. Correlation matrix of the 16 engineered features.</figcaption>
       </figure>
       <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
+        <h2>An early warning sign: 99% correlated features</h2>
+        <p>Haversine (straight-line) distance and Manhattan (grid) distance turn out to be 99% correlated &mdash; unsurprising in a mostly grid-like city, but a clear signal that X<sup>T</sup>X will be close to singular. This is the first hint that we will need Ridge regularisation rather than plain OLS once more correlated features (like the graph-based ones) are added.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/16_zone_map.png" alt="Map of New York City divided into 50 K-means zones">
+        <figcaption>Figure 3. NYC split into 50 zones using K-means on pickup/dropoff coordinates.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Turning the city into a graph</h2>
+        <p>We cluster all pickup and dropoff coordinates into 50 zones. Every trip then has a pickup zone i and a dropoff zone j; counting trips between zone pairs gives a 50&times;50 adjacency matrix A, from which we build the symmetric normalised graph Laplacian L<sub>sym</sub> = I &minus; D<sup>&minus;1/2</sup>A<sub>sym</sub>D<sup>&minus;1/2</sup> (we proved it is positive semi-definite).</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/19_spectral_clustering.png" alt="Spectral clustering of the 50 zones into 5 neighbourhoods">
+        <figcaption>Figure 4. Spectral clustering of the 50 zones into 5 natural neighbourhoods.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Spectral clustering recovers real NYC geography</h2>
+        <p>Using the Laplacian's eigenvectors, spectral clustering groups the 50 zones into 5 clusters &mdash; and they line up almost exactly with Manhattan centre, JFK airport, LaGuardia airport, Brooklyn, and outer Queens, with no geographic information given to the algorithm beyond trip counts.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/20_centrality_maps.png" alt="Maps of degree, betweenness, PageRank and eigenvector centrality across zones">
+        <figcaption>Figure 5. Four centrality scores per zone: degree, betweenness, PageRank, eigenvector.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>13 graph-based features</h2>
+        <p>Beyond cluster membership, we compute four "importance scores" per zone from the adjacency graph. Together with the cluster labels, these give 13 new graph-derived inputs that are attached to every trip based on its pickup and dropoff zone.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/29_model_comparison.png" alt="Bar chart comparing OLS, Gradient Descent and Ridge regression performance">
+        <figcaption>Figure 6. Test-set performance of OLS, Gradient Descent and Ridge regression.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Three models, built from scratch</h2>
+        <p>OLS solves the normal equation w* = (X<sup>T</sup>X)<sup>&minus;1</sup>X<sup>T</sup>y directly. Gradient Descent updates weights iteratively using the theoretically safe step size &eta; &lt; 2/&lambda;<sub>max</sub>(H); after 2000 iterations its squared errors are statistically identical to OLS's (Welch's t = 0.006, p = 0.995), confirming the step-size theorem exactly. Ridge adds an &alpha;&Vert;w&Vert;&sup2; penalty, with &alpha; chosen by 5-fold cross-validation, and is our best model.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/32_predicted_vs_actual.png" alt="Scatter plot of predicted versus actual trip duration">
+        <figcaption>Figure 7. Predicted vs. actual (log) trip duration on the test set.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Overall accuracy</h2>
+        <p>On 216,846 held-out trips never seen during training, Ridge regression reaches R&sup2; = 0.583 and RMSLE = 0.484 &mdash; explaining about 58% of the variance in trip time using a purely linear model with no external traffic or weather data.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/34_ablation_study.png" alt="Ablation study comparing mean-squared error with and without graph features">
+        <figcaption>Figure 8. Ablation study: mean-squared error with and without the 11 graph features.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Graph theory is the biggest single win</h2>
+        <p>Removing the 11 graph-based features and refitting Ridge worsens the mean-squared error by 22.4% (p = 1.17&times;10<sup>&minus;113</sup>). Treating the city as a network is not decoration &mdash; it is the single largest source of predictive power in the project, ahead of the geometric and temporal features.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/35_bootstrap_ci.png" alt="Bootstrap confidence intervals for all regression coefficients">
+        <figcaption>Figure 9. 200-iteration bootstrap confidence intervals for all 26 coefficients.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Every feature is statistically real</h2>
+        <p>A 200-iteration bootstrap gives 95% confidence intervals for all 26 coefficients, and every interval excludes zero &mdash; so each engineered feature, geometric, temporal, interaction and graph-based alike, is statistically distinguishable from noise.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/36_condition_number.png" alt="Condition number of the design matrix as a function of the Ridge penalty">
+        <figcaption>Figure 10. Condition number of X<sup>T</sup>X as the Ridge penalty &alpha; increases.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Numerical stability and the Ridge penalty</h2>
+        <p>Without regularisation the condition number is &kappa; = 727, well above the safe threshold of 30, consistent with the near-collinear distance features. Ridge lowers &kappa; below 30 once &alpha; &gtrsim; 0.3. Interestingly, cross-validation on our 1M+ row dataset actually picks &alpha;* = 10<sup>&minus;4</sup> (the smallest value on the grid): with this much data the estimator's variance is already tiny, so there is little left for Ridge to shrink in practice, even though the features remain severely correlated in theory.</p>
       </div>
     </section>
     <!-- END RESULT -->
 
     <div class="prose summary">
-      <!-- EDIT: sum up the main findings -->
       <h2>Anomalies, observations and patterns</h2>
       <ul>
-        <li><strong>Anomaly:</strong> something unusual in the data and a likely reason for it.</li>
-        <li><strong>Observation:</strong> something you measured or noticed.</li>
-        <li><strong>Pattern:</strong> a trend that repeats across the dataset.</li>
+        <li><strong>Anomaly:</strong> Haversine and Manhattan distance are 99% correlated &mdash; expected in a largely grid-based road network, but it made Ridge regularisation necessary rather than optional.</li>
+        <li><strong>Observation:</strong> spectral clustering of the 50-zone trip graph reproduces real NYC geography (Manhattan, JFK, LaGuardia, Brooklyn, outer Queens) purely from trip-count data, with no coordinates given to the clustering step itself.</li>
+        <li><strong>Pattern:</strong> graph-based features consistently dominate feature-importance and ablation results &mdash; removing them costs 22.4% more MSE than removing any other feature group, confirming that network structure, not just raw distance, drives trip duration.</li>
       </ul>
     </div>
 
