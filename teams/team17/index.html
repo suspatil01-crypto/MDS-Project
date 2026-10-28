@@ -6,62 +6,52 @@
   <title>Team 17 | Project</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
   <header class="site-header">
     <div class="wrap bar">
-      <div class="brand-group">
-        <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
-        <span class="brand">Team 17</span>
-      </div>
+      <div class="brand-group"><a class="back" href="../../index.html">All teams</a><span class="brand">Team 17</span></div>
       <nav class="tabs" aria-label="Team pages">
-        <a href="index.html" aria-current="page">Project</a>
-        <a href="results.html">Results</a>
-        <a href="team.html">Team</a>
+        <a href="index.html" aria-current="page">Project</a><a href="results.html">Results</a><a href="team.html">Team</a>
       </nav>
     </div>
   </header>
-
-
   <section class="page-hero">
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
-      <!-- EDIT: your project title and a one or two line summary -->
-      <h1 data-scramble>Your project title goes here</h1>
-      <p class="lede">One or two sentences that tell a visitor what this project is about and why it matters.</p>
+      <h1 data-scramble>Why Students Drop Out of Online Courses, and How Early We Can Tell</h1>
+      <p class="lede">Online learning platforms record clicks, logins and assignment submissions. We use these learning traces to understand student withdrawal and test how early an at-risk student can be identified—while there is still time to help.</p>
     </div>
   </section>
-
   <main class="wrap prose">
-
-    <!-- EDIT: describe the problem statement (PS) your team was given -->
     <h2>Problem statement</h2>
-    <p>Describe the problem your team is solving. Say what question you are trying to answer and what the final outcome should look like.</p>
-    <p>Add more paragraphs by copying a &lt;p&gt; line like this one.</p>
+    <p>In an online course, a student can disengage without an instructor noticing immediately. By the time a missed assessment or final result reveals the problem, the opportunity to help may have passed. Our project investigates whether student background information and learning-platform activity can predict withdrawal, and how early those predictions become useful.</p>
+    <p>We focus on three questions: which factors are associated with withdrawal; how prediction changes when we add early course activity; and whether simple warning rules can identify students who may need support without relying on a complex machine-learning model.</p>
 
     <h2>Dataset</h2>
-    <p>Where the data comes from, how many rows and columns it has, and what each important column means.</p>
+    <p>We use the <strong>Open University Learning Analytics Dataset (OULAD)</strong>, a public, anonymised dataset from online courses offered by the UK Open University in 2013–2014. The analysis covers <strong>32,593 enrolments</strong> from <strong>28,785 unique students</strong> and combines seven linked source tables, including student information, course and assessment records, registration information, and virtual learning environment (VLE) activity. The VLE table contains approximately <strong>10.6 million activity records</strong>.</p>
+    <p>The outcome is whether an enrolment ended as <em>Withdrawn</em>. The original final-result categories—Pass, Distinction, Fail and Withdrawn—are also examined when comparing the full outcome prediction task.</p>
 
     <h2>Approach</h2>
-    <p>Briefly explain the steps you followed, from cleaning the data to producing the final results.</p>
     <ul>
-      <li>Step or method one</li>
-      <li>Step or method two</li>
-      <li>Step or method three</li>
+      <li><strong>Clean and validate:</strong> handle missing-value markers, standardise an inconsistent income-band category, and retain enrolments with no website activity.</li>
+      <li><strong>Engineer features:</strong> summarise daily VLE records into student-level measures such as total clicks, active days and weeks, page types visited, inactivity gaps and weekly clicks; add assignment submission and mark summaries.</li>
+      <li><strong>Avoid information leakage:</strong> do not use unregistration dates or end-of-course exam marks as predictors of withdrawal.</li>
+      <li><strong>Compare prediction timing:</strong> evaluate background-only features, background plus the first two weeks of clicks, and full-course activity.</li>
+      <li><strong>Interpret patterns:</strong> inspect withdrawal rates across engagement, course-load and background groups, and use PCA to assess overlap among features.</li>
     </ul>
 
-    <h2>Tools used</h2>
-    <p>Python, pandas, matplotlib (replace with your own list).</p>
+    <h2>Methods and tools</h2>
+    <p>For binary withdrawal prediction, we compared Logistic Regression, Decision Tree, Random Forest, Support Vector Machine (SVM) and XGBoost. We also evaluated four-class final-result prediction and used Principal Component Analysis (PCA) to study feature redundancy. The train/test split was grouped by student ID so the same student could not appear in both sets.</p>
+    <p><strong>Tools:</strong> Python, pandas, NumPy, scikit-learn, XGBoost and data visualisation tools.</p>
 
-    <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="team.html">Meet the team</a></p>
+    <h2>Why this matters</h2>
+    <p>Withdrawal is more common than failure in this dataset: 31.2% of enrolments withdrew, compared with 21.6% that failed. If early signals can help staff reach students before they disappear from the course, the analysis could support timely, human-centred outreach rather than waiting for final marks.</p>
+    <p class="next"><a class="button" href="results.html">Explore the results</a> <a class="button alt" href="team.html">Meet the team</a></p>
   </main>
-
-  <footer class="site-footer">
-    <div class="wrap">MDS Project, IIT Dharwad</div>
-  </footer>
+  <footer class="site-footer"><div class="wrap">MDS Project · Mathematics for Data Science · IIT Dharwad · Team 17</div></footer>
   <script src="../../assets/site.js" defer></script>
 </body>
 </html>

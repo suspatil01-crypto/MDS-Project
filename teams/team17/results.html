@@ -6,88 +6,134 @@
   <title>Team 17 | Results</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../../assets/style.css">
+  <style>
+    .result figure img{width:100%;height:auto;display:block;background:#fbfaf6;border:1px solid #e6e3da;border-radius:12px;padding:8px}
+    .result figure{min-width:0}.result-text h2{margin-top:0}.metric-strip{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0 36px}.metric{padding:18px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}.metric strong{display:block;font-family:var(--display);font-size:clamp(1.7rem,3vw,2.5rem);line-height:1.1;letter-spacing:-.04em}.metric span{display:block;color:var(--muted);font-size:.88rem;margin-top:7px}.summary{margin-top:20px}.caveat{font-size:.9rem;color:var(--muted)}
+    @media(max-width:650px){.metric-strip{grid-template-columns:1fr}.result{gap:20px}}
+  </style>
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap bar">
-      <div class="brand-group">
-        <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
-        <span class="brand">Team 17</span>
-      </div>
-      <nav class="tabs" aria-label="Team pages">
-        <a href="index.html">Project</a>
-        <a href="results.html" aria-current="page">Results</a>
-        <a href="team.html">Team</a>
-      </nav>
-    </div>
-  </header>
-
-
-  <section class="page-hero">
-    <canvas class="field" aria-hidden="true"></canvas>
-    <div class="wrap">
-      <h1 data-scramble>Results</h1>
-      <p class="lede">Graphs from the project, with an explanation of what each one shows.</p>
-    </div>
-  </section>
-
+  <header class="site-header"><div class="wrap bar"><div class="brand-group"><a class="back" href="../../index.html">All teams</a><span class="brand">Team 17</span></div><nav class="tabs" aria-label="Team pages"><a href="index.html">Project</a><a href="results.html" aria-current="page">Results</a><a href="team.html">Team</a></nav></div></header>
+  <section class="page-hero"><canvas class="field" aria-hidden="true"></canvas><div class="wrap"><h1 data-scramble>What the data revealed</h1><p class="lede">The strongest signal is how students engage with the course. Our results compare prediction performance with patterns that could help educators reach students earlier.</p></div></section>
   <main class="wrap">
-
-    <!--
-      HOW TO ADD A GRAPH
-      1. Save your image inside this team's "images" folder (for example images/graph1.png).
-      2. Copy everything from "BEGIN RESULT" to "END RESULT" and paste it below the last result.
-      3. Change the image name, the alt text, the title and the explanation.
-    -->
-
-    <!-- BEGIN RESULT -->
+    <div class="metric-strip">
+      <div class="metric"><strong>85.8%</strong><span>Accuracy using full-course activity</span></div>
+      <div class="metric"><strong>64.6%</strong><span>Withdrawals caught by three simple warning rules</span></div>
+      <div class="metric"><strong>46.6%</strong><span>Withdrawals occurring before the first assignment is due</span></div>
+    </div>
     <section class="result">
-      <figure>
-        <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 1. Short caption for the graph.</figcaption>
-      </figure>
-      <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
-      </div>
+      <figure><img src="images/outcomes.svg" alt="Bar chart showing 37.9 percent Pass, 31.2 percent Withdrawn, 21.6 percent Fail and 9.3 percent Distinction."><figcaption>Figure 1. Distribution of final outcomes across 32,593 enrolments.</figcaption></figure>
+      <div class="result-text"><h2>Withdrawal is a major outcome—not a small edge case</h2><p>Withdrawals account for 31.2% of enrolments, exceeding the 21.6% that end in failure. This suggests that student-support efforts should not focus only on poor final marks; students who disengage and leave are a large group of their own.</p><p><strong>Observation:</strong> Pass is the largest single category at 37.9%, but withdrawal is the second-largest outcome. Percentages are rounded.</p></div>
     </section>
-    <!-- END RESULT -->
-
-    <!-- BEGIN RESULT -->
     <section class="result">
-      <figure>
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 2. Short caption for the graph.</figcaption>
-      </figure>
-      <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
-      </div>
+      <figure><img src="images/prediction.svg" alt="Bar chart comparing withdrawal prediction accuracy of 62.9 percent with background information, 75.1 percent with first two weeks of clicks, and 85.8 percent with full course activity."><figcaption>Figure 2. Prediction improves as activity data becomes available.</figcaption></figure>
+      <div class="result-text"><h2>Learning activity makes predictions much stronger</h2><p>Using background information alone, the Random Forest model achieved 62.9% accuracy and caught 53.1% of withdrawals. Adding just the first two weeks of clicks increased accuracy to 75.1%. Using full-course activity reached 85.8% accuracy and caught 89.3% of withdrawals.</p><p><strong>Pattern:</strong> behaviour during the course contains substantially more predictive information than background characteristics alone. The full-activity score is useful for comparison, but it may arrive too late for early intervention; the first-two-week result is closer to the practical goal.</p></div>
     </section>
-    <!-- END RESULT -->
+    <section class="result">
+      <figure><img src="images/risk-factors.svg" alt="Bar chart showing withdrawal rate of 25.4 percent for light course load up to 60 credits, 61.9 percent for heavy load above 180 credits, and 88.8 percent among students with no website activity."><figcaption>Figure 3. Selected groups with markedly different withdrawal rates.</figcaption></figure>
+      <div class="result-text"><h2>Course load and lack of engagement stand out</h2><p>Withdrawal rises from 25.4% for students taking a light load of up to 60 credits to 61.9% for those taking more than 180 credits. Separately, 88.8% of the 3,365 students with no recorded website activity withdrew.</p><p><strong>Interpretation:</strong> heavy course loads may be a useful point for guidance at registration, while no activity may be an immediate signal for supportive outreach. These are associations, not proof that course load alone causes withdrawal.</p></div>
+    </section>
+    <section class="result">
+      <figure><img src="images/early-warning.svg" alt="Three warning rules: no pre-course website visit, zero clicks in the first two weeks, and first assignment not submitted. Together they flag 37.5 percent of students and catch 64.6 percent of withdrawals."><figcaption>Figure 4. A simple early-warning system can catch many withdrawals without machine learning.</figcaption></figure>
+      <div class="result-text"><h2>Three simple checks catch nearly two-thirds of withdrawals</h2><p>Flag students who never opened the website before the course began, had zero clicks in the first two weeks, or did not submit the first assignment. Combined, these checks flag 37.5% of students and catch 64.6% of withdrawals.</p><p>The rules are easy to explain and could be implemented with basic database queries. They are not a substitute for asking students what support they need; they are a practical way to decide when to check in.</p></div>
+    </section>
+    <section class="result">
+      <figure><img src="images/pca.svg" alt="A simple diagram showing that three principal components capture 80 percent of variation among engineered features."><figcaption>Figure 5. PCA indicates that many engineered features carry overlapping information.</figcaption></figure>
+      <div class="result-text"><h2>Many features overlap—and withdrawal is not the same as low marks</h2><p>Three principal components captured 80% of the variation in the engineered features, suggesting that measures such as total clicks, active days, active weeks and pages visited partly reflect the same underlying engagement pattern. However, the report found that PCA-transformed inputs performed worse than the original features, so the main results retained the original columns.</p><p>Another notable result is that withdrawn and failed students had similar average marks (64.1 versus 64.6 out of 100). Withdrawn students were active for about 51 days on average, compared with 148 days for students who failed. They may differ more in how long they stay engaged than in the marks they earn.</p></div>
+    </section>
 
-    <div class="prose summary">
-      <!-- EDIT: sum up the main findings -->
-      <h2>Anomalies, observations and patterns</h2>
-      <ul>
-        <li><strong>Anomaly:</strong> something unusual in the data and a likely reason for it.</li>
-        <li><strong>Observation:</strong> something you measured or noticed.</li>
-        <li><strong>Pattern:</strong> a trend that repeats across the dataset.</li>
-      </ul>
+    <div class="prose">
+      <h2>Detailed plots from the analysis outputs</h2>
+      <p>The following figures are the plots exported by our analysis pipeline. They add detail to the summary charts above and show how the outcome distribution, engagement patterns, early-warning checks, models, clustering and PCA behave in the saved results.</p>
     </div>
 
+    <section class="result">
+      <figure><img src="images/eda_outcome_distribution.png" alt="Bar chart of final result counts across 32,593 enrolments: Pass 12,361; Withdrawn 10,156; Fail 7,052; Distinction 3,024." loading="eager"><figcaption>Figure 6. Final-result distribution, using the actual counts exported by the analysis.</figcaption></figure>
+      <div class="result-text"><h2>Withdrawal affects almost one in three enrolments</h2><p>The saved output contains 32,593 enrolments from 28,785 students. There were 12,361 Pass results (37.9%), 10,156 Withdrawals (31.2%), 7,052 Fails (21.6%) and 3,024 Distinctions (9.3%). The withdrawal group is large enough that predicting withdrawal deserves separate attention rather than treating it as a rare exception.</p><p><strong>Observation:</strong> the unit counted here is an enrolment, not a unique person; a student can contribute more than one enrolment.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/model_accuracy.png" alt="Grouped bars comparing accuracy and withdrawal recall for background-only, background plus first two weeks of clicks, and full-course activity." loading="eager"><figcaption>Figure 7. Accuracy and the share of withdrawals detected under three information windows.</figcaption></figure>
+      <div class="result-text"><h2>Engagement history adds predictive signal</h2><p>In the staged binary comparison, background-only features reached 62.9% accuracy and 53.1% withdrawal recall. Adding the first two weeks of clicks raised accuracy to 75.1% and recall to 55.8%. Full-course activity reached 85.8% accuracy and 89.3% recall.</p><p><strong>Interpretation:</strong> the first-two-week model is the more relevant early-warning comparison. Full-course activity is a reference benchmark, not a promise that the same performance is available at the beginning of a course.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/intervention_reach.png" alt="Horizontal bars comparing precision and withdrawal coverage for four early-warning triggers and the combined triage rule." loading="eager"><figcaption>Figure 8. Precision and withdrawal coverage of simple intervention triggers.</figcaption></figure>
+      <div class="result-text"><h2>One rule is precise; combining rules catches more people</h2><p>In the saved rule output, not submitting the first assessment had 77.8% precision and identified 55.4% of withdrawals. Zero clicks in weeks 1–2 had 67.8% precision and 41.2% recall. The combined rule—no pre-course VLE visit, zero clicks in weeks 1–2, or no first assessment—flagged 37.5% of enrolments, with 53.6% precision and 64.6% recall.</p><p><strong>Practical trade-off:</strong> an individual trigger can be more selective, while the combined rule catches a larger share of withdrawals. A flag should prompt supportive human outreach, not an automatic adverse decision.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/withdrawal_timing.png" alt="Histogram of withdrawal timing relative to course start, including events before and after day zero." loading="eager"><figcaption>Figure 9. Recorded withdrawal timing relative to the scheduled course start.</figcaption></figure>
+      <div class="result-text"><h2>Withdrawal risk is time-sensitive</h2><p>The saved analysis reports a median withdrawal day of 27 relative to course start. About 46.6% of withdrawals occurred before the first assessment was due, and a further 12.5% occurred within 30 days after that due date.</p><p><strong>Pattern to notice:</strong> the histogram includes negative day offsets, meaning some withdrawal records pre-date the scheduled start under the dataset's date convention. This is a useful reminder to define the time origin carefully when designing a live early-warning workflow.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/early_warning_curve.png" alt="ROC-AUC by weeks of engagement history, rising from about 0.758 at week one to 0.880 at week twenty, above a demographic-only baseline near 0.649." loading="eager"><figcaption>Figure 10. Withdrawal ranking quality as more weeks of engagement data become available.</figcaption></figure>
+      <div class="result-text"><h2>Prediction becomes more discriminative with more weeks of activity</h2><p>The exported early-warning curve reports ROC-AUC of 0.758 after one week, 0.766 after two weeks, 0.785 after four weeks, 0.821 after eight weeks and 0.880 by week 20. The demographic-only benchmark is about 0.649.</p><p><strong>Interpretation:</strong> engagement provides signal early, and the signal strengthens as observations accumulate. AUC evaluates how well the model ranks higher-risk enrolments above lower-risk ones; it is not the same as accuracy or the share of withdrawals caught at a particular threshold.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/eda_clicks_by_outcome.png" alt="Log-scale boxplots of total virtual learning environment clicks by final outcome." loading="eager"><figcaption>Figure 11. Total online activity by final outcome, shown on a logarithmic scale.</figcaption></figure>
+      <div class="result-text"><h2>Withdrawn students typically leave a shorter activity trace</h2><p>The relationship output reports mean total clicks of 89 for Withdrawn enrolments, compared with 317 for Fail, 1,343 for Pass and 1,896 for Distinction. The distributions are skewed, so a logarithmic axis is used to make both low- and high-activity enrolments visible.</p><p><strong>Caution:</strong> these are retrospective groups defined by final outcome. Total clicks across an entire course are useful for explaining patterns, but they cannot all be treated as features available early in the course.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/eda_score_by_outcome.png" alt="Boxplots of assessment scores by Distinction, Pass, Fail and Withdrawn final outcome." loading="eager"><figcaption>Figure 12. Assessment-score distributions by final outcome.</figcaption></figure>
+      <div class="result-text"><h2>Fail and withdrawal look similar on marks alone</h2><p>The saved relation summary reports mean assessment scores of 88.39 for Distinction, 76.53 for Pass, 64.61 for Fail and 64.11 for Withdrawn. The near-equal means for Fail and Withdrawn suggest that final marks alone do not explain why one enrolment ends in failure while another ends in withdrawal.</p><p><strong>Interpretation:</strong> the score distributions overlap, and scores may be unavailable for students who never submitted work. Engagement duration and submission activity add context, but neither should be interpreted as a cause by itself.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/eda_clicks_vs_score.png" alt="Scatterplot of total VLE clicks against mean assessment score, with points coloured by final outcome and clicks on a log scale." loading="eager"><figcaption>Figure 13. Engagement and assessment attainment at enrolment level.</figcaption></figure>
+      <div class="result-text"><h2>More activity often coincides with higher scores, but the relationship is not deterministic</h2><p>The scatterplot shows broad variation in scores at similar levels of activity. Higher-click enrolments appear more frequently among Pass and Distinction outcomes, while Withdrawn enrolments are concentrated at lower activity levels; however, the colours overlap substantially and some low-activity enrolments still have scores.</p><p><strong>Observation:</strong> the very wide range of click counts motivates the log axis. A simple click threshold is an interpretable screening signal, not a complete description of student engagement or ability.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/eda_engagement_over_time.png" alt="Line chart of weekly mean clicks by final outcome across the course." loading="eager"><figcaption>Figure 14. Average weekly engagement by eventual final result.</figcaption></figure>
+      <div class="result-text"><h2>Engagement trajectories diverge over the course</h2><p>The weekly lines show higher and more sustained average activity among Distinction and Pass enrolments, while activity for Withdrawn enrolments falls away much earlier. The gap is consistent with the broader finding that active weeks and time since last activity are informative signals.</p><p><strong>Important limitation:</strong> this is a descriptive chart grouped by eventual outcome. It helps explain the data, but using later-week values to predict an earlier outcome would leak future information into the prediction task.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/eda_correlation_heatmap.png" alt="Correlation heatmap for engineered activity, assessment, demographic and withdrawal variables." loading="eager"><figcaption>Figure 15. Correlations among engineered features and final outcome.</figcaption></figure>
+      <div class="result-text"><h2>Several engagement features measure related behaviour</h2><p>The heatmap compares total clicks, active days and weeks, weekly-click summaries, number of distinct sites, assessment measures and background variables. Many click-volume and activity-duration features move together, so they contain partly overlapping information.</p><p><strong>Model implication:</strong> correlated predictors can make feature importance harder to interpret as separate effects. The heatmap shows association between variables, not a causal diagram; it should be read alongside the model comparisons and the data-processing notes.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/clusters.png" alt="Learner-engagement cluster profiles across course weeks, with four clusters of different sizes and withdrawal rates." loading="eager"><figcaption>Figure 16. Four exploratory learner-engagement profiles from clustering.</figcaption></figure>
+      <div class="result-text"><h2>Clustering separates sustained engagement from high-risk trajectories</h2><p>The four-cluster output describes distinct profiles: the largest group (17,030 enrolments) has about 3.8% withdrawal and 82.6% pass; one smaller group (2,740 enrolments) has about 67.2% withdrawal; another group of 2,476 has about 55.1% withdrawal; and a 6,248-enrolment group has about 42.9% withdrawal.</p><p><strong>Limit:</strong> the reported silhouette score for four clusters is low (about 0.084), so the groups overlap. They are useful exploratory personas for discussion, not definitive natural categories of students.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/pca_outcome.png" alt="Scatterplot of enrolments on the first two principal components, coloured by final outcome." loading="eager"><figcaption>Figure 17. Final outcomes projected onto the first two principal components.</figcaption></figure>
+      <div class="result-text"><h2>The first two PCA dimensions do not cleanly separate the outcomes</h2><p>In this exported plot, PC1 explains 53.5% of variance and PC2 explains 6.9%. Pass, Fail, Withdrawn and Distinction points overlap in the two-dimensional projection, so these two axes alone do not neatly separate final outcomes.</p><p><strong>Interpretation:</strong> PCA is useful for visualising broad structure and redundancy, but the projection discards information. Overlap in two dimensions does not mean that all higher-dimensional prediction signal is absent.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/rel_pca_scree.png" alt="Cumulative explained-variance PCA scree plot crossing the 80 percent line at the third component." loading="eager"><figcaption>Figure 18. Cumulative explained variance in a saved PCA scree plot.</figcaption></figure>
+      <div class="result-text"><h2>PCA reduces dimensionality, but the exported summaries need reconciliation</h2><p>The relation log associated with this scree plot reports 65.9% for PC1, 74.7% for the first two components and 82.2% for the first three. However, another saved output, <code>results.json</code>, reports 13 components to reach 80% for a different variance sequence. The PCA outcome scatterplot also uses a different PC1/PC2 variance split.</p><p><strong>Data-quality note:</strong> these saved PCA outputs are inconsistent and likely come from different feature sets or processing runs. We retain the supplied figure for transparency, but the exact component count should be regenerated from one common pipeline before it is presented as a single definitive result.</p></div>
+    </section>
+
+    <section class="result">
+      <figure><img src="images/confusion_matrix.png" alt="Four-class XGBoost confusion matrix with actual and predicted labels Distinction, Pass, Fail and Withdrawn." loading="eager"><figcaption>Figure 19. Four-class outcome prediction confusion matrix from the saved XGBoost output.</figcaption></figure>
+      <div class="result-text"><h2>Pass and Withdrawn are clearer than the boundary between Fail and Withdrawn</h2><p>The confusion matrix correctly predicts 2,675 Pass enrolments and 1,952 Withdrawn enrolments. It also shows important errors: 678 actual Fail enrolments are predicted as Withdrawn, 469 as Pass, and 397 actual Withdrawals are predicted as Fail. Distinction is often confused with Pass (406 cases).</p><p><strong>Interpretation:</strong> the four-class task is harder than separating withdrawal from non-withdrawal, because Fail and Withdrawn can share similar observed marks and differ in persistence/engagement. The saved specification reports 69.24% overall accuracy for this confusion matrix; the macro-F1 in the JSON outputs differs across saved runs, so we avoid treating one macro-F1 value as definitive.</p></div>
+    </section>
+
+    <div class="prose summary"><h2>What we learned</h2><ul>
+      <li><strong>Observation:</strong> 31.2% of the 32,593 enrolments withdrew, more than the 21.6% that failed.</li>
+      <li><strong>Pattern:</strong> engagement history substantially improves prediction over demographics alone; using only the first two weeks already raises accuracy to 75.1% in the staged comparison.</li>
+      <li><strong>Early signal:</strong> 46.6% of recorded withdrawals occur before the first assessment is due. The combined early-warning rules flag 37.5% of enrolments and identify 64.6% of withdrawals.</li>
+      <li><strong>Fail versus withdrawal:</strong> their average assessment marks are nearly identical (64.61 for Fail and 64.11 for Withdrawn), while mean active weeks are 10.5 versus 3.0 and mean total clicks are 317 versus 89.</li>
+      <li><strong>Assessment participation:</strong> the output reports 72.1% withdrawal among enrolments with a submission rate of at most 25%, compared with 1.6% for those submitting more than 75% of assessments. This is a strong retrospective pattern, but later submissions should not be used in an early model.</li>
+      <li><strong>Unexpected pattern:</strong> registration 100 or more days before start is associated with 38.8% withdrawal, while registering 0–14 days before start is associated with 19.8%. This is a subgroup association, not evidence that registering early causes withdrawal; course and student composition may differ.</li>
+      <li><strong>Forum participation:</strong> the saved relation output shows 34.1% withdrawal for none/low forum participation, compared with about 18.7–22.7% for the higher participation groups. The difference is more consistent with a threshold effect than a steady benefit from ever-increasing forum activity.</li>
+      <li><strong>Model comparison:</strong> in a separate classifier run, Random Forest achieved 84.36% accuracy and the best ROC-AUC (0.9298), while XGBoost achieved 84.44% accuracy. These results come from a different saved comparison than the staged timing results above and should not be mixed without confirming identical evaluation setups.</li>
+      <li><strong>PCA caution:</strong> the saved PCA figures and JSON do not agree on the explained-variance sequence or number of components required for 80%. Re-run the PCA export using one feature set before quoting a single final component count.</li>
+      <li><strong>Limitation:</strong> the data represent UK Open University courses from 2013–2014. Associations are not causal claims, and models should be validated on the target course and time period before being used to drive student-support decisions.</li>
+    </ul></div>
     <p class="next"><a class="button" href="team.html">Meet the team</a> <a class="button alt" href="index.html">Back to the project</a></p>
   </main>
-
-  <footer class="site-footer">
-    <div class="wrap">MDS Project, IIT Dharwad</div>
-  </footer>
+  <footer class="site-footer"><div class="wrap">MDS Project · Mathematics for Data Science · IIT Dharwad · Team 17</div></footer>
   <script src="../../assets/site.js" defer></script>
 </body>
 </html>

@@ -1,7 +1,6 @@
-// EDIT: this is what shows on your team's tile on the main page.
-// Change the two texts between the quotes. Do not change anything else.
+// Team tile information for the MDS Project landing page.
 window.TEAM_INFO = window.TEAM_INFO || {};
 window.TEAM_INFO["team17"] = {
   name: "Team 17",
-  topic: "Project title to be added"
+  topic: "Predicting online-course withdrawal using learning analytics"
 };
