@@ -3,5 +3,5 @@
 window.TEAM_INFO = window.TEAM_INFO || {};
 window.TEAM_INFO["team18"] = {
   name: "Team 18",
-  topic: "Project title to be added"
+  topic: "Seventy years of NLP research, measured from 70,579 papers"
 };

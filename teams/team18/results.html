@@ -14,7 +14,6 @@
     <div class="wrap bar">
       <div class="brand-group">
         <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
         <span class="brand">Team 18</span>
       </div>
       <nav class="tabs" aria-label="Team pages">
@@ -30,30 +29,22 @@
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
       <h1 data-scramble>Results</h1>
-      <p class="lede">Graphs from the project, with an explanation of what each one shows.</p>
+      <p class="lede">Six findings from 70,579 NLP research papers and the 659,114 citations between them.</p>
     </div>
   </section>
 
   <main class="wrap">
 
-    <!--
-      HOW TO ADD A GRAPH
-      1. Save your image inside this team's "images" folder (for example images/graph1.png).
-      2. Copy everything from "BEGIN RESULT" to "END RESULT" and paste it below the last result.
-      3. Change the image name, the alt text, the title and the explanation.
-    -->
-
     <!-- BEGIN RESULT -->
     <section class="result">
       <figure>
-        <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 1. Short caption for the graph.</figcaption>
+        <img src="images/network.jpg" alt="Network of the 1,500 most cited papers, where coloured clusters show groups of papers that cite each other">
+        <figcaption>Figure 1. The 1,500 most-cited papers. Each dot is a paper, each line a citation, and each colour a community found by the Louvain algorithm.</figcaption>
       </figure>
       <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
+        <h2>Research splits into citation communities</h2>
+        <p>We built a network where every paper is a dot and every citation is a line, then asked an algorithm to find groups of papers that mostly cite each other. It found 24 clear communities, with a modularity of 0.61, which means the grouping is strong rather than accidental. The labels in the picture were added afterwards, from the most common topic inside each group.</p>
+        <p>The surprise is how weakly these communities match the topics we found from the words in the papers: the agreement score is only 0.23 out of 1. In other words, researchers cite papers from their own research family even when those papers use completely different vocabulary. Machine translation, for example, splits into a statistical community and a neural one that sit next to each other but barely overlap.</p>
       </div>
     </section>
     <!-- END RESULT -->
@@ -61,24 +52,84 @@
     <!-- BEGIN RESULT -->
     <section class="result">
       <figure>
-        <img src="../../assets/placeholder.svg" alt="Describe the graph in one sentence">
-        <figcaption>Figure 2. Short caption for the graph.</figcaption>
+        <img src="images/topics.png" alt="Heatmap showing the share of papers in each research topic for every year from 1990 to 2022">
+        <figcaption>Figure 2. Share of each year's papers belonging to each of the 20 topics. Darker means a bigger share. Topics are sorted from fastest-growing at the top to fastest-shrinking at the bottom.</figcaption>
       </figure>
       <div class="result-text">
-        <h2>Title of this result</h2>
-        <p>Explain what the graph shows and what a reader should notice first.</p>
-        <p>Add anomalies, patterns or observations you found in the data here.</p>
+        <h2>Topics rise and fall over decades</h2>
+        <p>Comparing 2008&ndash;12 with 2019&ndash;22, neural models grew by 14.4 percentage points and work on sentiment and social media grew by 8.5. Over the same period, building corpora and resources fell by 9.9 points, and both statistical machine translation and parsing fell by 4.1 points each.</p>
+        <p>Look closely at the <em>corpora and resources</em> row and a striped pattern appears, dark in one year and light in the next. This is the anomaly described below, and it turned out to have a simple real-world explanation.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/bert.png" alt="Chart showing the share of abstracts mentioning pre-trained models jumping sharply after 2018">
+        <figcaption>Figure 3. The share of abstracts that mention pre-trained models, before (blue) and after (green) the release of BERT. Circle size shows how many papers that year. The red bar marks the jump.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>The field changed course in 2019</h2>
+        <p>Google released the BERT model in October 2018, so 2019 is the first conference year after it. We treated that date as a boundary, fitted one trend line to the years before and a separate one to the years after, and measured the gap between them.</p>
+        <p>The share of abstracts using pre-trained model vocabulary <strong>jumped by 9.6 percentage points</strong> at that boundary (95% confidence interval 8.1 to 11.2), and its yearly growth rate rose from under 1 point a year to about 9. By 2021 it had reached 38.7% of all abstracts. We also found that papers began citing <strong>newer</strong> work: the average age of a cited paper fell by 0.66 years at the same boundary.</p>
+        <p>We are careful about the wording here. A calendar year is not a random dividing line, and other things happened nearby, such as the Transformer in 2017. So this measures that the field changed at that moment; it does not prove that BERT alone caused it.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/teamsize.png" alt="Two line charts: average authors per paper rising, and share of single-author papers falling">
+        <figcaption>Figure 4. Left: the average number of authors per paper. Right: the percentage of papers written by one person.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Research became teamwork</h2>
+        <p>In 1990 the average paper had 1.79 authors and 52.6% were written by a single person. By 2022 the average team had grown to 4.47 authors and single-author papers had almost disappeared, down to 4.2%.</p>
+        <p>The collaboration network tells the same story. We linked two researchers whenever they wrote a paper together: in 1990 only 11.5% of authors could reach each other through chains of co-authors, but by 2022 <strong>83.3% belonged to a single connected group</strong>. A field of separate small labs became one connected community.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/growth.png" alt="Bar chart of the number of papers published each year, growing steeply after 2010">
+        <figcaption>Figure 5. Papers published per year. 2022 is a partial year, because the citation data stops in September 2022.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>The field doubled in a decade</h2>
+        <p>Output grew from 2,845 papers in 2010 to 5,854 in 2021. Growth is slow until the mid-2000s and then climbs steeply, which matches the arrival of cheap computing power and large datasets.</p>
+        <p>This chart also carries a warning for anyone analysing the archive: the number of papers per year is so uneven that any measurement has to be reported as a <em>share</em> of that year's papers, never as a raw count, otherwise recent years dominate everything.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/map.png" alt="Scatter map of 12,000 papers forming coloured neighbourhoods by research area">
+        <figcaption>Figure 6. A map of 12,000 papers. Papers whose text is similar are placed close together, and colours mark the eight broad research areas.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Similar research forms visible neighbourhoods</h2>
+        <p>Each paper starts as a list of thousands of word scores, which cannot be drawn. We compressed this to 50 numbers using SVD and then to two using t-SNE, so that papers with similar text end up near each other on the page.</p>
+        <p>Clear neighbourhoods appear for machine translation, speech and dialogue, and information extraction, which is a good sign that the topics we found are real and not an artefact of the method. The boundaries overlap, which is honest: a paper about translating speech genuinely belongs to two areas at once.</p>
       </div>
     </section>
     <!-- END RESULT -->
 
     <div class="prose summary">
-      <!-- EDIT: sum up the main findings -->
       <h2>Anomalies, observations and patterns</h2>
       <ul>
-        <li><strong>Anomaly:</strong> something unusual in the data and a likely reason for it.</li>
-        <li><strong>Observation:</strong> something you measured or noticed.</li>
-        <li><strong>Pattern:</strong> a trend that repeats across the dataset.</li>
+        <li><strong>Anomaly &mdash; a striped pattern in even and odd years.</strong> In the topic heatmap, papers about corpora and resources alternate between dark and light bands. Between 2000 and 2015 this topic averaged 21.5% of papers in even years but only 13.8% in odd years. The cause is not a bug in our data: LREC, the main conference on language resources, is held only in even-numbered years, and it is large enough to bend the statistics of the whole field.</li>
+        <li><strong>Anomaly &mdash; papers citing the future.</strong> The raw citation data contained 457 records where a paper cites something published more than a year later, which is impossible. These come from version mix-ups in the source data and were removed. Every row in the raw citation file was also duplicated exactly, which would have doubled every count had we not checked.</li>
+        <li><strong>Anomaly &mdash; missing abstracts are not random.</strong> Only 43.5% of papers have an abstract, and the missing ones are concentrated before 2016. Measuring text trends naively would have shown a fake jump exactly where coverage improves, so all trends over time are measured on titles instead.</li>
+        <li><strong>Observation &mdash; citations are extremely unequal.</strong> The top 1% of papers collect 32% of all citations, a third of papers are never cited at all, and the Gini coefficient is 0.82, which is higher than the income inequality of most countries.</li>
+        <li><strong>Observation &mdash; impact is partly predictable.</strong> Using only facts known on publication day, our model ranks future top-10% papers with an ROC-AUC of 0.81. Among the papers it ranked highest, 35.6% really did become highly cited, against a 10% base rate. The strongest signals were the number of references, the conference, and the size of the team.</li>
+        <li><strong>Pattern &mdash; old methods fade as new ones arrive.</strong> Association rule mining shows the handover directly: the pairing "pre-trained model and fine-tuning" appeared in 0.04% of abstracts during 2010&ndash;18 and in 5.9% during 2019&ndash;22, while "SVM and classification" halved and "LSTM and attention" fell by a third.</li>
+        <li><strong>Pattern &mdash; a new research community forms.</strong> The strongest association rule we found links social media and speech to work on hate and offensive language, 23.6 times more often than chance would give. This topic barely existed before 2016 and is now a research area with its own shared tasks.</li>
       </ul>
     </div>
 

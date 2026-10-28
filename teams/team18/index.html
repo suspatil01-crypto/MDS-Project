@@ -14,7 +14,6 @@
     <div class="wrap bar">
       <div class="brand-group">
         <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
         <span class="brand">Team 18</span>
       </div>
       <nav class="tabs" aria-label="Team pages">
@@ -29,32 +28,47 @@
   <section class="page-hero">
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
-      <!-- EDIT: your project title and a one or two line summary -->
-      <h1 data-scramble>Your project title goes here</h1>
-      <p class="lede">One or two sentences that tell a visitor what this project is about and why it matters.</p>
+      <h1 data-scramble>Seventy years of NLP research, read from its own papers</h1>
+      <p class="lede">We analysed 70,579 research papers published between 1952 and 2022, together with 659,114 citations between them, to find out how the field of Natural Language Processing grew, how its topics changed, and whether we can tell early which papers will matter.</p>
     </div>
   </section>
 
   <main class="wrap prose">
 
-    <!-- EDIT: describe the problem statement (PS) your team was given -->
     <h2>Problem statement</h2>
-    <p>Describe the problem your team is solving. Say what question you are trying to answer and what the final outcome should look like.</p>
-    <p>Add more paragraphs by copying a &lt;p&gt; line like this one.</p>
+    <p>Natural Language Processing (NLP) is the field that teaches computers to work with human language: translation, chatbots, search and so on. Over seventy years it changed completely, from hand-written grammar rules, to statistics, to today's large neural models. Everyone in the field agrees that this change happened, but it is usually described from memory rather than measured.</p>
+    <p>Our problem statement is to measure it instead. Using the complete public archive of NLP research papers, we ask three questions:</p>
+    <ul>
+      <li><strong>What does the field look like?</strong> Which research topics exist, how big is each one, and who works with whom?</li>
+      <li><strong>When did it change course?</strong> Can we detect a specific moment when the field switched to a new way of working, and measure how big that jump was?</li>
+      <li><strong>Can impact be predicted?</strong> Using only what is known on the day a paper is published, can we tell which papers will go on to be heavily cited?</li>
+    </ul>
+    <p>The outcome is a set of measured, reproducible answers: a map of research topics over time, a network of which papers cite which, a statistical before-and-after test around a known turning point, and a trained classifier for future impact.</p>
 
     <h2>Dataset</h2>
-    <p>Where the data comes from, how many rows and columns it has, and what each important column means.</p>
+    <p>We use two public sources, joined into one dataset.</p>
+    <ul>
+      <li><strong>ACL Anthology</strong> (<a href="https://aclanthology.org/">aclanthology.org</a>) — the free archive of papers from the main NLP conferences. We downloaded the complete BibTeX export: 131,040 records, 178 MB, covering 1952 to 2026.</li>
+      <li><strong>ACL-OCL corpus</strong> (HuggingFace, CC BY-NC 4.0) — this gives each paper a Semantic Scholar identifier and a citation graph, that is, records of which paper cites which. Its snapshot ends in September 2022.</li>
+    </ul>
+    <p>After cleaning, the dataset we analyse has <strong>70,579 papers</strong> and <strong>659,114 citations</strong>. Each paper row carries 20 columns: title, abstract, year, conference, number of authors, how many papers it cites and is cited by, the average age of the papers it cites, its research topic, and its position in the citation network.</p>
 
     <h2>Approach</h2>
-    <p>Briefly explain the steps you followed, from cleaning the data to producing the final results.</p>
+    <p>The whole project runs as one reproducible Jupyter notebook, from the raw download to the final figures.</p>
     <ul>
-      <li>Step or method one</li>
-      <li>Step or method two</li>
-      <li>Step or method three</li>
+      <li><strong>Cleaning.</strong> Removed records that describe a whole conference volume rather than a paper, 2,119 non-English papers, 571 duplicates, 17 self-citations and 457 impossible "time-travel" citations where a paper cites something published later. Converted LaTeX escapes into normal text, so <em>St{\"u}ker</em> becomes Stüker.</li>
+      <li><strong>Exploratory analysis.</strong> Growth per year, team sizes, how unequally citations are shared, and how much of the text is actually available.</li>
+      <li><strong>Clustering.</strong> TF-IDF on titles and abstracts, then Non-negative Matrix Factorisation into 20 research topics. K-Means was tried first as a baseline but put a quarter of all papers into one mixed cluster.</li>
+      <li><strong>Dimensionality reduction.</strong> Truncated SVD followed by t-SNE, to draw 12,000 papers as a two-dimensional map.</li>
+      <li><strong>Network analysis.</strong> PageRank to find the most influential papers, and Louvain community detection to find groups of papers that cite each other.</li>
+      <li><strong>Association rule mining.</strong> Apriori over 45 research concepts detected in each abstract, to find which ideas travel together.</li>
+      <li><strong>Classification.</strong> Logistic regression, gradient boosting and a linear SVM, trained on older papers and tested on newer ones so that the test is honest.</li>
+      <li><strong>Regression.</strong> A before-and-after test at the release of the BERT model in October 2018, fitting a separate trend line on each side of that date.</li>
     </ul>
+    <p>One measurement problem shaped the whole design: only 43.5% of papers have an abstract, and most papers before 2016 have none. Comparing text across years would therefore measure <em>abstract availability</em> rather than research trends. So topics are learned from titles and abstracts together, but every trend over time is measured on <strong>titles alone</strong>, which every paper has.</p>
 
     <h2>Tools used</h2>
-    <p>Python, pandas, matplotlib (replace with your own list).</p>
+    <p>Python, pandas, NumPy, scikit-learn (TF-IDF, NMF, K-Means, SVD, t-SNE, logistic regression, gradient boosting, SVM), NetworkX (PageRank, Louvain), mlxtend (Apriori), statsmodels (regression), Matplotlib, and Jupyter.</p>
 
     <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="team.html">Meet the team</a></p>
   </main>
