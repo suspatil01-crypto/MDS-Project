@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team 15 | Results</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap bar">
+      <div class="brand-group">
+        <a class="back" href="../../index.html">All teams</a>
+        <!-- EDIT: team name (also change it in the other two pages) -->
+        <span class="brand">Team 15</span>
+      </div>
+      <nav class="tabs" aria-label="Team pages">
+        <a href="index.html">Project</a>
+        <a href="results.html" aria-current="page">Results</a>
+        <a href="team.html">Team</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <section class="page-hero">
+    <canvas class="field" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <h1 data-scramble>Results</h1>
+      <p class="lede">Fifteen graphs across the five objectives: time pressure, openings, time allocation, game endings and blunders.</p>
+    </div>
+  </section>
+
+  <main class="wrap">
+
+    <!--
+      HOW TO ADD A GRAPH
+      1. Save your image inside this team's "images" folder (for example images/graph1.png).
+      2. Copy everything from "BEGIN RESULT" to "END RESULT" and paste it below the last result.
+      3. Change the image name, the alt text, the title and the explanation.
+    -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/endings-by-speed.png" alt="Stacked bars showing the share of each ending type in Bullet, Blitz and Rapid games">
+        <figcaption>Figure 1. Ending-type share within each speed.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>How games end depends on speed</h2>
+        <p>Time forfeits decide 44.5% of Bullet games but only 22.4% of Blitz and 11.8% of Rapid games. Inferred resignations move the other way, rising from 25.8% in Bullet to 52.9% in Rapid, while checkmate stays between roughly a quarter and a third of games.</p>
+        <p>Because clock dynamics differ this much by speed, every analysis that follows is split by speed.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/paired-accuracy-pressure.png" alt="Line charts of the high-minus-low pressure accuracy difference by rating band for Bullet, Blitz and Rapid, with 95% intervals">
+        <figcaption>Figure 2. Paired High-minus-Low accuracy difference by rating band, with 95% intervals.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>The raw pressure effect changes sign with rating</h2>
+        <p>For the same player in the same game, we compare accuracy on moves made with at most 10% of the clock left against moves made with more than 30% left. The lowest rating bands actually score higher under pressure. The difference crosses zero near 1500 in Bullet and Blitz and near 1800 in Rapid, and is clearly negative above that.</p>
+        <p>Weak players plausibly reach severe time pressure mostly in positions that are already decided, where an engine records little further loss.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/accuracy-by-pressure.png" alt="Line charts of mean estimated accuracy by rating band for Low, Medium and High time pressure in each speed">
+        <figcaption>Figure 3. Mean estimated accuracy by pressure level, rating band and speed.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Accuracy rises with rating, but pressure opens a gap</h2>
+        <p>Accuracy climbs steadily with rating at every pressure level. Above the lowest bands, the Low-pressure line (green) sits clearly above Medium and High, and that gap is widest in Blitz.</p>
+        <p>Medium and High pressure track each other closely, which suggests most of the damage is already done once a player drops below 30% of their clock.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/adjusted-pressure-effect.png" alt="Adjusted high-minus-low accuracy difference falling linearly with player rating in all three speeds, with shaded confidence bands">
+        <figcaption>Figure 4. Adjusted association between High pressure and accuracy, by player rating.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>After adjustment, pressure hurts in every speed</h2>
+        <p>Controlling for phase, colour, pre-move evaluation imbalance and rating gap, High pressure is linked to accuracy that is 3.47, 2.10 and 2.02 points lower at rating 1800 in Bullet, Blitz and Rapid.</p>
+        <p>The penalty deepens with rating, by 2.34, 3.52 and 4.34 points between ratings 1000 and 2500. Stronger players are still more accurate in absolute terms; the gap between their calm and pressured play is simply wider.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/underdog-score-gap.png" alt="Line chart of mean underdog score falling as the rating gap grows, for Bullet, Blitz and Rapid">
+        <figcaption>Figure 5. Mean underdog score by rating gap and speed.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Underdogs score less as the gap grows</h2>
+        <p>Across 80,992 games with a gap of at least 200 points, the lower-rated player's score falls steadily as the gap widens. Bullet underdogs do noticeably better than Blitz or Rapid underdogs at every gap, consistent with faster games being more chaotic.</p>
+        <p>This is why an opening cannot be judged by raw win rate: that would mostly recover the rating gap. The model behind the next figure removes this trend first.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/opening-families.png" alt="Six bar charts of the top five opening families by adjusted underdog score lift, for each speed and underdog colour, with confidence intervals">
+        <figcaption>Figure 6. Highest conservatively ranked opening families for underdogs, by speed and colour.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Some openings beat rating expectations</h2>
+        <p>Each bar is the opening family's adjusted lift: how much better the underdog scored than the rating-only model predicted. Bullet gives the largest and most stable lifts, around 8 to 12 percentage points, led by the Nimzo-Larsen Attack (A01) for both colours.</p>
+        <p>Blitz lifts are smaller and less uniform. In Rapid, the Four Knights Game (C47) stands out for Black underdogs, while the leading White-underdog intervals all include zero. With 300 families screened, these are candidates for follow-up, not established effects.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/thinking-time-phase.png" alt="Line charts of the share of thinking time spent in the opening, middlegame and endgame by rating band for each speed">
+        <figcaption>Figure 7. How players divide their thinking time in games reaching move 31.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Weaker players spend more of their time early</h2>
+        <p>Using only the 729,619 player-games that reach move 31, the middlegame takes the largest share of thinking time at every level. The opening share falls with rating while the endgame share rises.</p>
+        <p>The effect is strongest in Bullet, where the opening share drops by about 15 percentage points between the under-1200 and 2700+ bands.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/clock-reserve.png" alt="Line charts of mean clock reserve after move 15 and after move 30 by rating band for each speed">
+        <figcaption>Figure 8. Mean clock reserve remaining after moves 15 and 30.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Clock discipline improves with rating only where the clock binds</h2>
+        <p>In Bullet, the reserve after move 30 more than doubles from about 20% for the weakest players to 41% for the strongest. Blitz moves the same way over a narrower range.</p>
+        <p>Rapid breaks the pattern: the weakest band finishes the middlegame with more clock than most stronger bands. A ten-minute clock is rarely binding for weak players, whose games are usually decided tactically long before time matters.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/style-profiles.png" alt="Heatmap showing how the clock-preserving and early-spending styles differ from the overall profile on six pacing features">
+        <figcaption>Figure 9. How each discovered time-management style differs from the overall profile.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Two time-management styles</h2>
+        <p>k-means clustering on six pacing features across 562,687 player-games finds two clear groups (silhouette 0.344, against 0.250 for the next best option).</p>
+        <p>The clock-preserving style (66.6% of player-games) plays the opening quickly and keeps 48.2% of its clock after move 30. The early-spending / late-scramble style (33.4%) keeps only 18.2% and plays 64.8% of its endgame moves under High pressure.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/forfeit-by-style.png" alt="Bar chart of time-forfeit loss rate for the two time-management styles in Bullet, Blitz and Rapid">
+        <figcaption>Figure 10. Time-forfeit loss rate by discovered style and speed.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>The styles predict who flags</h2>
+        <p>Game result and termination were never shown to the clustering, so time-forfeit rates act as an outside check. The early-spending style loses on time in 46.6% of Bullet player-games against 17.1% for the clock-preserving style, and 26.9% against 8.5% in Blitz and 16.5% against 3.5% in Rapid.</p>
+        <p>That is a 2.7 to 4.7 times higher flagging rate in every speed.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/forfeit-share-losses.png" alt="Line charts of the share of decisive losses caused by time forfeit by the losing player's rating band, for each speed">
+        <figcaption>Figure 11. Share of decisive losses caused by time forfeit, by losing player's rating, with Wilson 95% intervals.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>"Weaker players flag more" only holds in Bullet</h2>
+        <p>In Bullet, the time-forfeit share of decisive losses falls steadily from 66.8% for under-1200 players to 27.8% for 2700+ players.</p>
+        <p>Blitz is flat at 22.0% to 24.5% across all eight bands, and Rapid stays between 10.5% and 12.9%. The apparent rise in the top Rapid band rests on only 93 decisive losses.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/forfeit-predictors.png" alt="Horizontal bar chart of permutation importance for move-15 predictors of a future time-forfeit loss, led by current clock seconds">
+        <figcaption>Figure 12. Most useful move-15 predictors of a future time-forfeit loss (permutation importance).</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Predicting a flag at move 15</h2>
+        <p>A gradient-boosted model that only sees what is known at move 15 reaches ROC AUC 0.747 on held-out games, against an 11.9% base rate. Its highest-risk 10% of players flag 38.1% of the time, 3.19 times the base rate.</p>
+        <p>Remaining clock time dominates. Ratings and time control alone give AUC 0.666, early clock behaviour lifts it to 0.734, and early evaluation and accuracy add almost nothing more.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/blunder-definitions.png" alt="Six line charts of blunder rate by rating band and phase, with the win-chance definition on the top row and the centipawn definition on the bottom row">
+        <figcaption>Figure 13. Blunder rate per evaluable move by rating band, phase and speed. Top: win-chance loss of at least 10 points. Bottom: evaluation loss of at least 200 centipawns.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Two blunder definitions, two different stories</h2>
+        <p>Both definitions flag almost the same share of moves, 9.36% and 9.29%, but about 36% of the moves each one labels are not labelled by the other.</p>
+        <p>Under the win-chance rule, the middlegame is the most error-prone phase. Under the centipawn rule, the endgame comes out highest for most bands. For Blitz players rated 1200&ndash;1499, for example, the centipawn endgame rate is 18.6%, while the win-chance rule puts the endgame lowest at 9.3%. Which phase looks worst depends on the metric, not the games.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/position-collapses.png" alt="Six line charts of position collapses and clear advantage reversals per evaluable move by rating band and phase, for each speed">
+        <figcaption>Figure 14. Position collapses (top) and clear advantage reversals (bottom) by rating and phase.</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Stricter errors are rarer and peak in the middlegame</h2>
+        <p>A position collapse, where a playable position becomes clearly lost, happens on 2.28% of plies. A clear advantage reversal happens on 0.88%.</p>
+        <p>Both peak in the middlegame for under-1200 players, at about 4.4% and 2.8%, and fall sharply with rating. As with blunders, the rating gradient is steepest in the opening, consistent with opening preparation being what separates rating bands most clearly: the median first game-changing blunder comes at move 7&ndash;8 for under-1200 players but at move 21 for 2700+ Blitz players.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <!-- BEGIN RESULT -->
+    <section class="result">
+      <figure>
+        <img src="images/blunder-predictors.png" alt="Horizontal bar chart of permutation importance for pre-move predictors of a game-changing blunder, led by pre-move evaluation">
+        <figcaption>Figure 15. Most useful pre-move predictors of a game-changing blunder (permutation importance).</figcaption>
+      </figure>
+      <div class="result-text">
+        <h2>Predicting the next blunder</h2>
+        <p>Using lagged features only, the next-move blunder model reaches ROC AUC 0.787 for game-changing blunders and 0.794 for engine-cost blunders, with the highest-risk decile at about three times the base rate.</p>
+        <p>Here the ordering flips: pre-move evaluation and recent accuracy lead, while adding the pre-move clock moves AUC by only 0.002.</p>
+      </div>
+    </section>
+    <!-- END RESULT -->
+
+    <div class="prose summary">
+      <!-- EDIT: sum up the main findings -->
+      <h2>Anomalies, observations and patterns</h2>
+      <ul>
+        <li><strong>Anomaly:</strong> the lowest-rated players are more accurate under severe time pressure in raw comparisons. This reverses once phase and position are controlled, because weak players tend to reach time trouble in positions that are already decided.</li>
+        <li><strong>Anomaly:</strong> two common blunder definitions agree on the overall rate (9.36% vs 9.29%) yet disagree on about a third of the moves they label, and they rank the game phases in opposite orders.</li>
+        <li><strong>Observation:</strong> the adjusted time-pressure penalty grows with rating, from at most 2.2 points at rating 1000 to between 3.7 and 4.6 points at rating 2500.</li>
+        <li><strong>Observation:</strong> unsupervised clustering finds two pacing styles, and the early-spending style flags 2.7 to 4.7 times as often, even though termination was never used to build the clusters.</li>
+        <li><strong>Pattern:</strong> the expected rating gradient in clock discipline holds only where the clock binds: strongly in Bullet, weakly in Blitz and not at all in Rapid. The termination data shows the same pattern.</li>
+        <li><strong>Pattern:</strong> clock state drives the multi-move time-forfeit forecast (AUC 0.747), while position state and recent form drive the next-move blunder forecast (AUC 0.787). Clock management, position quality and the definition of error behave as three separate axes of performance.</li>
+      </ul>
+    </div>
+
+    <p class="next"><a class="button" href="team.html">Meet the team</a> <a class="button alt" href="index.html">Back to the project</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">MDS Project, IIT Dharwad</div>
+  </footer>
+  <script src="../../assets/site.js" defer></script>
+</body>
+</html>

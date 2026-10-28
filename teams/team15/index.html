@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team 15 | Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap bar">
+      <div class="brand-group">
+        <a class="back" href="../../index.html">All teams</a>
+        <!-- EDIT: team name (also change it in the other two pages) -->
+        <span class="brand">Team 15</span>
+      </div>
+      <nav class="tabs" aria-label="Team pages">
+        <a href="index.html" aria-current="page">Project</a>
+        <a href="results.html">Results</a>
+        <a href="team.html">Team</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <section class="page-hero">
+    <canvas class="field" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <!-- EDIT: your project title and a one or two line summary -->
+      <h1 data-scramble>Time Pressure, Time Allocation and Error Structure in Online Chess</h1>
+      <p class="lede">A study of 672,718 engine-annotated Lichess games that separates three things easily confused: managing the clock, holding a sound position, and what actually counts as a mistake.</p>
+    </div>
+  </section>
+
+  <main class="wrap prose">
+
+    <!-- EDIT: describe the problem statement (PS) your team was given -->
+    <h2>Problem statement</h2>
+    <p>Online chess archives record the clock reading and an engine evaluation after every move. That makes it possible to separate two things that are easily confused: a player can hold an objectively sound position and still lose on time, and a player can shed a lot of engine evaluation without really changing the likely result.</p>
+    <p>Using one shared preprocessing pipeline, we answer five linked questions across Bullet, Blitz and Rapid games:</p>
+    <ul>
+      <li><strong>Time pressure and accuracy:</strong> how does severe clock pressure relate to move accuracy, and does that change with rating?</li>
+      <li><strong>Openings in rating mismatches:</strong> do particular opening families help the lower-rated player beat rating-based expectations?</li>
+      <li><strong>Time allocation by phase:</strong> how is thinking time spread across the opening, middlegame and endgame, and do players fall into distinct time-management styles?</li>
+      <li><strong>Game endings:</strong> how do games end, and can a time-forfeit loss be predicted from a snapshot at move 15?</li>
+      <li><strong>Blunders:</strong> where do major errors occur, does the answer depend on how a blunder is defined, and can the next one be anticipated?</li>
+    </ul>
+    <p>No randomisation is present in any of these settings: players choose their openings, their pacing and their willingness to enter time trouble. Results are therefore conditional associations, and the predictive results describe achievable risk ranking rather than causation.</p>
+
+    <h2>Dataset</h2>
+    <p>Rated games from the public <a href="https://database.lichess.org/">Lichess open database</a>, supplied as one merged PGN file of 708,978 games (about 2.3 GB). Each game was classified by speed using an estimated duration of <em>starting seconds + 40 &times; increment</em>. We kept Bullet (30 s to under 3 min), Blitz (3 to under 8 min) and Rapid (8 to under 25 min) games that carry both an engine evaluation and a clock reading, and excluded 36,260 Classical and Ultrabullet games.</p>
+    <ul>
+      <li><strong>Bullet:</strong> 134,325 games, 8,876,144 move records (most common control 60+0)</li>
+      <li><strong>Blitz:</strong> 345,463 games, 24,710,930 move records (180+0)</li>
+      <li><strong>Rapid:</strong> 192,930 games, 13,136,675 move records (600+0)</li>
+      <li><strong>Total:</strong> 672,718 games and 46,723,749 move records, with zero duplicates and zero parsing errors</li>
+    </ul>
+    <p>The games were turned into two reusable tables. The game table holds one row per game: player ratings, average rating and rating gap, ECO code and opening, time control, termination and game length. The move table holds one row per ply: clock reading, engine evaluation, game phase, thinking time, remaining-clock fraction, evaluation loss, win-chance loss, estimated accuracy and blunder flags. 45.86 million plies (98.2%) have everything needed to compute accuracy; most of the rest are first moves, which have no preceding evaluation.</p>
+
+    <h2>Approach</h2>
+    <p>Everything starts from one preprocessing pipeline that streams the PGN files game by game and defines the common variables used by all five analyses.</p>
+    <ul>
+      <li><strong>Derived measures.</strong> Remaining-clock fraction is the clock divided by the time made available up to that move. Time pressure is Low above 30%, Medium from 10% to 30% and High at 10% or less. Game phases are fixed by move number: opening 1&ndash;15, middlegame 16&ndash;30, endgame 31 onward.</li>
+      <li><strong>Accuracy scale.</strong> Engine evaluations are mapped to a winning-chance scale and then to a 0&ndash;100 move-accuracy score. This is a project scale for internal comparison, not the official Lichess accuracy. Blunders are also flagged on the centipawn scale at 100, 200 and 300 centipawns.</li>
+      <li><strong>Objective 1: time pressure.</strong> Paired within-game comparisons of High- versus Low-pressure accuracy, followed by a weighted least-squares model that adjusts for phase, colour, evaluation imbalance and rating gap, with standard errors clustered by game.</li>
+      <li><strong>Objective 2: openings.</strong> 80,992 games with a rating gap of at least 200 points. A binomial model predicts the underdog's score from rating gap, rating, speed and colour, leaving opening identity out. Each opening family's adjusted lift is its mean residual, ranked by its lower confidence bound.</li>
+      <li><strong>Objective 3: time allocation.</strong> Thinking-time shares by phase for 729,619 player-games reaching move 31, then k-means clustering of 562,687 player-games on six pacing features. Rating, result and termination were kept out of the clustering.</li>
+      <li><strong>Objective 4: game endings.</strong> Termination profiles by speed and rating with Wilson 95% intervals, and a gradient-boosted model that predicts a future time-forfeit loss from information available at move 15.</li>
+      <li><strong>Objective 5: blunders.</strong> Blunder location under two definitions (a fall of at least 10 percentage points in win chance, and a loss of at least 200 centipawns), plus a gradient-boosted next-move blunder model built on lagged features only.</li>
+    </ul>
+    <p>Both predictive models are evaluated on held-out whole games so that neither opponent from a game can end up on both sides of the split.</p>
+
+    <h2>Tools used</h2>
+    <p>Python, pandas, DuckDB, PyArrow (Parquet with Zstandard compression), NumPy, statsmodels, scikit-learn (HistGradientBoostingClassifier, MiniBatchKMeans), matplotlib and seaborn, in Jupyter notebooks.</p>
+
+    <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="team.html">Meet the team</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">MDS Project, IIT Dharwad</div>
+  </footer>
+  <script src="../../assets/site.js" defer></script>
+</body>
+</html>

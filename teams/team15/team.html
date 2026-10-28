@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Team 15 | Team</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap bar">
+      <div class="brand-group">
+        <a class="back" href="../../index.html">All teams</a>
+        <!-- EDIT: team name (also change it in the other two pages) -->
+        <span class="brand">Team 15</span>
+      </div>
+      <nav class="tabs" aria-label="Team pages">
+        <a href="index.html">Project</a>
+        <a href="results.html">Results</a>
+        <a href="team.html" aria-current="page">Team</a>
+      </nav>
+    </div>
+  </header>
+
+
+  <section class="page-hero">
+    <canvas class="field" aria-hidden="true"></canvas>
+    <div class="wrap">
+      <h1 data-scramble>Meet the team</h1>
+      <p class="lede">Five students from the Department of CSE, IIT Dharwad, for CS407T Mathematics for Data Science.</p>
+    </div>
+  </section>
+
+  <main class="wrap">
+
+    <!-- EDIT: team photo or logo. Save it as images/team.jpg (png or webp also work) inside this team's folder.
+         It replaces the placeholder here and also appears on your tile on the main page. -->
+    <img class="team-dp" data-team-photo src="../../assets/team-placeholder.svg" alt="Team photo or logo">
+
+    <!-- Teams usually have 1 to 4 members; Team 15 has 5. Delete the member blocks you do not need (everything from "BEGIN MEMBER" to "END MEMBER"). To add one, copy a block and paste it below. -->
+    <div class="members">
+      <!-- BEGIN MEMBER -->
+      <article class="member">
+        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
+        <img src="../../assets/avatar.svg" alt="Photo of Naveen T S">
+        <h2>Naveen T S</h2>
+        <p class="meta">CS24BT006, Computer Science and Engineering</p>
+        <p>Contributed in game endings and blunder analysis. Classified how games end by speed and rating, and built the move-15 time-forfeit model (ROC AUC 0.747). Compared two blunder definitions, mapped where errors occur by phase, and built the next-move blunder model (ROC AUC 0.787).</p>
+      </article>
+      <!-- END MEMBER -->
+      <!-- BEGIN MEMBER -->
+      <article class="member">
+        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
+        <img src="../../assets/avatar.svg" alt="Photo of Jami Sai Harshit">
+        <h2>Jami Sai Harshit</h2>
+        <p class="meta">CS24BT026, Computer Science and Engineering</p>
+        <p>Contributed in time allocation by phase. Measured how thinking time is split across opening, middlegame and endgame, and how much clock is left after moves 15 and 30. Clustered 562,687 player-games into two time-management styles and checked them against time-forfeit rates.</p>
+      </article>
+      <!-- END MEMBER -->
+      <!-- BEGIN MEMBER -->
+      <article class="member">
+        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
+        <img src="../../assets/avatar.svg" alt="Photo of Bhuvan Saraf">
+        <h2>Bhuvan Saraf</h2>
+        <p class="meta">CS24BT028, Computer Science and Engineering</p>
+        <p>Contributed in openings in rating mismatches. Built a binomial model of the underdog's expected score from rating gap, rating, speed and colour, then ranked about 300 opening families by their adjusted score lift with conservative confidence bounds.</p>
+      </article>
+      <!-- END MEMBER -->
+      <!-- BEGIN MEMBER -->
+      <article class="member">
+        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
+        <img src="../../assets/avatar.svg" alt="Photo of Prakhar Gupta">
+        <h2>Prakhar Gupta</h2>
+        <p class="meta">CS24BT003, Computer Science and Engineering</p>
+        <p>Contributed in time pressure and accuracy. Compared accuracy under High and Low clock pressure within the same game, then fitted a weighted least-squares model with game-clustered errors to show how the pressure penalty grows with rating.</p>
+      </article>
+      <!-- END MEMBER -->
+      <!-- BEGIN MEMBER -->
+      <article class="member">
+        <!-- EDIT: save a square photo in this team's images folder and change the src to images/yourname.jpg (it is shown as a circle) -->
+        <img src="../../assets/avatar.svg" alt="Photo of Kratagya Jain">
+        <h2>Kratagya Jain</h2>
+        <p class="meta">CS24BT025, Computer Science and Engineering</p>
+        <p>Contributed in data exploration and preprocessing. Split the 708,978-game PGN by speed, then streamed it into game and move tables (672,718 games, 46.7 million moves) with clock fraction, thinking time, accuracy and blunder flags, plus validation checks.</p>
+      </article>
+      <!-- END MEMBER -->
+    </div>
+
+    <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="index.html">Back to the project</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">MDS Project, IIT Dharwad</div>
+  </footer>
+  <script src="../../assets/site.js" defer></script>
+</body>
+</html>
