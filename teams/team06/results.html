@@ -47,7 +47,7 @@
     <section class="result">
       <figure>
         <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="/images/Overall_model_comparision.jpeg" alt="Overall Model Comparision">
+        <img src="https://raw.githubusercontent.com/suspatil01-crypto/MDS-Project/main/teams/team06/images/Overall_model_comparision.jpeg" alt="Overall Model Comparision">
         <figcaption>Figure 1. Overall Model Comparision across processed patients.</figcaption>
       </figure>
       <div class="result-text">
@@ -75,7 +75,7 @@
     <section class="result">
       <figure>
         <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="/images/Per_band_energy_shift.jpeg" alt="Per band enegy shift">
+        <img src="https://raw.githubusercontent.com/suspatil01-crypto/MDS-Project/main/teams/team06/images/Per_band_energy_shift.jpeg" alt="Per band enegy shift">
         <figcaption>Figure 3. PCA Spectral Lines.</figcaption>
       </figure>
       <div class="result-text">
@@ -88,7 +88,7 @@
     <section class="result">
       <figure>
         <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="/images/Class_imbalance.jpeg" alt="class imbalance">
+        <img src="https://raw.githubusercontent.com/suspatil01-crypto/MDS-Project/main/teams/team06/images/Class_imbalance.jpeg" alt="class imbalance">
         <figcaption>Figure 4. Class Imbalance.</figcaption>
       </figure>
       <div class="result-text">
@@ -101,7 +101,7 @@
     <section class="result">
       <figure>
         <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="/images/feature_importance.jpeg" alt="important features">
+        <img src="https://raw.githubusercontent.com/suspatil01-crypto/MDS-Project/main/teams/team06/images/feature_importance.jpeg" alt="important features">
         <figcaption>Figure 5. Top feature importances.</figcaption>
       </figure>
       <div class="result-text">
@@ -115,7 +115,7 @@
     <section class="result">
       <figure>
         <!-- EDIT: replace the src with images/your-graph.png -->
-        <img src="/images/PCA_spectral_lines.jpeg" alt="PCA spectral lines">
+        <img src="https://raw.githubusercontent.com/suspatil01-crypto/MDS-Project/main/teams/team06/images/PCA_spectral_lines.jpeg" alt="PCA spectral lines">
         <figcaption>Figure 6. PCA Spectral Lines.</figcaption>
       </figure>
       <div class="result-text">
@@ -130,9 +130,46 @@
       <!-- EDIT: sum up the main findings -->
       <h2>Anomalies, observations and patterns</h2>
       <ul>
-        <li><strong>Anomaly:</strong> something unusual in the data and a likely reason for it.</li>
-        <li><strong>Observation:</strong> something you measured or noticed.</li>
-        <li><strong>Pattern:</strong> a trend that repeats across the dataset.</li>
+        <li><strong>Anomaly:</strong> 
+          <ul> <li> ⁠Severe class imbalance: CHB01 contains 36,231 interictal windows but only 112 ictal windows, making seizure detection challenging.
+ </li>
+            <li> Extreme spectral outliers: A few EEG windows exhibit unusually high spectral-feature values, potentially indicating artifacts or atypical signal activity.
+</li>
+            <li> Several patients have no sensitivity values displayed, potentially because they lack eligible seizure events or evaluated results.
+            </li>
+            <li> ⁠Inconsistent model performance: Logistic Regression achieves high sensitivity but produces substantially more false alarms than KNN and Random Forest.
+            </li>
+            <li> Overlapping feature distributions: PCA reveals that ictal and interictal samples overlap considerably in the first two principal components.
+            </li>
+          </ul></li>
+        <li><strong>Observation:</strong> 
+        <ul> <li>⁠Higher ictal spectral energy: Seizure windows show substantially higher mean energy than interictal windows across all eight plotted spectral bands.
+ </li> 
+        <li> ⁠Important predictive features: Feature 291 has the highest reported importance for CHB01, followed by Features 13, 273, and 149.
+        </li>
+          <li> Patient-specific variability: The best sensitivity differs across patients, with some achieving 100% sensitivity and others showing lower detection rates.
+          </li>
+          <li> Different evaluation outcomes: A model's window-level classification performance does not necessarily translate directly into strong event-level detection.
+          </li>
+          <li>
+            <li> Sensitivity–false alarm trade-off: Logistic Regression prioritizes seizure detection, while KNN produces fewer false detections.
+            </li>
+        </ul>
+        </li>
+        <li><strong>Pattern:</strong> 
+        <ul>
+          <li>Seizure-related spectral changes: Ictal and interictal windows exhibit different spectral-energy distributions, providing potentially useful classification features.
+</li>
+          <li>Majority-class dominance: The large number of interictal windows can bias models toward non-seizure predictions.
+</li>
+          <li>Uneven feature importance: A small subset of features has higher importance scores than the remaining features.
+</li>
+          <li>Patient-dependent generalization: Model performance varies across patients, emphasizing the importance of patient-aware evaluation.
+</li>
+          <li>Complementary evaluation metrics: Sensitivity, false detections per 24 hours, detection latency, PR-AUC, and F1-score reveal different aspects of model performance.
+</li>
+        </ul>
+        </li>
       </ul>
     </div>
 
