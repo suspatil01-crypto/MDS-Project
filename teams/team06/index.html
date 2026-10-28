@@ -30,8 +30,9 @@
     <canvas class="field" aria-hidden="true"></canvas>
     <div class="wrap">
       <!-- EDIT: your project title and a one or two line summary -->
-      <h1 data-scramble>Your project title goes here</h1>
-      <p class="lede">One or two sentences that tell a visitor what this project is about and why it matters.</p>
+      <h1 data-scramble>A Comparative and Reproducible Framework for EEG Seizure Detection
+</h1>
+      <p class="lede">Data-Speaks is a reproducible EEG seizure detection framework that compares signal preprocessing techniques and machine learning models using the CHB-MIT Scalp EEG Database. By evaluating seizure detection sensitivity, false alarms, and detection latency, it highlights the importance of reliable, interpretable evaluation in developing safer computer-assisted seizure monitoring systems.</p>
     </div>
   </section>
 
@@ -39,22 +40,26 @@
 
     <!-- EDIT: describe the problem statement (PS) your team was given -->
     <h2>Problem statement</h2>
-    <p>Describe the problem your team is solving. Say what question you are trying to answer and what the final outcome should look like.</p>
-    <p>Add more paragraphs by copying a &lt;p&gt; line like this one.</p>
+    <p>Data-Speaks is a modular framework for EEG seizure detection using the CHB-MIT Scalp EEG Database. Four candidate preprocessing and evaluation approaches were explored, ranging from conventional FIR filtering and independent component analysis (ICA) to artifact-aware processing and patient-level validation. The approaches were compared under common downstream conditions to study the effect of preprocessing while maintaining consistent segmentation, feature extraction, and evaluation. The final architecture emphasizes reproducibility and leakage-resistant validation through explicit patient-level grouping. Seizure detection is evaluated using sensitivity, false detections per 24 h, detection latency, precision-recall area under the curve (PR-AUC), and F1-score. The experiments demonstrate substantial trade-offs between seizure detection, false alarms, and latency, highlighting the importance of evaluating EEG detectors using multiple complementary metrics rather than accuracy alone.</p>
+    <!-- <p>Add more paragraphs by copying a &lt;p&gt; line like this one.</p> -->
 
     <h2>Dataset</h2>
-    <p>Where the data comes from, how many rows and columns it has, and what each important column means.</p>
+    <p>The <a href="https://physionet.org/content/chbmit/1.0.0/"> CHB-MIT Scalp EEG Database </a>, a collection of EEG recordings of 22 pediatric subjects with intractable seizures, is now available. Subjects were monitored for up to several days following withdrawal of anti-seizure medication to characterize seizures and assess their candidacy for surgical intervention. In all, the onsets and ends of 182 seizures are annotated.</p>
 
     <h2>Approach</h2>
     <p>Briefly explain the steps you followed, from cleaning the data to producing the final results.</p>
     <ul>
-      <li>Step or method one</li>
-      <li>Step or method two</li>
-      <li>Step or method three</li>
+      <li>FIR Filtering + ICA: Standardized EEG channels, applied FIR bandpass filtering (0.5–45 Hz), removed artifacts using Independent Component Analysis (ICA), performed per-channel z-score normalization, and resampled to 256 Hz. Extracted FFT-based spectral features and evaluated machine learning classifiers using Leave-One-Recording-Out validation.
+</li>
+      <li>Butterworth Filtering + Wavelet Denoising: Applied Butterworth filtering followed by wavelet-based denoising to suppress noise and transient artifacts. Used robust scaling to reduce the influence of extreme signal values, then compared seizure detection performance using the downstream classification and evaluation framework.
+</li>
+      <li>Butterworth Filtering + ASR + FastICA: Combined Butterworth filtering with Artifact Subspace Reconstruction (ASR) and FastICA for more extensive artifact removal. Standardized the processed EEG signals to 256 Hz and evaluated the resulting representations using machine learning.
+</li>
+      <li>Modular Cohort Architecture + Patient-Level Validation: Developed a reproducible pipeline with explicit patient grouping and leakage-resistant validation. Standardized EEG channels, applied FIR filtering and ICA, normalized signals, segmented them into two-second epochs, combined three epochs into six-second windows, extracted FFT-based features across eight frequency bands, and evaluated seizure detection using patient-aware validation and event-level metrics.</li>
     </ul>
 
     <h2>Tools used</h2>
-    <p>Python, pandas, matplotlib (replace with your own list).</p>
+    <p>Python, pandas, matplotlib, numpy.</p>
 
     <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="team.html">Meet the team</a></p>
   </main>
