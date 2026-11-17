@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,59 +11,133 @@
   <link rel="stylesheet" href="../../assets/style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap bar">
-      <div class="brand-group">
-        <a class="back" href="../../index.html">All teams</a>
-        <!-- EDIT: team name (also change it in the other two pages) -->
-        <span class="brand">Team 9</span>
-      </div>
-      <nav class="tabs" aria-label="Team pages">
-        <a href="index.html" aria-current="page">Project</a>
-        <a href="results.html">Results</a>
-        <a href="team.html">Team</a>
-      </nav>
+
+<header class="site-header">
+  <div class="wrap bar">
+    <div class="brand-group">
+      <a class="back" href="../../index.html">All teams</a>
+      <span class="brand">Team 9</span>
     </div>
-  </header>
+    <nav class="tabs" aria-label="Team pages">
+      <a href="index.html" aria-current="page">Project</a>
+      <a href="results.html">Results</a>
+      <a href="team.html">Team</a>
+    </nav>
+  </div>
+</header>
 
+<section class="page-hero">
+  <canvas class="field" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h1 data-scramble>E-Commerce Customer Behavior Analysis</h1>
+    <p class="lede">
+      Understanding customer purchasing patterns and predicting
+      returning customers using data analysis and machine learning.
+    </p>
+  </div>
+</section>
 
-  <section class="page-hero">
-    <canvas class="field" aria-hidden="true"></canvas>
-    <div class="wrap">
-      <!-- EDIT: your project title and a one or two line summary -->
-      <h1 data-scramble>Your project title goes here</h1>
-      <p class="lede">One or two sentences that tell a visitor what this project is about and why it matters.</p>
-    </div>
-  </section>
+<main class="wrap prose">
 
-  <main class="wrap prose">
+  <h2>Problem Statement</h2>
 
-    <!-- EDIT: describe the problem statement (PS) your team was given -->
-    <h2>Problem statement</h2>
-    <p>Describe the problem your team is solving. Say what question you are trying to answer and what the final outcome should look like.</p>
-    <p>Add more paragraphs by copying a &lt;p&gt; line like this one.</p>
+  <p>
+    In the rapidly growing e-commerce industry, understanding
+    customer behavior is essential for business success.
+    Online businesses generate large amounts of customer data
+    through browsing activities, purchases and interactions.
+  </p>
 
-    <h2>Dataset</h2>
-<p class="dataset-source"><strong>Data source and reproducibility:</strong> <a href="https://github.com/suspatil01-crypto/MDS-Project/tree/main/teams/team09" target="_blank" rel="noopener noreferrer">View this team’s project data and files in the repository</a>. Use the original source or citation given on this page when available to verify provenance.</p>
-    <p>Where the data comes from, how many rows and columns it has, and what each important column means.</p>
+  <p>
+    However, identifying which customers are likely to return
+    and make future purchases is a challenging task.
+    Businesses need to understand the patterns and factors
+    that influence customer retention.
+  </p>
 
-    <h2>Approach</h2>
-    <p>Briefly explain the steps you followed, from cleaning the data to producing the final results.</p>
-    <ul>
-      <li>Step or method one</li>
-      <li>Step or method two</li>
-      <li>Step or method three</li>
-    </ul>
+  <p>
+    The objective of this project is to analyze e-commerce
+    customer behavior, identify important purchasing patterns
+    and develop machine learning models to predict whether
+    a customer is likely to return.
+  </p>
 
-    <h2>Tools used</h2>
-    <p>Python, pandas, matplotlib (replace with your own list).</p>
+  <h2>Project Objectives</h2>
 
-    <p class="next"><a class="button" href="results.html">See the results</a> <a class="button alt" href="team.html">Meet the team</a></p>
-  </main>
+  <ul>
+    <li>Analyze customer purchasing behavior and patterns.</li>
+    <li>Identify important factors influencing customer retention.</li>
+    <li>Explore relationships between different customer attributes.</li>
+    <li>Apply machine learning techniques for customer prediction.</li>
+    <li>Evaluate and compare model performance.</li>
+  </ul>
 
-  <footer class="site-footer">
-    <div class="wrap">Data Speaks!! · IIT Dharwad</div>
-  </footer>
-  <script src="../../assets/site.js" defer></script>
+  <h2>Dataset</h2>
+
+  <p>
+    The project uses an e-commerce customer behavior dataset
+    containing customer-related information and purchasing
+    behavior. The dataset is analyzed to understand patterns
+    associated with customer return behavior.
+  </p>
+
+  <p class="dataset-source">
+    <strong>Data source and reproducibility:</strong>
+    <a href="https://github.com/suspatil01-crypto/MDS-Project/tree/main/teams/team09"
+       target="_blank" rel="noopener noreferrer">
+       View Team 9 project files
+    </a>.
+    The exact dataset source, number of records and feature
+    descriptions should be added from the original dataset.
+  </p>
+
+  <h2>Methodology</h2>
+
+  <p>
+    Our project follows a systematic data analysis and
+    machine learning workflow:
+  </p>
+
+  <ul>
+    <li><strong>Data Collection:</strong> Obtain the e-commerce customer dataset.</li>
+    <li><strong>Data Preprocessing:</strong> Inspect missing values, clean the data and prepare features.</li>
+    <li><strong>Exploratory Data Analysis:</strong> Use graphs and statistical analysis to identify patterns.</li>
+    <li><strong>Feature Analysis:</strong> Study the factors that influence customer behavior.</li>
+    <li><strong>Model Building:</strong> Apply machine learning algorithms to predict returning customers.</li>
+    <li><strong>Model Evaluation:</strong> Compare model performance using appropriate evaluation metrics.</li>
+  </ul>
+
+  <h2>Tools and Technologies</h2>
+
+  <ul>
+    <li>Python</li>
+    <li>NumPy and Pandas</li>
+    <li>Matplotlib and Seaborn</li>
+    <li>Scikit-learn</li>
+    <li>Jupyter Notebook</li>
+  </ul>
+
+  <h2>Expected Outcome</h2>
+
+  <p>
+    The project aims to identify meaningful customer behavior
+    patterns and build predictive models that help understand
+    customer retention. These insights can support e-commerce
+    businesses in improving customer engagement and
+    decision-making.
+  </p>
+
+  <p class="next">
+    <a class="button" href="results.html">Explore Results</a>
+    <a class="button alt" href="team.html">Meet Our Team</a>
+  </p>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">Data Speaks!! · IIT Dharwad</div>
+</footer>
+
+<script src="../../assets/site.js" defer></script>
 </body>
 </html>
